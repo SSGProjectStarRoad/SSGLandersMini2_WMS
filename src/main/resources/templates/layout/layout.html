@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Layout page</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navToggle = document.querySelector(".mobile-nav-toggle");
+            const navDiv = document.querySelector(".nav-div");
+
+            navToggle.addEventListener("click", function () {
+                navDiv.classList.toggle("show"); // 'show' 클래스를 토글하여 메뉴 표시
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const navToggle = document.querySelector(".mobile-nav-toggle");
+            const navDiv = document.querySelector(".nav-div");
+            const navFlexColumn = navDiv.querySelector(".nav.flex-column");
+
+            navToggle.addEventListener("click", function () {
+                // navDiv의 표시 상태를 토글
+                if (navDiv.style.display === 'none' || navDiv.style.display === '') {
+                    navDiv.style.display = 'flex';
+                    navFlexColumn.style.display = 'flex'; // 필요한 경우 .nav.flex-column의 display도 조절
+                } else {
+                    navDiv.style.display = 'none';
+                    navFlexColumn.style.display = 'none'; // 필요한 경우
+                }
+            });
+        });
+
+        window.addEventListener("resize", function () {
+            const navDiv = document.querySelector(".nav-div");
+            const navFlexColumn = navDiv.querySelector(".nav.flex-column");
+            if (window.innerWidth > 768) {
+                navDiv.style.display = "flex"; // 또는 원하는 다른 display 값
+                navDiv.classList.remove("show"); // 'show' 클래스 제거
+                navFlexColumn.style.display = "flex";
+            }else {
+                if (navDiv.classList.contains("show")) {
+                    navDiv.style.display = "flex";
+                } else {
+                    navDiv.style.display = "none";
+                }
+                //navFlexColumn.style.display = "none";
+            }
+        });
+
+        // chart 스크립트
+
+    </script>
+</head>
+<body>
+<div class="left-div">
+    <div class="imag-div">
+        <img class="nav-img" th:src="@{/images/v62_560.png}" alt="errorimg" />
+    </div>
+    <div class="mobile-nav-toggle">
+        <i class="bi bi-list"></i>
+        <!-- 햄버거 메뉴 아이콘 -->
+    </div>
+
+    <div class="nav-div">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <i class="bi bi-grid"></i>
+                <a class="nav-link active" aria-current="page" href="#"
+                >메인페이지</a
+                >
+            </li>
+            <span class="nav-menu">입고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-plus"></i>
+                <a class="nav-link" href="#">입고현황</a>
+            </li>
+            <span class="nav-menu">출고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-minus"></i>
+                <a class="nav-link" href="#">출고현황</a>
+            </li>
+            <span class="nav-menu">재고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-range"></i>
+                <a class="nav-link" href="#">재고현황</a>
+            </li>
+            <span class="nav-menu">창고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-week"></i>
+                <a class="nav-link" href="#">창고관리</a>
+            </li>
+            <span class="nav-menu">승인</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <a class="nav-link" href="#">승인관리</a>
+            </li>
+            <span class="nav-menu">회원</span>
+            <li class="nav-item">
+                <i class="bi bi-person"></i>
+                <a class="nav-link" href="#">회원수정</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div layout:fragment="content">
+    <p>Page content goes here</p>
+</div>
+
+<div layout:fragment="modal">
+
+</div>
+
+<th:block layout:fragment="script" >
+</th:block>
+</body>
+</html>
