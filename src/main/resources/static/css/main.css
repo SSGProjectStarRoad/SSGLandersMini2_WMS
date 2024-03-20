@@ -7,6 +7,7 @@ body {
   padding: 0;
   width: 100%;
   display: flex;
+  background-color: rgb(233,233,233);
 }
 
 /*  nav bar */
@@ -245,7 +246,7 @@ body {
 
 .main-detail thead {
   text-align: left;
-  border-radius: solid
+  border-radius: solid;
 
 }
 .main-detail thead th {
