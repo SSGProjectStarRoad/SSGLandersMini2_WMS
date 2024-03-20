@@ -22,13 +22,13 @@
             </div>
             <div class="main-statebox">
               <h2>입고 내역</h2>
-              <ul class="value">24</ul>
-              <ul class="wait-value">입고예정 5 <br> 입고 완료 19</ul>
+              <ul class="value"><span th:text="${incomingcount}"></span></ul>
+              <ul class="wait-value">입고예정 <span th:text="${getIncomingBeforeCount}"/><br> 입고 완료 <span th:text="${getIncomingArriveCount}"/></ul>
               <i class="icon-home bi bi-cart-check"></i>
             </div>
             <div class="main-statebox">
               <h2>출고 내역</h2>
-              <ul class="value">12</ul>
+              <ul class="value"><span th:text="${outcomingcount}"></span></ul>
               <ul class="wait-value">출고예정 10 <br> 출고 완료 2</ul>
               <i class="icon-home bi bi-truck"></i>
             </div>

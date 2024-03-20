@@ -17,4 +17,15 @@ public class overallMapperTest {
         log.info(overallMapper.getIncomingCount());
     }
 
+    @Test
+    public void testgetOutcomingCount(){
+        log.info(overallMapper.getOutComingCount());
+    }
+
+    @Test
+    public void testgetIncomingBeforeCount() {log.info(overallMapper.getIncomingBeforeCount());}
+
+    @Test
+    public void testgetIncomingArriveCount() {log.info(overallMapper.getIncomingArriveCount());}
+
 }
