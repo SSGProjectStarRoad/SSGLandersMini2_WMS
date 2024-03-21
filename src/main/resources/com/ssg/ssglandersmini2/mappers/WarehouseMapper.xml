@@ -2,4 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.WarehouseMapper">
 
+<!--    창고등록쿼리-->
+    <insert id="insert">
+        insert into warehouse(warehouseType, address, capacity, wname) values(#{warehouseType}, #{address}, #{capacity}, #{wname})
+    </insert>
+
+    <!--    창고목록조회 쿼리-->
+    <select id="getAll" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse order by wid;
+    </select>
+
+    <!--    창고하나 상세조회 쿼리-->
+    <select id="getOne" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse where wid = #{wid};;
+    </select>
+
+    <!--    창고삭제 쿼리-->
+    <delete id="delete">
+        delete from warehouse where wid = #{wid}
+    </delete>
+
+    <!--    창고수정 쿼리-->
+    <update id="update">
+        update warehouse set warehouseType = #{warehouseType}, address = #{address}, capacity = #{capacity}, wname = #{wname} where wid = #{wid}
+    </update>
+
 </mapper>
