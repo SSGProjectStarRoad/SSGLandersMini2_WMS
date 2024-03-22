@@ -1,3 +1,71 @@
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animatedl{
+    animation-name: slideInFromLeft;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animatedt {
+    animation-name: slideInFromTop;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animatedr {
+    animation-name: slideInFromRight;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideNav {
+    from {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animatednav {
+    animation-name: slideNav;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
 
 /*  nav bar */
 

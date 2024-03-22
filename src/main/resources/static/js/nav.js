@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     navToggle.addEventListener("click", function () {
         navDiv.classList.toggle("show"); // 'show' 클래스를 토글하여 메뉴 표시
+        navDiv.classList.toggle("animatednav"); // 'show' 클래스를 토글하여 메뉴 표시
     });
 });
 document.addEventListener("DOMContentLoaded", function () {
