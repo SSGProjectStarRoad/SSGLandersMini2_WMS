@@ -37,7 +37,7 @@
     color: black;
     margin-right: 20px; /* 각 항목 사이의 간격 조절 */
     margin-left: 30px;
-    width: 155px;
+    width: 160px;
     border-radius: 5px;
     transition: box-shadow 0.3s ease-in-out; /* 그림자 변화에 애니메이션 효과를 추가 */
 }
@@ -45,7 +45,7 @@
 .nav-item:hover {
     background-color: transparent; /* 배경색 변경을 제거 */
     box-shadow: 0 2px 5px black; /* 그림자 효과 추가 */
-    width: 155px; /* 필요한 경우 너비 조정 */
+    width: 160px; /* 필요한 경우 너비 조정 */
     border-radius: 5px; /* 그림자 효과에 매끄러운 모서리 추가 */
     position: relative; /* z-index가 올바르게 작동하도록 위치 지정 */
     z-index: 1; /* 다른 항목 위에 표시되도록 z-index 설정 */
@@ -82,7 +82,11 @@
     color: black;
     margin-top: 7px;
 }
-.bi-person{
+.bi-person-gear{
+    color: black;
+    margin-top: 7px;
+}
+.bi-person-check{
     color: black;
     margin-top: 7px;
 }
@@ -140,7 +144,7 @@
         /* Rest of your styling */
     }
     .nav-div {
-        height: 330px;
+        height: 365px;
         display: flex; /* 항상 flex로 설정하여 항목들이 나타나게 합니다 */
         flex-direction: row;
         width: 100%; /* 너비를 화면 전체로 설정 */
@@ -186,7 +190,7 @@
     }
 
     .nav-item {
-        width: 138px;
+        width: 150px;
         display: inline-flex;
         margin-right: 20px; /* 각 항목 사이의 간격 조절 */
         transition: box-shadow 0.3s ease-in-out; /* 그림자 변화에 애니메이션 효과를 추가 */
@@ -200,7 +204,7 @@
     .nav-item:hover {
         background-color: transparent; /* 배경색 변경을 제거 */
         box-shadow: 0 2px 5px black; /* 그림자 효과 추가 */
-        width: 138px; /* 필요한 경우 너비 조정 */
+        width: 150px; /* 필요한 경우 너비 조정 */
         border-radius: 5px; /* 그림자 효과에 매끄러운 모서리 추가 */
         position: relative; /* z-index가 올바르게 작동하도록 위치 지정 */
         z-index: 1; /* 다른 항목 위에 표시되도록 z-index 설정 */

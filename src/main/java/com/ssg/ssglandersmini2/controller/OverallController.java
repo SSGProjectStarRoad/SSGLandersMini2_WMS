@@ -22,5 +22,15 @@ public class OverallController {
         model.addAttribute("outcomingcount",overallService.getOutcomingCount());
         model.addAttribute("getIncomingBeforeCount",overallService.getIncomingBeforeCount());
         model.addAttribute("getIncomingArriveCount",overallService.getIncomingArriveCount());
+        model.addAttribute("getNotApprovalCount",overallService.getNotApprovalCount());
+        model.addAttribute("getTotalUsingCapacity",overallService.getTotalUsingCapacity());
+        model.addAttribute("WarehouseCityDTOlist",overallService.getWarehouseCityTotal());
+        model.addAttribute("MonthlyDTO",overallService.getMonthlyInOut());
+//       맨 위 내역 정보들
+
+
+
+
+
     }
 }
