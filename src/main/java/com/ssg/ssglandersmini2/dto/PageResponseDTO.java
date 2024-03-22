@@ -4,10 +4,7 @@ import com.ssg.ssglandersmini2.dto.PageRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-
 import java.util.List;
-
-// PageResponseDTO 클래스는 페이지 응답 정보를 표현하는 DTO(Data Transfer Object)입니다.
 
 // @Getter 어노테이션은 모든 필드에 대한 getter 메서드를 자동으로 생성합니다.
 @Getter
@@ -53,4 +50,3 @@ public class PageResponseDTO<E> {
         // DTO 리스트 설정
         this.dtoList = dtoList;
     }
-}

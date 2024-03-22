@@ -32,6 +32,7 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .main-background {
   position: absolute;
   z-index: 2;
@@ -190,8 +191,8 @@ tr:nth-child(even) {
     justify-content: center;
   }
   .main .chart{
-    width: 60%;
-    height: 30vw;
+    width: 90%;
+    height: 55vw;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;

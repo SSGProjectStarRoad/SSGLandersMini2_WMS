@@ -80,4 +80,6 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
 }
+

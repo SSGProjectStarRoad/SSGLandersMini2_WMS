@@ -7,10 +7,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Stock {
-    private int pid;
-    private int wid;
-    private int quantity;
-
+public class Inventory {
+    private long bid;
+    private String status;
+    private long wid;
 }
-
