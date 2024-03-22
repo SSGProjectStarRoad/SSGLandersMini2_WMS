@@ -13,8 +13,8 @@
       
         <div class="main-background"></div>
         <div class="main-box">
-          <h1>전체 현황</h1>
-          <div class="main-stateboxes">
+          <h1 class="animatedl">전체 현황</h1>
+          <div class="main-stateboxes animatedt">
             <div class="main-statebox">
               <h2>승인 대기</h2>
               <ul class="value"><span th:text="${getNotApprovalCount}"/></ul>
@@ -42,7 +42,7 @@
         <!-- 차트 목록 -->
         <div class="charts">
         <!-- 창고별 차트 -->
-        <div class="chart">
+        <div class="chart animatedl">
           <canvas id="warehouseChart"></canvas>
       </div>
           <script th:inline="javascript">
@@ -50,53 +50,22 @@
           </script>
 
         <!-- 창고별 차트 끝 -->
-        <!-- 파이차트 -->
+
         <!-- 카테고리별 재고현황 -->
-      <!-- <div style="width:400px; height:400px;">
-        <canvas id="myChart"></canvas>
-      </div>
-    
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['데이터 1', '데이터 2', '데이터 3', '데이터 4', '데이터 5'],
-                datasets: [{
-                    label: '데이터 집합 1',
-                    data: [10, 20, 30, 40, 50],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 205, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(54, 162, 235, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-            }
-        });
-    });
-    </script> -->
-      <!-- 파이차트 끝 -->
+
+
+
       <!-- 월별 입출고차트 -->
-    <div class="chart">
+    <div class="chart animatedr">
         <canvas id="inOutChart"></canvas>
     </div>
     <script th:inline="javascript">
       const monthly = [[${MonthlyDTO}]];
     </script>
+            <!-- 파이차트 -->
+<!--     <div class="chart">-->
+<!--         <canvas id="myChart"></canvas>-->
+<!--    </div>-->
     
 
     </div>
