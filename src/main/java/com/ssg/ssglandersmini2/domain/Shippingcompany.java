@@ -11,5 +11,5 @@ import lombok.*;
 public class Shippingcompany {
 
     private long sid;
-    private String name;
+    private String sname;
 }

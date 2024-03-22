@@ -11,6 +11,6 @@ public class Stock {
     private int pid;
     private int wid;
     private int quantity;
-    private int stock_id;
 
 }
+

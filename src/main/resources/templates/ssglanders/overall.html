@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
-        layout:decorate="~{layout/layout.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout.html}">
 <head>
-  <link th:href="@{/css/overall.css}" rel="stylesheet" />
-  <script th:src="@{/js/overall.js}"></script>
+    <link th:href="@{/css/overall.css}" rel="stylesheet"/>
+    <script th:src="@{/js/overall.js}"></script>
 
 </head>
 <!-- 메인 -->
+
 
     <div class="main" layout:fragment="content">
       
@@ -19,29 +20,33 @@
               <h2>승인 대기</h2>
               <ul class="value"><span th:text="${getNotApprovalCount}"/></ul>
               <i class="icon-home bi bi-hourglass-split"></i>
+
             </div>
             <div class="main-statebox">
-              <h2>입고 내역</h2>
-              <ul class="value"><span th:text="${incomingcount}"></span></ul>
-              <ul class="wait-value">입고예정 <span th:text="${getIncomingBeforeCount}"/><br> 입고 완료 <span th:text="${getIncomingArriveCount}"/></ul>
-              <i class="icon-home bi bi-cart-check"></i>
+                <h2>입고 내역</h2>
+                <ul class="value"><span th:text="${incomingcount}"></span></ul>
+                <ul class="wait-value">입고예정 <span th:text="${getIncomingBeforeCount}"/><br> 입고 완료 <span
+                        th:text="${getIncomingArriveCount}"/></ul>
+                <i class="icon-home bi bi-cart-check"></i>
             </div>
             <div class="main-statebox">
-              <h2>출고 내역</h2>
-              <ul class="value"><span th:text="${outcomingcount}"></span></ul>
-              <ul class="wait-value">출고예정 10 <br> 출고 완료 2</ul>
-              <i class="icon-home bi bi-truck"></i>
+                <h2>출고 내역</h2>
+                <ul class="value"><span th:text="${outcomingcount}"></span></ul>
+                <ul class="wait-value">출고예정 10 <br> 출고 완료 2</ul>
+                <i class="icon-home bi bi-truck"></i>
             </div>
             <div class="main-statebox">
+
               <h2>전체 보관 수량</h2>
               <ul class="value"><span th:text="${getTotalUsingCapacity}"/></ul>
               <i class="icon-home bi bi-collection"></i>
             </div>
-          </div>
         </div>
-        <!-- 차트 목록 -->
-        <div class="charts">
+    </div>
+    <!-- 차트 목록 -->
+    <div class="charts">
         <!-- 창고별 차트 -->
+
         <div class="chart animatedl">
           <canvas id="warehouseChart"></canvas>
       </div>
@@ -52,7 +57,6 @@
         <!-- 창고별 차트 끝 -->
 
         <!-- 카테고리별 재고현황 -->
-
 
 
       <!-- 월별 입출고차트 -->
