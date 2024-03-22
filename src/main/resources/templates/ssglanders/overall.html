@@ -1,105 +1,106 @@
 <!DOCTYPE html>
-<html   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
-        layout:decorate="~{layout/layout.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout.html}">
 <head>
-  <link th:href="@{/css/overall.css}" rel="stylesheet" />
-  <script th:src="@{/js/overall.js}"></script>
+    <link th:href="@{/css/overall.css}" rel="stylesheet"/>
+    <script th:src="@{/js/overall.js}"></script>
 
 </head>
 <!-- 메인 -->
 
-    <div class="main" layout:fragment="content">
-      
-        <div class="main-background"></div>
-        <div class="main-box">
-          <h1>전체 현황</h1>
-          <div class="main-stateboxes">
+<div class="main" layout:fragment="content">
+
+    <div class="main-background"></div>
+    <div class="main-box">
+        <h1>전체 현황</h1>
+        <div class="main-stateboxes">
             <div class="main-statebox">
-              <h2>승인 대기</h2>
-              <ul class="value">18</ul>
-              <i class="icon-home bi bi-hourglass-split"></i>
+                <h2>승인 대기</h2>
+                <ul class="value">18</ul>
+                <i class="icon-home bi bi-hourglass-split"></i>
             </div>
             <div class="main-statebox">
-              <h2>입고 내역</h2>
-              <ul class="value"><span th:text="${incomingcount}"></span></ul>
-              <ul class="wait-value">입고예정 <span th:text="${getIncomingBeforeCount}"/><br> 입고 완료 <span th:text="${getIncomingArriveCount}"/></ul>
-              <i class="icon-home bi bi-cart-check"></i>
+                <h2>입고 내역</h2>
+                <ul class="value"><span th:text="${incomingcount}"></span></ul>
+                <ul class="wait-value">입고예정 <span th:text="${getIncomingBeforeCount}"/><br> 입고 완료 <span
+                        th:text="${getIncomingArriveCount}"/></ul>
+                <i class="icon-home bi bi-cart-check"></i>
             </div>
             <div class="main-statebox">
-              <h2>출고 내역</h2>
-              <ul class="value"><span th:text="${outcomingcount}"></span></ul>
-              <ul class="wait-value">출고예정 10 <br> 출고 완료 2</ul>
-              <i class="icon-home bi bi-truck"></i>
+                <h2>출고 내역</h2>
+                <ul class="value"><span th:text="${outcomingcount}"></span></ul>
+                <ul class="wait-value">출고예정 10 <br> 출고 완료 2</ul>
+                <i class="icon-home bi bi-truck"></i>
             </div>
             <div class="main-statebox">
-              <h2>전체 수량</h2>
-              <ul class="value">600</ul>
-              <i class="icon-home bi bi-collection"></i>
+                <h2>전체 수량</h2>
+                <ul class="value">600</ul>
+                <i class="icon-home bi bi-collection"></i>
             </div>
-          </div>
         </div>
-        <!-- 차트 목록 -->
-        <div class="charts">
+    </div>
+    <!-- 차트 목록 -->
+    <div class="charts">
         <!-- 창고별 차트 -->
         <div class="chart">
-          <canvas id="warehouseChart"></canvas>
-      </div>
+            <canvas id="warehouseChart"></canvas>
+        </div>
 
         <!-- 창고별 차트 끝 -->
         <!-- 파이차트 -->
         <!-- 카테고리별 재고현황 -->
-      <!-- <div style="width:400px; height:400px;">
-        <canvas id="myChart"></canvas>
-      </div>
-    
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['데이터 1', '데이터 2', '데이터 3', '데이터 4', '데이터 5'],
-                datasets: [{
-                    label: '데이터 집합 1',
-                    data: [10, 20, 30, 40, 50],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 205, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(54, 162, 235, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-            }
-        });
-    });
-    </script> -->
-      <!-- 파이차트 끝 -->
-      <!-- 월별 입출고차트 -->
-      <div class="chart">
-        <canvas id="inOutChart"></canvas>
-    </div>
-    
+        <!-- <div style="width:400px; height:400px;">
+          <canvas id="myChart"></canvas>
+        </div>
+
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const ctx = document.getElementById('myChart').getContext('2d');
+          const myChart = new Chart(ctx, {
+              type: 'pie',
+              data: {
+                  labels: ['데이터 1', '데이터 2', '데이터 3', '데이터 4', '데이터 5'],
+                  datasets: [{
+                      label: '데이터 집합 1',
+                      data: [10, 20, 30, 40, 50],
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(54, 162, 235, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(255, 159, 64, 1)',
+                          'rgba(255, 205, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(54, 162, 235, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  responsive: true,
+              }
+          });
+      });
+      </script> -->
+        <!-- 파이차트 끝 -->
+        <!-- 월별 입출고차트 -->
+        <div class="chart">
+            <canvas id="inOutChart"></canvas>
+        </div>
+
 
     </div>
-      <!-- 월별입출고차트 끝 -->
-        <div class="main-detail">
-          <h2>입/출고 내역</h2>
-          <table>
+    <!-- 월별입출고차트 끝 -->
+    <div class="main-detail">
+        <h2>입/출고 내역</h2>
+        <table>
             <thead>
-              <tr>
+            <tr>
                 <th>상품 이름</th>
                 <th>상품 분류</th>
                 <th>진행 상태</th>
@@ -108,10 +109,10 @@
                 <th>입고일</th>
                 <th>출고일</th>
                 <th>수량</th>
-              </tr>
+            </tr>
             </thead>
             <tbody>
-              <tr>
+            <tr>
                 <td data-label="상품 이름">Dropbox Design System</td>
                 <td data-label="상품 분류">업무</td>
                 <td data-label="진항 상태">진행중</td>
@@ -120,8 +121,8 @@
                 <td data-label="입고일">2023.9.10</td>
                 <td data-label="출고일">2023.10.20</td>
                 <td data-label="수량">100</td>
-              </tr>
-              <tr>
+            </tr>
+            <tr>
                 <td data-label="상품 이름">Slack Team UI Design</td>
                 <td data-label="상품 분류">내부</td>
                 <td data-label="진항 상태">계획중</td>
@@ -130,9 +131,9 @@
                 <td data-label="입고일">2023.9.10</td>
                 <td data-label="출고일">2023.10.20</td>
                 <td data-label="수량">150</td>
-              </tr>
-        
+            </tr>
+
             </tbody>
-          </table>
-        </div>
-      </div>
+        </table>
+    </div>
+</div>
