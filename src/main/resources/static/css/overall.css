@@ -23,11 +23,11 @@ body {
 }
 .main .charts{
   display: flex;
-  width: 90%;
+  width: 100%;
 }
 .main .chart{
   width: 40%;
-  height: 15vw;
+  height: 25vw;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
