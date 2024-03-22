@@ -17,7 +17,7 @@
           <div class="main-stateboxes">
             <div class="main-statebox">
               <h2>승인 대기</h2>
-              <ul class="value">18</ul>
+              <ul class="value"><span th:text="${getNotApprovalCount}"/></ul>
               <i class="icon-home bi bi-hourglass-split"></i>
             </div>
             <div class="main-statebox">
@@ -33,8 +33,8 @@
               <i class="icon-home bi bi-truck"></i>
             </div>
             <div class="main-statebox">
-              <h2>전체 수량</h2>
-              <ul class="value">600</ul>
+              <h2>전체 보관 수량</h2>
+              <ul class="value"><span th:text="${getTotalUsingCapacity}"/></ul>
               <i class="icon-home bi bi-collection"></i>
             </div>
           </div>
@@ -45,6 +45,9 @@
         <div class="chart">
           <canvas id="warehouseChart"></canvas>
       </div>
+          <script th:inline="javascript">
+            var cities = [[${WarehouseCityDTOlist}]]
+          </script>
 
         <!-- 창고별 차트 끝 -->
         <!-- 파이차트 -->
@@ -88,51 +91,13 @@
     </script> -->
       <!-- 파이차트 끝 -->
       <!-- 월별 입출고차트 -->
-      <div class="chart">
+    <div class="chart">
         <canvas id="inOutChart"></canvas>
     </div>
+    <script th:inline="javascript">
+      const monthly = [[${MonthlyDTO}]];
+    </script>
     
 
     </div>
-      <!-- 월별입출고차트 끝 -->
-        <div class="main-detail">
-          <h2>입/출고 내역</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>상품 이름</th>
-                <th>상품 분류</th>
-                <th>진행 상태</th>
-                <th>보관 위치</th>
-                <th>보관 기간</th>
-                <th>입고일</th>
-                <th>출고일</th>
-                <th>수량</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="상품 이름">Dropbox Design System</td>
-                <td data-label="상품 분류">업무</td>
-                <td data-label="진항 상태">진행중</td>
-                <td data-label="보관 위치">사용자-10-45</td>
-                <td data-label="보관 기간">40일</td>
-                <td data-label="입고일">2023.9.10</td>
-                <td data-label="출고일">2023.10.20</td>
-                <td data-label="수량">100</td>
-              </tr>
-              <tr>
-                <td data-label="상품 이름">Slack Team UI Design</td>
-                <td data-label="상품 분류">내부</td>
-                <td data-label="진항 상태">계획중</td>
-                <td data-label="보관 위치">사용자-10-45</td>
-                <td data-label="보관 기간">47일</td>
-                <td data-label="입고일">2023.9.10</td>
-                <td data-label="출고일">2023.10.20</td>
-                <td data-label="수량">150</td>
-              </tr>
-        
-            </tbody>
-          </table>
-        </div>
       </div>
