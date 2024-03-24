@@ -1,5 +1,6 @@
 package com.ssg.ssglandersmini2.dto;
 
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
@@ -48,8 +49,6 @@ public class PageRequestDTO {
     // 검색 키워드를 나타내는 필드
     private String keyword;
 
-    // 완료 여부를 나타내는 필드
-    private boolean finished;
 
     // 시작일을 나타내는 필드
     private LocalDate from;
@@ -80,6 +79,5 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
-
 }
 

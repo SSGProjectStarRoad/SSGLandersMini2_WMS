@@ -1,17 +1,17 @@
-package com.ssg.ssglandersmini2.domain;
+package com.ssg.ssglandersmini2.dto;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-@Getter
-@ToString
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@NotNull
-public class Incoming {
+public class IncomingDTO {
     private Long iid;
     private Long pid;
     private Long wid;
