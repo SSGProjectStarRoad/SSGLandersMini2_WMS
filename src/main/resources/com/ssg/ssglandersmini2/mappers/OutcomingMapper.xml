@@ -2,4 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.OutcomingMapper">
 
+
+    <select id="selectOutcomingList" resultType="com.ssg.ssglandersmini2.domain.Outcoming">
+
+        select * from outcoming o inner join product p on o.pid = p.pid
+        <where>
+            <!-- 타입에 따른 검색 -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'num'.toString()">
+                        o.oid like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="type == 'name'.toString()">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+
+        </where>
+        order by oid limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from outcoming
+    </select>
+
+    <select id="getProductByPid" resultType="com.ssg.ssglandersmini2.domain.Product">
+        select * from product where pid = #{pid}
+    </select>
+
+    <select id="getProductNameByPid" resultType="string">
+        select name from product where pid = #{pid}
+    </select>
+
+    <select id="getWarehouseByWid" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse where wid = #{wid}
+    </select>
+
+    <select id="getStockByWidPid" resultType="com.ssg.ssglandersmini2.domain.Stock">
+        select * from stock where wid = #{wid} and pid = #{pid}
+    </select>
+
+    <select id="getWarehouseTypeByWid" resultType="string">
+        select warehouseType from warehouse where wid = #{wid}
+    </select>
+
+    <select id="getStockQuantityByWidAndPid" resultType="long">
+        select quantity from stock where wid = #{wid} and pid = #{pid}
+    </select>
+
+<!--    디테일 -->
+    <select id="getProductByOid" resultType="com.ssg.ssglandersmini2.domain.Product">
+        select * from product where pid = (select pid from outcoming where oid = #{oid})
+    </select>
+
+    <select id="getWarehouseByOid" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse where wid = (select wid from outcoming where oid = #{oid})
+    </select>
+
+    <select id="getWaybillByOid" resultType="com.ssg.ssglandersmini2.domain.Waybill">
+        select * from waybill where wbid = (select wbid from outcoming where oid = #{oid})
+    </select>
+
+    <select id="getShippingcompanyByWbid" resultType="com.ssg.ssglandersmini2.domain.Shippingcompany">
+        select * from shippingcompany where sid = (select sid from waybill where wbid = #{wbid})
+    </select>
+
+    <select id="getOutcomingByOid" resultType="com.ssg.ssglandersmini2.domain.Outcoming">
+        select * from outcoming where oid = #{oid};
+    </select>
+
+
+
+
 </mapper>

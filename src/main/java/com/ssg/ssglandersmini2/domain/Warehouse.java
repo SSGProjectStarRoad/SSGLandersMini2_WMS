@@ -6,10 +6,8 @@ import lombok.*;
 @ToString
 @Builder
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Warehouse {
     private long wid;
     private String warehousetype;
