@@ -30,7 +30,7 @@ public class PageResponseDTO<E> {
 
     // 생성자
     @Builder(builderMethodName = "withAll")
-    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total){
+    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
         // 현재 페이지 번호를 설정
         this.page = pageRequestDTO.getPage();
         // 페이지 크기를 설정
@@ -38,11 +38,11 @@ public class PageResponseDTO<E> {
         // 전체 항목 수를 설정
         this.total = total;
         // 페이지 계산
-        this.end = (int)(Math.ceil(this.page / 10.0 )) * 10;
+        this.end = (int) (Math.ceil(this.page / 10.0)) * 10;
         this.start = this.end - 9;
         // 마지막 페이지 번호 계산
-        int last = (int)(Math.ceil((total/(double)size)));
-        this.end = end > last ? last: end;
+        int last = (int) (Math.ceil((total / (double) size)));
+        this.end = end > last ? last : end;
         // 이전 페이지의 존재 여부 설정
         this.prev = this.start > 1;
         // 다음 페이지의 존재 여부 설정
@@ -50,3 +50,4 @@ public class PageResponseDTO<E> {
         // DTO 리스트 설정
         this.dtoList = dtoList;
     }
+}
