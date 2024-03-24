@@ -916,7 +916,7 @@ tr:nth-child(even) {
     z-index: 2;
     /* 필요한 경우 z-index 조정 */
     top: 20vw;
-    background-color: (233, 233, 233);
+    background-color: rgb(233, 233, 233);
   }
 
 
