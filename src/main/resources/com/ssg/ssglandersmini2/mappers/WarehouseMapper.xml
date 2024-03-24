@@ -4,7 +4,7 @@
 
 <!--    창고등록쿼리-->
     <insert id="insert">
-        insert into warehouse(warehouseType, address, capacity, wname) values(#{warehouseType}, #{address}, #{capacity}, #{wname})
+        insert into warehouse(warehousetype, address, capacity, wname) values(#{warehousetype}, #{address}, #{capacity}, #{wname})
     </insert>
 
     <!--    창고목록조회 쿼리-->
@@ -24,7 +24,31 @@
 
     <!--    창고수정 쿼리-->
     <update id="update">
-        update warehouse set warehouseType = #{warehouseType}, address = #{address}, capacity = #{capacity}, wname = #{wname} where wid = #{wid}
+        update warehouse set wname = #{wname}, warehousetype =  #{warehousetype}, address = #{address}, capacity = #{capacity}  where wid = #{wid}
     </update>
+
+    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse
+            <where>
+                <if test="types != null and types.length > 0">
+                    <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                        <if test="type == 'type'.toString()">
+                            warehousetype like concat('%', #{keyword}, '%')
+                        </if>
+                        <if test="type == 'address'.toString()">
+                            address like concat('%', #{keyword}, '%')
+                        </if>
+                        <if test="type == 'all'.toString()">
+                            address like concat('%', #{keyword}, '%') or warehousetype like concat('%', #{keyword},'%') or wname like concat('%', #{keyword}, '%')
+                        </if>
+                    </foreach>
+                </if>
+            </where>
+            order by wid limit #{skip}, #{size}
+        </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from warehouse
+    </select>
 
 </mapper>

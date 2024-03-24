@@ -7,11 +7,12 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class WarehouseDTO {
-    private Long id;
+    private long wid;
     private String address;
-    private String warehouseType;
+    private String warehousetype;
     private int capacity;
-    private int usingCapacity;
+    private int usingcapacity;
     private String wname;
 }

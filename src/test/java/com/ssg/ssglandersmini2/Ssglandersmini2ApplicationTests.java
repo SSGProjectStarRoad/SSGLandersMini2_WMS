@@ -17,7 +17,7 @@ class Ssglandersmini2ApplicationTests {
     @Test
     void testRegisterWarehouse(){
         WarehouseDTO warehouseDTO = WarehouseDTO.builder()
-                .warehouseType("테스트타입")
+                .warehousetype("테스트타입")
                 .address("테스트주소")
                 .capacity(1234).build();
         warehouseService.register(warehouseDTO);

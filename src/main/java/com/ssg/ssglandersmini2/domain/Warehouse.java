@@ -1,18 +1,20 @@
 package com.ssg.ssglandersmini2.domain;
 
+
 import lombok.*;
 
+@ToString
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Warehouse {
-    private Long id;
-    private String address;
-    private String warehouseType;
-    private int capacity;
-    private int usingCapacity;
-    private String wname;
 
+public class Warehouse {
+    private long wid;
+    private String warehousetype;
+    private String address;
+    private long capacity;
+    private long usingcapacity;
+    private String wname;
 }
