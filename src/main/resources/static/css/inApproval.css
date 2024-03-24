@@ -471,7 +471,7 @@ input {
 
 .main-detail thead {
   text-align: left;
-  border-radius: solid
+  /*border-radius: solid*/
 }
 
 .main-detail thead th {
@@ -920,7 +920,7 @@ tr:nth-child(even) {
   }
 
 
-  .main-main-stateboxes {
+  .main-main-stateboxes{
     display: flex;
     flex-direction: column;
     margin: auto auto;
