@@ -1,12 +1,21 @@
 html,
 body {
-
   width: 100%;
   height: 100%;
   display: flex;
   background-color: rgb(233, 233, 233);
 }
 
+/* 이중 모달 */
+
+#myModal {
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#myModal2 {
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 
 /* 메인 div */
@@ -17,8 +26,8 @@ body {
   z-index: 1;
   background-color: rgb(233, 233, 233);
   width: 100%;
-  /* display: flex; */
   height: 100%;
+
 }
 
 .main-background {
@@ -33,6 +42,8 @@ body {
 .main-box {
   margin-left: 30px;
   margin-top: 110px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main h1 {
@@ -43,51 +54,17 @@ body {
   margin-bottom: 10px;
 }
 
-.coming-btn {
-  display: flex;
-}
 
-.input-bigbox {
-  display: flex;
-}
-
-.incoming-btn {
-  margin-right: 20px;
-
-}
-
-.outcoming-btn {
-  margin-right: 40px;
-
-}
-
-.incoming-btn button {
-  background-color: rgb(217, 237, 255);
-  /* border-color: #36064D; */
-  color: black;
-  font-weight: bold;
-  border: 0px;
-  font-size: 15px;
-  width: 130px;
-  height: 34.5px;
+.btn,
+.form-control {
+  height: 40px;
+  white-space: nowrap;
 }
 
 
 
-.incoming-btn button:focus {
-  background-color: rgb(217, 237, 255);
 
-  color: black;
-  font-weight: bold;
-  border: 0px;
-  font-size: 15px;
-  width: 130px;
-  height: 34.5px;
-}
-
-
-
-.outcoming-btn button {
+button {
   background-color: rgb(217, 237, 255);
   border-color: #36064D;
   color: black;
@@ -98,47 +75,24 @@ body {
   height: 34.5px;
 }
 
-.outcoming-btn button:focus{
-  background-color: rgb(217, 237, 255);
-  border-color: #36064D;
-  color: black;
-  font-weight: bold;
-  border: 0px;
-  font-size: 15px;
-  width: 130px;
-  height: 34.5px;
+.primary-btn{
+  width: 49.95px;
 }
+
 
 .main-stateboxes {
   position: relative;
-  justify-content: space-between;
   display: flex;
+  flex-direction: row;
   z-index: 3;
-
-  /* border: solid 1px white; */
+  justify-content: center;
 }
-
-.main-statebox {
-  position: relative;
-  padding-left: 10px;
-  width: 250px;
-  border-radius: 5%;
-  margin: 10px;
-  background-color: white;
-}
-
 
 
 .input-box {
-  width: 420px;
-  margin-left: 140px;
+  width: 30vw;
+  margin-right: 20px;
 }
-
-.input-box input[type="text"]{
-  height: 40px;
-}
-
-
 
 .input-btn {
   margin-left: 20px;
@@ -146,46 +100,40 @@ body {
   height: 100px;
 }
 
-.input-bigbox {
-  display: flex;
-  flex-direction: row;
-  padding-left: 120px;
-}
-
-.search-toggle{
-  white-space: noWrap;
-  display: flex;
-}
-.form-select{
-  height: 40px;
-  border-radius: 5px;
-  width: 60px;
-  margin-left: 40px;
-  margin-right: -40vw;
-  border: 0px;
-}
-
-
 
 .input-btn button {
   background-color: rgb(217, 237, 255);
+  border-color: #36064D;
   color: black;
   font-weight: bold;
   border: 0px;
   font-size: 15px;
-
 }
 
+.btn-register {
+  margin: 0px;
+}
+
+/* 버튼 색 돌아오는 거 */
 .input-btn button:focus {
   background-color: rgb(217, 237, 255);
   color: black;
   font-weight: bold;
   border: 0px;
   font-size: 15px;
-
 }
 
-.main-statebox i.icon-home {
+.approval-btn button:focus {
+  background-color: rgb(217, 237, 255);
+  color: black;
+  font-weight: bold;
+  border: 0px;
+  font-size: 15px;
+  width: 130px;
+  height: 40px;
+}
+
+i.icon-home {
   position: absolute;
   top: 30px;
   right: 20px;
@@ -199,11 +147,11 @@ body {
   /* 이미지 파일의 경로를 지정해야 할 수도 있습니다. 예: background-image: url('path/to/image.png'); */
 }
 
-.main-statebox ul {
+ul {
   padding-left: 10px;
 }
 
-.main-statebox ul.value {
+ul.value {
   font-weight: bold;
   font-size: 30px;
 }
@@ -214,20 +162,88 @@ body {
   border-color: rgb(254, 0, 0);
 }
 
-button {
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
+
+
+/* Modal */
+.modal-input {
+  margin-bottom: 10px;
+  height: 40px;
+  width: 330px;
+}
+
+input {
+  background-color: rgb(226, 226, 226);
+  border-color: white;
+  margin-left: 20px;
+  width: 350px;
+}
+
+.modal-header h1 {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.modal-minititle {
+  text-align: left;
+  width: 100%;
+  font-size: small;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.modal-dialog {
+  width: 400px;
+}
+
+.warehouse-address{
+  white-space: nowrap;
+  width: 330px;
+}
+
+.select-warehouse{ 
+  margin-left: 160px;
+  margin-top: 10px;
 }
 
 
-.float-end{
-  margin-top: 10px;
-  width: 100%;
+.modal-body{
+  width: 300px;
   display: flex;
-  justify-content: right;
-  padding-right: 10px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-second-body {
+  width: 35vw;
+}
+.modal-table{
+  width: 370px;
+}
+
+/* search-toggle */
+
+.form-select {
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  margin-right: 1vw;
+  text-align: center;
+  border: 0px;
+}
+
+
+/* toggle dropdown */
+
+.select-toggle select {
+  margin-bottom: 10px;
+  background-color: rgb(226, 226, 226);
+  border-color: white;
+  margin-left: 20px;
+  width: 350px;
+  text-align: center;
+  height: 40px;
+  border-radius: 5px;
 }
 
 
@@ -248,7 +264,7 @@ button {
 .right-way {
   background-color: white;
   width: 350px;
-  height: 450px;
+  height: 470px;
   border-radius: 5px;
   /* margin-top: 30px; */
   display: flex;
@@ -257,15 +273,14 @@ button {
   flex-direction: column;
   /* position: absolute; */
   z-index: 2;
-  margin-left: 30px;
-  margin-top: 20px;
+  margin: 0 2vw;
   padding-top: 20px;
 }
 
 .right {
   background-color: white;
-  width: 400px;
-  height: 550px;
+  width: 350px;
+  height: 600px;
   border-radius: 5px;
   /* margin-top: 30px; */
   display: flex;
@@ -274,35 +289,27 @@ button {
   flex-direction: column;
   /* position: absolute; */
   z-index: 2;
-  margin-left: 30px;
+  margin-left: 10px;
   overflow: auto;
   overflow-x: hidden;
-  padding-top: 140px;
+  padding-top: 90px;
 
 }
 
-
-
-.table-way{
-  margin: 0 auto;
+.table-way {
   display: flex;
-  /* 하단 하얗게 나오는거 수정 */
-  background-color: rgb(233,233,233);
-  padding-bottom: 17px;
+  margin: 0 15px;
 }
 
 /* 테이블 */
 .main-detail {
-  width: 55.5vw;
-  margin-left: 40px;
+  width: 80vw;
+  margin-left: 10px;
   font-size: 13px;
   background-color: white;
   border-radius: 10px;
-  margin-top: 20px;
   padding: 10px;
   height: 100%;
-
-
 }
 
 .main-detail h2 {
@@ -313,6 +320,11 @@ button {
 
 .main-detail thead {
   text-align: left;
+  /*border-radius: solid;*/
+
+
+
+
 
 }
 
@@ -376,7 +388,7 @@ tr:nth-child(even) {
 
 
 
-/* waybil */
+/* waybill */
 
 .waybill-title {
   text-align: center;
@@ -397,31 +409,6 @@ tr:nth-child(even) {
   justify-content: center;
 
 }
-
-.waybill-content-arrival{
-  width: 310px;
-}
-
-.waybill-content-arrival label{
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.waybill-content-arrival input{
-  background-color: rgb(233, 233, 233);
-  border: 0px;
-  margin-bottom: 5px;
-  margin-top: 3px;
-}
-
-.waybill-content-arrival button{
-  margin-left: 20px;
-  margin-bottom: 5px;
-}
-
-
-
-
 
 .waybill-content-left {
   width: 150px;
@@ -489,70 +476,11 @@ tr:nth-child(even) {
 }
 
 
-
-.right-text {
-  padding-top: 5px;
-}
-
-.right-input {
-  margin-left: 20px;
-  width: 200px;
-}
-
-.right-text-besong{
-  margin-left: -142px;
-}
-
-.right-input input{
+input {
   background-color: rgb(226, 226, 226);
   border-color: white;
 
 }
-
-.select-toggle{
-  position: relative;
-}
-
-
-.select-toggle select{
-  margin-bottom: 10px;
-  background-color: rgb(226, 226, 226);
-  border-color: white;
-  margin-left: 20px;
-  width: 160px;
-  text-align: center;
-  height: 40px;
-  border-radius: 5px;
-
-}
-.select-toggle button{
-  position: absolute;
-  left: 200px;
-  top: 10px;
-  width: 50px;
-  border-radius: 5px;
-  font-size: 10px;
-  border: solid 1px black;
-}
-
-
-
-.select-toggle-way-modal select{
-  margin-bottom: 10px;
-  background-color: rgb(226, 226, 226);
-  border-color: white;
-  margin-left: 20px;
-  width: 350px;
-  text-align: center;
-  height: 40px;
-  border-radius: 5px;
-  padding-right: 4px;
-}
-
-.modal-footer{
-  background-color: white;
-}
-
 
 .qr-img {
   width: 70px;
@@ -571,7 +499,7 @@ tr:nth-child(even) {
   margin-top: 20px;
   margin-bottom: 20px;
   padding-left: 50px;
-  
+
 }
 
 .update-btn button {
@@ -586,114 +514,87 @@ tr:nth-child(even) {
   border: white;
 }
 
-/* 모달 */
-.modal-header h1{
-  font-size: 15px;
-  font-weight: bold;
-}
-.modal-minititle{
-  text-align: left;
-  width: 100%;
-  font-size: small;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  margin-left: 20px;
-}
-
-.modal-input{
-  margin-bottom: 10px;
-}
-.modal-input input{
-  background-color: rgb(226, 226, 226);
-  border-color: white;
-  margin-left: 20px;
-  width: 350px;
-}
-
-.modal-dialog{
-  width: 400px;
-}
-
-
-
-
 
 @media (max-width: 768px) {
-  html, body {
-    width: 100%;
-    flex-direction: column; /* html과 body의 flex 방향을 수직으로 변경 */
-  }
 
-
-
-  /* 위에 검색이랑 버튼들 */
-
-  .input-bigbox {
-    display: flex;
-    flex-direction: row;
-    padding-left: 5px;
+  html,
+  body {
+    flex-direction: column;
+    background-color: rgb(233, 233, 233);
+    /* html과 body의 flex 방향을 수직으로 변경 */
   }
 
   .input-box {
-    margin-top: 10px;
-    width: 420px;
-    margin-left: 20px;
+    /* margin-top: 10px; */
+    width: 40vw;
+    /* margin-left: 20px; */
   }
 
   .input-btn {
-    margin-top: 12px;
-    margin-left: 20px;
-    width: 100px;
-    height: 100px;
-    white-space: nowrap;
-  }
-  .search-toggle{
-    white-space: noWrap;
     display: flex;
+    align-items: center;
   }
 
-  .form-select{
-    height: 40px;
-    border-radius: 5px;
-    width: 60px;
-    min-width: 60px;
-    margin-right: 1vw;
-    margin-left: -40px;
-    margin-top: 11px;
+  .incoming {
+    margin-left: 0.5px;
   }
 
+  .incoming,
+  .outcoming {
+    width: 100%;
+  }
 
-  .coming-btn{
-    margin-top: -36px;
+  .approval-btn {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: -67px;
-    /* border: 1px solid black; */
+    align-items: center;
+    margin-top: -24px;
+
   }
 
-  .incoming-btn{
-    /* border-bottom: 1px solid black; */
+  .approval-btn button {
+    background-color: rgb(217, 237, 255);
+    border-color: #36064D;
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+    width: 100vw;
+    height: 40px;
+    margin-left: -45px;
   }
 
-
-  .coming-btn button{
-    width: 100vW;
-    height: 45px;
+  .input-btn button:focus {
+    background-color: rgb(217, 237, 255);
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
   }
-  
+
+  .approval-btn button:focus {
+    background-color: rgb(217, 237, 255);
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+    width: 100vw;
+    height: 40px;
+  }
 
   /* 운송장과 테이블 감싸는 div */
 
-  .table-way{
+  .table-way {
     display: flex;
     flex-direction: column;
+    margin: 0 0;
   }
 
   .right-way {
     background-color: white;
     width: 350px;
-    height: 450px;
+    height: 500px;
     border-radius: 5px;
     /* margin-top: 30px; */
     display: flex;
@@ -708,19 +609,12 @@ tr:nth-child(even) {
     margin-bottom: 50px;
   }
 
-  .table-div table thead tr th {
-    border: none; /* 테두리(border) 없애기 */
-  }
-
-
-
-
   /* 상세정보 right  */
 
   .right {
     background-color: white;
     width: 400px;
-    height: 750px;
+    height: 700px;
     border-radius: 5px;
     /* margin-top: 30px; */
     display: flex;
@@ -734,93 +628,97 @@ tr:nth-child(even) {
     /* overflow-x: hidden; */
     padding-top: 10px;
     margin-left: 43px;
-    /*border: 1px solid 1px;*/
+    border: 1px solid;
     margin-bottom: 50px;
   }
 
   /* 미디어쿼리 메인문 */
 
   .main {
-    width: 100%; /* main의 너비를 화면 전체로 설정 */
-    position: relative; /* main의 위치를 상대적으로 설정 */
-    z-index: 2; /* 필요한 경우 z-index 조정 */
+    width: 100%;
+    /* main의 너비를 화면 전체로 설정 */
+    position: relative;
+    /* main의 위치를 상대적으로 설정 */
+    z-index: 2;
+    /* 필요한 경우 z-index 조정 */
     top: 20vw;
-    height: 100%;
+    background-color: rgb(233, 233, 233);
   }
 
-  .main .charts{
-    flex-direction: column;
-    justify-content: center;
-  }
-  .main .chart{
-    width: 60%; 
-    height: 30vw; 
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
 
   .main-stateboxes {
     display: flex;
-    width: 90%;
-    flex-direction: column;
-    left: 7%;
-  }
-  .main-statebox{
-    width: 80%;
-    height: 100px;
-  }
-  .main-statebox .wait-value {
-    top: 40%;
-    left: 40%;
-  }
-  .main-detail {
-    width: 85%;
-    margin: 20px auto; /* 상하 마진은 20px, 좌우 마진은 자동으로 설정하여 중앙 정렬 */
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    white-space: nowrap;
+    align-items: center;
   }
 
-  table, thead, tbody, th, td, tr { 
-    display: block; /* 블록 요소로 변환하여 세로로 쌓임 */
+  .main-detail {
+    width: 85%;
+    margin: 20px auto;
+    /* 상하 마진은 20px, 좌우 마진은 자동으로 설정하여 중앙 정렬 */
   }
-  thead tr { 
-    position: absolute; /* 헤더를 보이지 않게 설정 */
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    /* 블록 요소로 변환하여 세로로 쌓임 */
+  }
+
+  thead tr {
+    position: absolute;
+    /* 헤더를 보이지 않게 설정 */
     top: -9999px;
     left: -9999px;
   }
-  tr { 
-    margin: 0 0 1rem 0; /* 각 행(카드)에 마진 추가 */
-    /*border: 1px solid #ddd; !* 행에 테두리 추가 *!*/
 
-    box-shadow: 0 2px 3px rgba(0,0,0,0.1); /* 그림자 효과 추가 */
+  tr {
+    margin: 0 0 1rem 0;
+    /* 각 행(카드)에 마진 추가 */
+    border: 1px solid #ddd;
+    /* 행에 테두리 추가 */
+
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    /* 그림자 효과 추가 */
   }
-  td { 
-    border-bottom: 1px solid #ddd; /* 각 데이터 아래 테두리 추가 */
+
+  td {
+    border-bottom: 1px solid #ddd;
+    /* 각 데이터 아래 테두리 추가 */
     position: relative;
     padding: .625rem;
     text-align: left;
     padding-left: 50%;
     border-bottom-left-radius: 0px;
   }
-  td:before { 
+
+  td:before {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: .625rem;
     font-weight: bold;
-    content: attr(data-label); /* 라벨 표시 */
+    content: attr(data-label);
+    /* 라벨 표시 */
   }
+
   .main-detail tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 0; /* 모서리 라운딩 제거 */
+    border-bottom-left-radius: 0;
+    /* 모서리 라운딩 제거 */
   }
+
   .main-detail tbody tr:last-child td:last-child {
     border-bottom-right-radius: 0;
-}
-  .main-detail h2{
+  }
+
+  .main-detail h2 {
     margin-bottom: 15px;
   }
 
-  .right-text-besong{
-    margin-left: 0px;
-  }
-  
 }

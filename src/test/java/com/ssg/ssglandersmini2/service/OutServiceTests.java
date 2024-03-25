@@ -21,8 +21,8 @@ public class OutServiceTests {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
-//                .types(new String[] {"name"})
-//                .keyword("맥북")
+                .types(new String[] {"id"})
+                .keyword("5")
                 .build();
 
         log.info(outcomingService.getList(pageRequestDTO));
@@ -33,4 +33,23 @@ public class OutServiceTests {
         log.info(outcomingService.getDetails(1l));
     }
 
+    @Test
+    public void modifyStatus(){
+        outcomingService.modifyStatus(1l,1l);
+    }
+
+    @Test
+    public void testgetWaybill(){
+        log.info(outcomingService.getWaybill(4l));
+    }
+
+    @Test
+    public void testShippingcompany(){
+        log.info(outcomingService.getShippingcompanyByWbid(1l));
+    }
+
+    @Test
+    public void modifyWaybillSidByWbidAndSid(){
+        outcomingService.modifyWaybillSidByWbidAndSid(1l,3l);
+    }
 }

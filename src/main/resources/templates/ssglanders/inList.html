@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <link th:href="@{/css/inList.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css}"/>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js}"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js}"></script>
+    <script th:src="@{/js/incoming.js}"></script>
+</head>
+<body>
+<div>
+    <div class="main" layout:fragment="content">
+        <div class="main-background"></div>
+        <div class="main-box">
+            <h1>입고 현황</h1>
+            <div class="main-stateboxes">
+
+                <div class="search-toggle">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>---</option>
+                        <option value="1">전체</option>
+                        <option value="2">번호</option>
+                        <option value="3">상품명</option>
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <input type="search" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-btn">
+                    <button type="button" class="btn btn-primary">검색</button>
+                </div>
+
+            </div>
+
+
+            <div class="table-way">
+
+                <div class="main-detail">
+                    <h2>입고 현황</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>상품명</th>
+                            <th>수량</th>
+                            <th>창고</th>
+                            <th>계약일</th>
+                            <th>승인 여부</th>
+                            <th>배송 상태</th>
+                            <th>수정</th>
+                        </tr>
+                        </thead>
+                        <tbody onclick="handleRegisterClick(event)">
+                        <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.iid}">
+                            <td><span th:text="${dto.iid}"></span></td>
+                            <td><span th:text="${dto.name}"></span></td>
+                            <td><span th:text="${dto.quantity}"></span></td>
+                            <td><span th:text="${dto.type}"></span></td>
+                            <td><span th:text="${dto.date}"></span></td>
+                            <td><span th:text="${dto.approval}"></span></td>
+                            <td><span th:text="${dto.status}"></span></td>
+                            <td>
+                                <a href="#myModal" class="btn btn-primary" data-toggle="modalModify">수정</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="float-end">
+                        <ul class="pagination flex-wrap">
+                            <th:block th:if="${responseDTO.prev}">
+                                <li class="page-item">
+                                    <a class="page-link" th:data-num="${responseDTO.start - 1}">Previous</a>
+                                </li>
+                            </th:block>
+
+                            <th:block th:each="num: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                                <li class="page-item" th:classappend="${responseDTO.page == num ? 'active' : ''}">
+                                    <a class="page-link" th:data-num="${num}" th:text="${num}"></a>
+                                </li>
+                            </th:block>
+
+                            <th:block th:if="${responseDTO.next}">
+                                <li class="page-item">
+                                    <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;" layout:fragment="modal1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">입고 수정</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+
+
+                <div class="modal-minititle">
+                    대분류
+                </div>
+                <div class="modal-input">
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"
+                           value="뭐시기에서 끌고옴" readonly>
+                </div>
+
+                <div class="modal-minititle">
+                    중분류
+                </div>
+                <div class="modal-input">
+                    <div class="modal-input">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1" value="뭐시기에서 끌고옴" readonly>
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    소분류
+                </div>
+                <div class="modal-input">
+                    <div class="modal-input">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1" value="뭐시기에서 끌고옴" readonly>
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    상품명
+                </div>
+                <div class="modal-input">
+                    <div class="modal-input">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1" value="알아서 꽂힘" readonly>
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    수량
+                </div>
+                <div class="modal-input">
+                    <div class="modal-input">
+                        <input type="text" class="form-control" placeholder="단위 : 1 파레트(PLT)" aria-label="Username"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    입고일
+                </div>
+                <div class="modal-input">
+                    <div class="modal-input">
+                        <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    창고 조회 선택
+                </div>
+                <div class="modal-warehouse-search">
+                    <div class="warehouse-address">
+
+                        <input type="text" class="form-control warehouse-input" placeholder="창고 주소 입력" aria-label="Username"
+                               aria-describedby="basic-addon1">
+                        <a data-toggle="modal" type="submit" href="#myModal2" class="btn btn-primary select-warehouse">조회</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn btn-primary">닫기</a>
+                <a href="#" type="submit" data-dismiss="modal" class="btn btn-primary">수정</a>
+                <a href="#" type="submit" data-dismiss="modal" class="btn btn-primary">삭제</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;" layout:fragment="modal2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>창고목록</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="container"></div>
+            <div class="modal-second-body">
+
+                <table class="modal-table">
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>주소</th>
+                        <th>선택</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td data-label="창고번호">서울냉장01</td>
+                        <td data-label="상품명">윤호상 윤호상 120-3</td>
+                        <td data-label="선택"><button type="submit" class="btn btn-primary select-modal-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#myModal2">
+                            선택
+                        </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="창고번호">서울냉장01</td>
+                        <td data-label="상품명">윤호상 윤호상 120-3</td>
+                        <td data-label="선택"><button type="submit" class="btn btn-primary select-modal-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#myModal2">
+                            선택
+                        </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

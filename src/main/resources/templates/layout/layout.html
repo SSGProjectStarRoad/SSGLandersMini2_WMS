@@ -28,7 +28,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <i class="bi bi-grid"></i>
-                <a class="nav-link active" aria-current="page" href="#"
+                <a class="nav-link active" aria-current="page" th:href="@{/ssglanders/overall}"
                 >메인페이지</a
                 >
             </li>
@@ -40,7 +40,7 @@
             <span class="nav-menu">출고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-minus"></i>
-                <a class="nav-link" href="#">출고현황</a>
+                <a class="nav-link" th:href="@{/ssglanders/outList}">출고현황</a>
             </li>
             <span class="nav-menu">재고</span>
             <li class="nav-item">
@@ -57,11 +57,13 @@
                 <i class="bi bi-calendar2-check"></i>
                 <a class="nav-link" href="#">승인관리</a>
             </li>
-            <span class="nav-menu">회원</span>
+            <span class="nav-menu">내 정보</span>
             <li class="nav-item">
                 <i class="bi bi-person-gear"></i>
-                <a class="nav-link" href="#">내 정보 수정</a>
+                <a class="nav-link" href="#">수정/삭제</a>
             </li>
+<!--            권한에 따라 회원관리 안보이게, url 접근도 막을것-->
+            <span class="nav-menu">회원</span>
             <li class="nav-item">
                 <i class="bi bi-person-check"></i>
                 <a class="nav-link" href="#">회원 관리</a>
@@ -70,10 +72,14 @@
     </div>
 </div>
 <div layout:fragment="content">
-    <p>Page content goes here</p>
+
 </div>
 
-<div layout:fragment="modal">
+<div layout:fragment="modal1">
+
+</div>
+
+<div layout:fragment="modal2">
 
 </div>
 

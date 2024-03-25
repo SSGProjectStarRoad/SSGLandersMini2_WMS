@@ -31,16 +31,26 @@ public class PageResponseDTO<E> {
     // DTO(Data Transfer Object) 리스트를 나타내는 필드
     private List<E> dtoList;
 
+
     // 생성자
+
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total){
-        // 현재 페이지 번호를 설정
+
+
         this.page = pageRequestDTO.getPage();
         // 페이지 크기를 설정
         this.size = pageRequestDTO.getSize();
+
         // 전체 항목 수를 설정
         this.total = total;
         // 페이지 계산
+
+
+        this.total =total;
+        this.dtoList = dtoList;
+
+
         this.end = (int)(Math.ceil(this.page / 10.0 )) * 10;
         this.start = this.end - 9;
         // 마지막 페이지 번호 계산

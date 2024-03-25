@@ -49,6 +49,7 @@ public class PageRequestDTO {
     // 검색 키워드를 나타내는 필드
     private String keyword;
 
+
     // 완료 여부를 나타내는 필드
     private boolean finished;
 
@@ -70,6 +71,7 @@ public class PageRequestDTO {
     }
 
     // 링크 정보를 반환하는 메서드
+
     public String getLink() {
         if(link == null){
             StringBuilder builder = new StringBuilder();
@@ -80,6 +82,7 @@ public class PageRequestDTO {
         return link;
     }
 
+
     // 검색 유형이 주어진 유형과 일치하는지 확인하는 메서드
     public boolean checkType(String type) {
         if (types == null || types.length == 0) {
@@ -88,3 +91,5 @@ public class PageRequestDTO {
         return Arrays.stream(types).anyMatch(type::equals);
     }
 }
+
+
