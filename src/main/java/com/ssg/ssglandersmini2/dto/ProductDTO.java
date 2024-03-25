@@ -1,16 +1,16 @@
-package com.ssg.ssglandersmini2.domain;
+package com.ssg.ssglandersmini2.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class ProductDTO {
     @NotNull
     private Long pid;
     @NotNull

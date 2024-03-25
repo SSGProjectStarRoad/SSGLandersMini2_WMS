@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.IncomingMapper">
+    <select id="selectIncomingList" resultType="com.ssg.ssglandersmini2.domain.Incoming">
+        select * from incoming
+        <where>
+            <if test="keyword != null and keyword != ''">
+                iid like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by iid limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
 
 </mapper>
