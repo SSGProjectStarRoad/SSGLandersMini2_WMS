@@ -3,6 +3,7 @@ package com.ssg.ssglandersmini2.domain;
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @Builder
 @NoArgsConstructor

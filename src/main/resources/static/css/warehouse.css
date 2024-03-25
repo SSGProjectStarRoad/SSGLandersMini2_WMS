@@ -154,7 +154,20 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-left: 16vw;
+    padding-left: 14vw;
+}
+.bigcheckbox{
+    display: flex;
+    justify-content: center;
+    margin-top: -48px;
+    margin-left: 75px;
+    flex-direction: row;
+    /*white-space: noWrap;*/
+    display: flex;
+    color: white;
+}
+.capacity-checkbox{
+    margin-left: 20px;
 }
 
 .coming-btn {
@@ -196,7 +209,7 @@ body {
 
 .input-box {
     width: 420px;
-    margin-left: 140px;
+    margin-left: 40px;
 }
 
 
@@ -294,7 +307,7 @@ body {
 .table-div {
     /* margin-top: 30px; */
     border-radius: 15px;
-    margin-left: 20spx;
+    margin-left: 20px;
 
 }
 

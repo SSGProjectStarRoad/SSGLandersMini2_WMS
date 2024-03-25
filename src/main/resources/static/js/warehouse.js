@@ -89,36 +89,24 @@ document.addEventListener('DOMContentLoaded', function () {
         initMap(address, name);
     });
 
-    // 모달창 열리는 이벤트 핸들러
-    // $('#exampleModal2').on('shown.bs.modal', function (event) {
-    //     var button = $(event.relatedTarget); // 모달창을 열기 위한 버튼
-    //     var address = button.data('address'); // 버튼의 데이터 속성 data-address에서 주소 정보를 가져온다
-    //     var name = button.data('name'); // 버튼의 데이터 속성 data-name 창고 이름 정보를 가져온다
-    //
-    //     initMap(address, name); // 지도 초기화 함수를 호출하며 주소와 이름을 인자로 전달
-    //
-    //     setTimeout(function () {
-    //         map.relayout(); // 모달창이 완전히 열린 후 지도의 레이아웃을 재정의한다->지도 이상하게 뜨는거 해결하는부분.
-    //     }, 0);
-    // });
+
 
 
     // 지도관련
-    // $(document).ready(function () {
-    //     var map; // 지도 객체를 저장할 변수 선언
-
     function initMap(address, name) {
         console.log("initMap called with address: " + address + ", name: " + name); // 함수 호출 로그
-        if (typeof kakao === 'undefined' || !kakao.maps) {
-            console.error('Kakao Maps API is not loaded.');
-            // 여기에 사용자에게 API 로드 실패 알리는 로그.
-            return;
+            //카카오맵 API 로드 실패 알리는 로그.
+        if (typeof kakao !== 'undefined' && kakao.maps) {
+            console.log('카카오 지도 API 로드 성공!');
+        } else {
+            console.log('카카오 지도 API 로드 실패...');
         }
+
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 임시 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
+                level: 6 // 지도의 확대 레벨
             };
         console.log(address);
 
@@ -149,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // 지도의 중심을 결과값으로 받은 위치로 이동
                 map.setCenter(coords);
+            }else{
+                console.log("주소 검색 실패 유효하지 않은 주소")
             }
         });
     }
@@ -186,49 +176,49 @@ $(document).ready(function() {
     });
 
 
-    //모달창의 첫번째 수정버튼
+    //모달창의 첫번째 수정버튼 !봉인!
 
-    $('#modify-button').click(function() {
-        // 입력 필드의 readonly 속성을 제거하여 수정 가능하게 만듦
-        $('#exampleModal2 input:not(#modal-warehouse-id)').removeAttr('readonly');
-
-        // 수정 완료 버튼을 동적으로 생성하고 추가함
-        var completeButton = $('<button type="button" id="complete-modify-button" class="btn btn-success">수정하기</button>');
-        $('.modal-footer').prepend(completeButton);
-
-        // 기존 수정 버튼을 숨김
-        $(this).hide();
-    });
-
-    // 수정 완료 버튼의 클릭 이벤트 핸들러 추가
-    $(document).on('click', '#complete-modify-button', function() {
-        var warehouseData = {
-            wid: $('#modal-warehouse-id').val(),
-            wname: $('#modal-warehouse-name').val(),
-            address: $('#modal-warehouse-address').val(),
-            warehousetype: $('#modal-warehouse-type').val(),
-            capacity: $('#modal-warehouse-capacity').val(),
-            usingcapacity: $('#modal-warehouse-usingcapacity').val(),
-        };
-
-        // AJAX 요청으로 서버의 modify 컨트롤러 호출
-        $.ajax({
-            url: '/ssglanders/modify', // 서버의 URL. 필요에 따라 수정하세요.
-            type: 'POST',
-            contentType: 'application/json', // JSON 형식의 데이터 전송을 명시
-            data: JSON.stringify(warehouseData), // JavaScript 객체를 JSON 문자열로 변환
-            success: function(response) {
-                // 성공적으로 수정되면 페이지를 새로고침하거나 사용자에게 알림
-                alert('창고 수정 성공');
-                location.reload(); // 또는 다른 로직 구현
-            },
-            error: function(error) {
-                // 오류 처리
-                console.error('수정 실패:', error);
-                alert('창고 수정 실패');
-            }
-        });
-    });
+    // $('#modify-button').click(function() {
+    //     // 입력 필드의 readonly 속성을 제거하여 수정 가능하게 만듦
+    //     $('#exampleModal2 input:not(#modal-warehouse-id)').removeAttr('readonly');
+    //
+    //     // 수정 완료 버튼을 동적으로 생성하고 추가함
+    //     var completeButton = $('<button type="button" id="complete-modify-button" class="btn btn-success">수정하기</button>');
+    //     $('.modal-footer').prepend(completeButton);
+    //
+    //     // 기존 수정 버튼을 숨김
+    //     $(this).hide();
+    // });
+    //
+    // // 수정 완료 버튼의 클릭 이벤트 핸들러 추가
+    // $(document).on('click', '#complete-modify-button', function() {
+    //     var warehouseData = {
+    //         wid: $('#modal-warehouse-id').val(),
+    //         wname: $('#modal-warehouse-name').val(),
+    //         address: $('#modal-warehouse-address').val(),
+    //         warehousetype: $('#modal-warehouse-type').val(),
+    //         capacity: $('#modal-warehouse-capacity').val(),
+    //         usingcapacity: $('#modal-warehouse-usingcapacity').val(),
+    //     };
+    //
+    //     // AJAX 요청으로 서버의 modify 컨트롤러 호출
+    //     $.ajax({
+    //         url: '/ssglanders/modify', // 서버의 URL. 필요에 따라 수정하세요.
+    //         type: 'POST',
+    //         contentType: 'application/json', // JSON 형식의 데이터 전송을 명시
+    //         data: JSON.stringify(warehouseData), // JavaScript 객체를 JSON 문자열로 변환
+    //         success: function(response) {
+    //             // 성공적으로 수정되면 페이지를 새로고침하거나 사용자에게 알림
+    //             alert('창고 수정 성공');
+    //             location.reload(); // 또는 다른 로직 구현
+    //         },
+    //         error: function(error) {
+    //             // 오류 처리
+    //             console.error('수정 실패:', error);
+    //             alert('창고 수정 실패');
+    //         }
+    //     });
+    // });
 
 
 

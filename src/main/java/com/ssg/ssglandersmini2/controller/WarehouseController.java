@@ -4,10 +4,12 @@ import com.ssg.ssglandersmini2.domain.Warehouse;
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
 import com.ssg.ssglandersmini2.dto.PageResponseDTO;
 import com.ssg.ssglandersmini2.dto.WarehouseDTO;
+import com.ssg.ssglandersmini2.mappers.WarehouseMapper;
 import com.ssg.ssglandersmini2.service.interfaces.WarehouseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WarehouseController {
     private final WarehouseService warehouseService;
+    private final ModelMapper modelMapper;
+    private final WarehouseMapper warehouseMapper;
 
 
 
@@ -49,21 +53,32 @@ public class WarehouseController {
                                @RequestParam("zipp_code") String zipp_code,
                                @RequestParam("UserAdd1") String UserAdd1,
                                @RequestParam("UserAdd2") String UserAdd2,
-                               @RequestParam("capacity") int capacity,
-                               @RequestParam("wname") String wname) {
+                               @RequestParam("capacity") int capacity
+//            , @RequestParam("wname") String wname
+            )
+    {
         log.info("warehouse register Post doing...");
         // 3개의 주소를 fullAddress 하나로 합치기
         String fullAddress = String.join(" ", UserAdd1, UserAdd2);
 
-//        warehouseDTO = new WarehouseDTO();
-
+        //warehouseDTO에 뷰에서 입력한 값 넣기
         warehouseDTO.setWarehousetype(warehousetype);
         warehouseDTO.setAddress(fullAddress); // 합친 주소 설정
         warehouseDTO.setCapacity(capacity);
-        warehouseDTO.setWname(wname);
+//        warehouseDTO.setWname(wname);
 
         // 서비스 계층에 DTO 전달
         warehouseService.register(warehouseDTO);
+
+//        Warehouse warehouse = warehouseMapper.getMaxWid();
+//        log.info("될진모르겠는 wid 나와랏!-> "+warehouse.getWid());
+//        long insertWid = warehouse.getWid();
+//        String wname = UserAdd1.substring(0,2)+" "+warehousetype+" "+insertWid;
+//        log.info(warehouse.getWid()+"번 창고의 이름은! "+wname);
+//        warehouseMapper.updateWname(insertWid, wname);
+
+
+
 
         return "redirect:warehouse";
 

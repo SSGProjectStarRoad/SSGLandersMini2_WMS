@@ -19,5 +19,9 @@ public interface WarehouseService {
 
     void remove(long wid);
 
+    void addWarehouseAndPopulateInventory(Warehouse warehouse);
+
+    void updateWarehouseName(long warehouseId, String warehousetype, String address);
+
 
 }
