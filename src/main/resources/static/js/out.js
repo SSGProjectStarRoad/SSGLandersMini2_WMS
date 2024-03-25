@@ -61,6 +61,12 @@ window.addEventListener("resize", function () {
 //     formObj.submit();
 // }, false);
 
+// 옵션 선택 시 hidden 필드 업데이트
+function updateHiddenField(selectElement) {
+    var selectedValue = selectElement.value;
+    document.getElementById("selectedValueHidden").value = selectedValue;
+}
+
 
 // clear 버튼
 document.querySelector(".clearBtn").addEventListener("click", function (e){
@@ -102,3 +108,26 @@ function handlePaginationClick(event) {
 
     formObj.submit();
 }
+
+// 배송상태 select
+
+// $(document).ready(function(){
+//     $(".form-select").change(function(){
+//         var selectedValue = $(this).val();
+//         if(selectedValue !== ""){
+//             $.ajax({
+//                 type: "POST",
+//                 url: "/ssglanders/outList",
+//                 data: { selectedValue: selectedValue },
+//                 success: function(response){
+//                     console.log("POST 요청이 성공하였습니다.");
+//                     // 원하는 작업을 수행합니다.
+//                 },
+//                 error: function(){
+//                     console.log("POST 요청이 실패하였습니다.");
+//                     // 오류 처리를 수행합니다.
+//                 }
+//             });
+//         }
+//     });
+// });

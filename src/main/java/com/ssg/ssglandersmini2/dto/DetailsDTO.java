@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetailsDTO {
+    private long oid;
+    private long wid;
     private String name;
     private long quantity;
     private String warehousetype;

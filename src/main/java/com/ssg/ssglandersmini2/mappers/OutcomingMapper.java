@@ -44,4 +44,13 @@ public interface OutcomingMapper {
     // oid로 outcoming 가져오기
     Outcoming getOutcomingByOid(long oid);
 
+    //oid와 String value 값으로 배송상태 업데이트 해주기(배송완료) (배송전)
+    void updateOutcomingStatusByValue(String value, long oid);
+
+    //oid와 String shipping으로 택배회사 변경하기
+    void updateWaybillSidByWbidAndSid(long wbid, long sid);
+
+    //oid 이용해서 삭제하기
+    void deleteOutcomingByOid(long oid);
+
 }
