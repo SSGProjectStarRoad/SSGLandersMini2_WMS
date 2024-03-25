@@ -15,17 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: totalCapacities, // 각 창고의 총 용량
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                borderWidth: 2
             }, {
                 label: '현재 보관 중인 용량',
 
                 data: totalUsingCapacities, // 각 창고에서 현재 사용 중인 용량
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
+                borderWidth: 2
             }]
         },
         options: {
+            indexAxis: 'x',
             scales: {
                 y: {
                     beginAtZero: true
@@ -50,17 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: incoming,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                borderWidth: 2
             }, {
                 label: '출고',
 
                 data: outcoming,
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
+                borderWidth: 2
             }]
         },
         options: {
+            indexAxis: 'x',
             scales: {
                 y: {
                     beginAtZero: true

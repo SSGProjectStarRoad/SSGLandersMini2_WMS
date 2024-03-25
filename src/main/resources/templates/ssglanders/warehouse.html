@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout.html}">
+
+<head>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=742a48b5f8ebcd05ea324fd6f69e1c3f&libraries=services"></script>
+    <meta charset="UTF-8">
+    <title>창고 목록</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <!-- 주소검색src(다음API) -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <link th:href="@{/css/warehouse.css}" rel="stylesheet"/>
+    <script th:src="@{/js/warehouse.js}"></script>
+
+</head>
+<!-- 창고등록 모달창 -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true"
+     layout:fragment="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel1">신규 창고 등록</h1>
+            </div>
+            <div class="modal-body">
+                등록할 창고 정보를 입력하세요
+            </div>
+            <form action="/ssglanders/register" method="post">
+                <div class="modal-minititle">
+                    창고명
+                </div>
+                <div class="right-div">
+                    <div class="modal-input">
+                        <input type="text" class="form-control" name="wname" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="modal-minititle">
+                    창고 주소
+                </div>
+
+                <!-- 주소입력 -->
+                <div class="col-sm-10">
+                    <!-- <label for="zipp_btn" class="form-label">■ 주소 *</label><br /> -->
+                    <input type="text" class="form-control mb-2" id="zipp_code" name="zipp_code" maxlength="10"
+                           placeholder="우편번호" style="width: 50%; display: inline;">
+                    <input type="button" id="zipp_btn" class="btn btn-primary" onclick="execDaumPostcode()"
+                           value="우편번호 찾기"><br>
+                    <input type="text" class="form-control mb-2" name="UserAdd1" id="UserAdd1" maxlength="40"
+                           placeholder="기본 주소를 입력하세요" required>
+                    <div class="invalid-feedback">주소를 입력해주시기 바랍니다!</div>
+                    <input type="text" class="form-control" name="UserAdd2" id="UserAdd2" maxlength="40"
+                           placeholder="상세 주소를 입력하세요">
+                </div>
+
+
+                <div class="modal-minititle">
+                    창고 타입
+                </div>
+                <div class="select-toggle">
+                    <div class="toggle-warehouse">
+                        <select class="form-select" aria-label="Default select example" name="warehousetype">
+                            <option selected>타입 선택</option>
+                            <option value="상온">상온</option>
+                            <option value="냉장">냉장</option>
+                            <option value="냉동">냉동</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="modal-minititle">
+                    창고 수용량
+                </div>
+                <div class="select-toggle">
+                    <div class="toggle-warehouse">
+                        <select class="form-select" aria-label="Default select example" name="capacity">
+                            <option selected>수용량 선택</option>
+                            <option value="10">10PLT</option>
+                            <option value="20">20PLT</option>
+                            <option value="40">40PLT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="register-button" class="btn btn-primary">등록</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- 창고 수정 및 삭제 모달창
+ -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true"
+     layout:fragment="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">창고 상세</h1>
+            </div>
+
+            <div class="modal-minititle">
+                창고 ID
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-id" readonly>
+                </div>
+            </div>
+            <div class="modal-minititle">
+                창고명
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-name" readonly>
+                </div>
+            </div>
+            <div class="modal-minititle">
+                창고 주소
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-address" readonly>
+                </div>
+            </div>
+            <div class="modal-minititle">
+                창고 타입
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-type" readonly>
+                </div>
+            </div>
+            <div class="modal-minititle">
+                창고 수용량
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-capacity" readonly>
+                </div>
+            </div>
+            <div class="modal-minititle">
+                창고 사용량
+            </div>
+            <div class="right-div">
+                <div class="modal-input">
+                    <input type="text" class="form-control" id="modal-warehouse-usingcapacity" readonly>
+                </div>
+            </div>
+
+
+            <!-- 지도 -->
+            <div id="map" style="width:300px;height:240px;"></div>
+
+
+            <div class="modal-footer">
+                <button type="submit" id="modify-button" class="btn btn-primary">수정</button>
+                <button type="submit" id="remove-button" class="btn btn-primary">삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="main" layout:fragment="content">
+    <div class="main-background"></div>
+    <div class="main-box">
+        <h1>창고 관리</h1>
+
+        <!-- 상단 검색바 및 버튼 -->
+        <div class="main-stateboxes">
+
+            <!-- 검색창 -->
+            <form action="/ssglanders/warehouse" method="get">
+                <div class="input-bigbox">
+                    <div class="search-toggle">
+                        <select class="form-select" name="types" aria-label="Default select example">
+                            <option value="all">전체</option>
+                            <option value="address">주소</option>
+                            <option value="type">타입</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="keyword" aria-label="Username"
+                                   aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-btn">
+                        <button type="submit" class="btn btn-primary">검색</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- 등록 모달 나오는 버튼 -->
+
+            <div class="coming-btn">
+                <div class="register-btn">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1">
+                        창고등록
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!--    <div class="content-down">-->
+<!--    </div>-->
+
+    <!-- 메인 테이블 -->
+
+     <div class="table-way">
+
+    <div class="main-detail">
+        <h2>창고목록</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>창고명</th>
+                <th>주소</th>
+                <th>타입</th>
+                <th>수용량</th>
+                <th>사용량</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dto : ${responseDTO.dtoList}">
+                <td th:text="${dto.wid}">ID</td>
+                <td th:text="${dto.wname}">창고명</td>
+                <td th:text="${dto.address}">주소</td>
+                <td th:text="${dto.warehousetype}">타입</td>
+                <td th:text="${dto.capacity}">수용량</td>
+                <td th:text="${dto.usingcapacity}">사용량</td>
+                <td data-label="창고수정">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2"
+                            th:data-id="${dto.wid}"
+                            th:data-name="${dto.wname}"
+                            th:data-address="${dto.address}"
+                            th:data-warehousetype="${dto.warehousetype}"
+                            th:data-capacity="${dto.capacity}"
+                            th:data-usingcapacity="${dto.usingcapacity}"
+                    >상세 보기
+                    </button>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+    <!--    페이지네이션-->
+    <div class="float-end">
+        <ul class="pagination flex-wrap">
+
+            <li class="page-item" th:if="${responseDTO.prev}">
+                <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+            </li>
+
+            <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">
+                    <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                </li>
+            </th:block>
+
+            <li class="page-item" th:if="${responseDTO.next}">
+                <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+
+</html>
