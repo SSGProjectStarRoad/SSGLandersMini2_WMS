@@ -27,7 +27,7 @@ public class PageResponseDTO<E> {
     private List<E> dtoList;
 
 
-    @Builder(builderMethodName = "All")
+    @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total){
 
         this.page = pageRequestDTO.getPage();
