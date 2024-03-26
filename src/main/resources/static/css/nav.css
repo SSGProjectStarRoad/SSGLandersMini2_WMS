@@ -66,6 +66,16 @@
     animation-fill-mode: both;
 }
 
+.body {
+    position: relative;
+}
+.nav-role {
+    width: 150px;
+    position: absolute;
+    right : 50px;
+    z-index: 999;
+}
+
 
 /*  nav bar */
 
@@ -124,6 +134,16 @@
     z-index: 1; /* 다른 항목 위에 표시되도록 z-index 설정 */
     cursor: pointer;
 }
+/*.nav-item .vcard:hover {*/
+/*    background-color: initial; !* `:hover` 효과로 인한 배경색 변경을 제거 *!*/
+/*    box-shadow: none; !* `:hover` 효과로 인한 그림자 제거 *!*/
+/*    width: auto; !* `:hover` 효과로 인한 너비 변경을 제거 (원하는 너비로 설정) *!*/
+/*    border-radius: initial; !* `:hover` 효과로 인한 모서리 둥글기 제거 *!*/
+/*    cursor: initial; !* `:hover` 효과로 인한 커서 변경을 기본값으로 재설정 *!*/
+/*}*/
+
+
+
 
 
 .nav-icon{
@@ -163,6 +183,11 @@
     color: black;
     margin-top: 7px;
 }
+.bi-person-vcard{
+    color: black;
+    margin-top: 7px;
+}
+
 .nav-menu{
     color: black;
     font-weight: bold;
@@ -217,7 +242,7 @@
         /* Rest of your styling */
     }
     .nav-div {
-        height: 365px;
+        height: 395px;
         display: flex; /* 항상 flex로 설정하여 항목들이 나타나게 합니다 */
         flex-direction: row;
         width: 100%; /* 너비를 화면 전체로 설정 */
