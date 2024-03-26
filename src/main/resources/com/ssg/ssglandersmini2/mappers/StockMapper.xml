@@ -15,7 +15,7 @@
     <select id="selectList">
         SELECT
         p.name, p.firstcategory, p.secondcategory, p.thirdcategory ,
-        s.quantity, w.warehousetype, b.status
+        s.quantity, substring(w.wname,1,2) as wname, w.warehousetype, b.status
         FROM
         stock s
         LEFT JOIN

@@ -71,4 +71,10 @@ function updatefill(){
     console.log(capacity);
     fillBar.style.width = `${capacity}%`;
 }
+function hiddenlist(){
+    // let liststatus = document.getElementById("myTable").style.display;
+    if(document.getElementById("myTable").style.display === "none"){
+        document.getElementById("myTable").style.display = "block";
+    }else document.getElementById("myTable").style.display = "none";
+}
 

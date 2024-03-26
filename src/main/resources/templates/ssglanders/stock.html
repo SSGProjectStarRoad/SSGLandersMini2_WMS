@@ -99,7 +99,7 @@
     </div>
 
     <div class="windows">
-        <div class="warehouse">
+        <div class="warehouse" onclick="hiddenlist()">
             <h3 id="storagetitle"></h3>
             <div class="capacity-bar">
                 <div class="bar">
@@ -107,14 +107,14 @@
                 </div>
             </div>
         </div>
-        <div id="myTable">
+        <div id="myTable" style="display: none;">
             <table>
                 <tr>
-                    <td>총 수용량 13 / 40</td>
+                    <td colspan="2">총 수용량 13 / 40</td>
                 </tr>
-                <tr><td data-label="#1">맥북에어 4 PLT</td></tr>
-                <tr><td data-label="#2">아이패드 프로 8 PLT</td></tr>
-                <tr><td data-label="#3">삼성 냉장고 1 PLT</td></tr>
+                <tr><td data-label="#1">맥북에어</td><td> 4 PLT</td></tr>
+                <tr><td data-label="#2">아이패드 프로</td><td> 8 PLT</td></tr>
+                <tr><td data-label="#3">삼성 냉장고</td><td> 1 PLT</td></tr>
             </table>
         </div>
     </div>
@@ -162,13 +162,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="dto : ${responseDTO.dtoList}">
-                <td data-label="#"></td>
+            <tr th:each="dto, index : ${responseDTO.dtoList}">
+                <td data-label="#" th:text="${index.index + 1}"></td>
                 <td data-label="상품명" th:text="${dto.name}"></td>
                 <td data-label="카테고리"
                     th:text="${dto.firstcategory + '-' + dto.secondcategory + '-' + dto.thirdcategory}"></td>
                 <td data-label="현 재고량" th:text="${dto.quantity}"></td>
-                <td data-label="창고 위치">서울</td>
+                <td data-label="창고 위치" th:text="${dto.wname}"></td>
                 <td data-label="창고 상태" th:text="${dto.warehousetype}"></td>
                 <td data-label="현 상태" th:text="${dto.status}"></td>
                 <td data-label="요청사항">
