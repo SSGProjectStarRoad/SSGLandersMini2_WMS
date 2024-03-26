@@ -40,7 +40,7 @@ public class WarehouseController {
 
 
 
-    @GetMapping("/register")
+    @GetMapping("/registerWarehouse")
     public String showRegisterForm(Model model) {
         log.info("warehouse register GetMapping doing......");
         model.addAttribute("warehouseDTO", new WarehouseDTO());
@@ -48,7 +48,7 @@ public class WarehouseController {
     }
 
 
-    @PostMapping("/register")
+    @PostMapping("/registerWarehouse")
     public String registerPost(@ModelAttribute WarehouseDTO warehouseDTO, RedirectAttributes redirectAttributes,
                                @RequestParam("warehousetype") String warehousetype,
                                @RequestParam("zipp_code") String zipp_code,
@@ -75,22 +75,22 @@ public class WarehouseController {
 
     }
 
-    @GetMapping({"/read"})
+    @GetMapping({"/readWarehouse"})
     public void read(long wid, Model model) {
         WarehouseDTO warehouseDTO = warehouseService.getOne(wid);
         model.addAttribute("warehouseDTO", warehouseDTO);
     }
 
-    @PostMapping("/modify")
-    public String modify(@RequestBody WarehouseDTO warehouseDTO) {
-        log.info("warehouse modify doing...");
-        warehouseService.modify(warehouseDTO);
+//    @PostMapping("/modifyWarehouse")
+//    public String modify(@RequestBody WarehouseDTO warehouseDTO) {
+//        log.info("warehouse modify doing...");
+//        warehouseService.modify(warehouseDTO);
+//
+//        // 성공 응답 반환
+//        return "redirect:warehouse";
+//    }
 
-        // 성공 응답 반환
-        return "redirect:warehouse";
-    }
-
-    @PostMapping("/remove")
+    @PostMapping("/removeWarehouse")
     public String remove(long wid) {
         log.info(wid + " warehouse remove doing...");
         warehouseService.remove(wid);

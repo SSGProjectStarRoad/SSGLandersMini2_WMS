@@ -157,7 +157,7 @@ $(document).ready(function() {
         var warehouseId = $("#modal-warehouse-id").val(); // 창고 ID 가져오기
         // AJAX 요청으로 삭제 메소드 호출
         $.ajax({
-            url: "/ssglanders/remove", // 컨트롤러의 삭제 메소드 URL
+            url: "/ssglanders/removeWarehouse", // 컨트롤러의 삭제 메소드 URL
             type: "POST",
             data: {
                 wid: warehouseId,
