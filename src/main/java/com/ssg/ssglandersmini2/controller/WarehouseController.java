@@ -1,23 +1,17 @@
 package com.ssg.ssglandersmini2.controller;
 
-import com.ssg.ssglandersmini2.domain.Warehouse;
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
 import com.ssg.ssglandersmini2.dto.PageResponseDTO;
 import com.ssg.ssglandersmini2.dto.WarehouseDTO;
 import com.ssg.ssglandersmini2.mappers.WarehouseMapper;
 import com.ssg.ssglandersmini2.service.interfaces.WarehouseService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/ssglanders")
@@ -32,7 +26,7 @@ public class WarehouseController {
 
     @GetMapping("/warehouse")
     public String list(PageRequestDTO pageRequestDTO, Model model) {
-        PageResponseDTO<WarehouseDTO> responseDTO = warehouseService.list(pageRequestDTO);
+        PageResponseDTO<WarehouseDTO> responseDTO = warehouseService.listWarehouse(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
         return "ssglanders/warehouse"; // 검색 결과를 보여줄 뷰 페이지 경로
     }
@@ -68,7 +62,7 @@ public class WarehouseController {
         warehouseDTO.setCapacity(capacity);
 
         // 서비스 계층에 DTO 전달
-        warehouseService.register(warehouseDTO);
+        warehouseService.registerWarehouse(warehouseDTO);
 
         redirectAttributes.addAttribute("success", true);
         return "redirect:warehouse";
@@ -77,7 +71,7 @@ public class WarehouseController {
 
     @GetMapping({"/readWarehouse"})
     public void read(long wid, Model model) {
-        WarehouseDTO warehouseDTO = warehouseService.getOne(wid);
+        WarehouseDTO warehouseDTO = warehouseService.getOneWarehouse(wid);
         model.addAttribute("warehouseDTO", warehouseDTO);
     }
 
@@ -93,7 +87,7 @@ public class WarehouseController {
     @PostMapping("/removeWarehouse")
     public String remove(long wid) {
         log.info(wid + " warehouse remove doing...");
-        warehouseService.remove(wid);
+        warehouseService.removeWarehouse(wid);
         return "redirect:warehouse";
     }
 }

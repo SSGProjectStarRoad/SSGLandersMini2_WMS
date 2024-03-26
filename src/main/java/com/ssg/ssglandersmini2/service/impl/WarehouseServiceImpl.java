@@ -11,8 +11,6 @@ import com.ssg.ssglandersmini2.service.interfaces.WarehouseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +25,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     private final InventoryMapper inventoryMapper;
 
     @Override
-    public void register(WarehouseDTO warehouseDTO) {
+    public void registerWarehouse(WarehouseDTO warehouseDTO) {
         //DTO를 VO로 변환해서 db에 매퍼.insert()
         Warehouse warehouse = modelMapper.map(warehouseDTO, Warehouse.class);
         warehouseMapper.insertWarehouse(warehouse);
@@ -38,28 +36,28 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public WarehouseDTO getOne(long wid) {
-        WarehouseDTO warehouseDTO = modelMapper.map(warehouseMapper.getOne(wid), WarehouseDTO.class);
+    public WarehouseDTO getOneWarehouse(long wid) {
+        WarehouseDTO warehouseDTO = modelMapper.map(warehouseMapper.getOneWarehouse(wid), WarehouseDTO.class);
         return warehouseDTO;
     }
 
 
     @Override
-    public List<WarehouseDTO> getAll() {
-        List<WarehouseDTO> warehouseDTOS = warehouseMapper.getAll().stream()
+    public List<WarehouseDTO> getAllWarehouse() {
+        List<WarehouseDTO> warehouseDTOS = warehouseMapper.getAllWarehouse().stream()
                 .map(entity -> modelMapper.map(entity, WarehouseDTO.class))
                 .collect(Collectors.toList());
         return warehouseDTOS;
     }
 
     @Override
-    public PageResponseDTO<WarehouseDTO> list(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<WarehouseDTO> listWarehouse(PageRequestDTO pageRequestDTO) {
 
 
         int skip = (pageRequestDTO.getPage() -1)* pageRequestDTO.getSize();
         pageRequestDTO.getSkip();
         // Warehouse 리스트
-        List<Warehouse> voList = warehouseMapper.selectList(pageRequestDTO);
+        List<Warehouse> voList = warehouseMapper.selectWarehouseList(pageRequestDTO);
 
         int totalCount = warehouseMapper.getCount(pageRequestDTO);
 
@@ -79,16 +77,16 @@ public class WarehouseServiceImpl implements WarehouseService {
         return pageResponseDTO;
     }
 
-    @Override
-    public void modify(WarehouseDTO warehouseDTO) {
-        Warehouse warehouse = modelMapper.map(warehouseDTO, Warehouse.class);
-        warehouseMapper.update(warehouse);
+//    @Override
+//    public void modify(WarehouseDTO warehouseDTO) {
+//        Warehouse warehouse = modelMapper.map(warehouseDTO, Warehouse.class);
+//        warehouseMapper.update(warehouse);
+//
+//    }
 
-    }
-
     @Override
-    public void remove(long wid) {
-        warehouseMapper.delete(wid);
+    public void removeWarehouse(long wid) {
+        warehouseMapper.deleteWarehouse(wid);
 
     }
     public void addWarehouseAndPopulateInventory(Warehouse warehouse) {
