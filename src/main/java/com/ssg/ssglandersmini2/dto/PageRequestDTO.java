@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 
@@ -18,24 +17,21 @@ import java.util.Arrays;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequestDTO {
-    // 페이지 번호를 나타내는 필드. 기본값은 1입니다.
-    // page 필드는 페이지 번호를 나타내며, 기본값은 1입니다.
-// @Builder.Default 어노테이션은 빌더를 통해 객체를 생성할 때 해당 필드의 기본값을 설정합니다.
-// @Min(value = 1) 어노테이션은 page 필드의 최소값이 1임을 나타냅니다.
-// @Positive 어노테이션은 page 필드가 양수임을 나타냅니다.
-    @Builder.Default // 기본값 설정
-    @Min(value = 1) // 최소값
-    @Positive // 양수
+    @Builder.Default
+    @Min(value = 1)
+    @Positive
     private int page = 1;
 
-    // 페이지 크기를 나타내는 필드. 기본값은 10이며, 최소값은 10, 최대값은 100입니다.
     @Builder.Default
-    @Min(value = 3)
-    @Max(value = 100)
     @Positive
-    private int size = 3;
+    @Min(value = 10)
+    @Max(value = 100)
+    private int size = 10;
 
-    // 링크 정보를 나타내는 필드
+    public int getSkip() {
+        return (page - 1) * 10;
+    }
+
     private String link;
 
     // 검색 유형을 나타내는 배열 필드
@@ -47,16 +43,6 @@ public class PageRequestDTO {
     // 완료 여부를 나타내는 필드
     private boolean finished;
 
-    // 시작일을 나타내는 필드
-    private LocalDate from;
-
-    // 종료일을 나타내는 필드
-    private LocalDate to;
-
-    // 페이지당 건너뛸 항목 수를 계산하는 메서드
-    public int getSkip() {
-        return (page - 1) * size;
-    }
 
     // 링크 정보를 반환하는 메서드
     public String getLink() {
@@ -76,5 +62,6 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
 }
 
