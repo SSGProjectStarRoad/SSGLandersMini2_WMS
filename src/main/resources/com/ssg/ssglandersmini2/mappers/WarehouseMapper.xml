@@ -34,19 +34,6 @@
     </update>
 
 <!--    검색창 쿼리-->
-<!--    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">-->
-<!--        select * from warehouse-->
-<!--            <where>-->
-<!--                <if test="types != null and types.length > 0">-->
-<!--                    <foreach collection="types" item="type" open="(" close=") " separator=" OR ">-->
-<!--                    -->
-<!--                            address like concat('%', #{keyword}, '%') or warehousetype like concat('%', #{keyword},'%') or wname like concat('%', #{keyword}, '%')-->
-<!--        -->
-<!--                    </foreach>-->
-<!--                </if>-->
-<!--            </where>-->
-<!--            order by wid limit #{skip}, #{size}-->
-<!--        </select>-->
     <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         SELECT * FROM warehouse
         <where>

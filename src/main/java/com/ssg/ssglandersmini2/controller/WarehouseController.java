@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -48,38 +49,28 @@ public class WarehouseController {
 
 
     @PostMapping("/register")
-    public String registerPost(@ModelAttribute WarehouseDTO warehouseDTO,
-            @RequestParam("warehousetype") String warehousetype,
+    public String registerPost(@ModelAttribute WarehouseDTO warehouseDTO, RedirectAttributes redirectAttributes,
+                               @RequestParam("warehousetype") String warehousetype,
                                @RequestParam("zipp_code") String zipp_code,
                                @RequestParam("UserAdd1") String UserAdd1,
                                @RequestParam("UserAdd2") String UserAdd2,
                                @RequestParam("capacity") int capacity
-//            , @RequestParam("wname") String wname
+
             )
     {
         log.info("warehouse register Post doing...");
-        // 3개의 주소를 fullAddress 하나로 합치기
+        // 주소를 fullAddress 하나로 합치기
         String fullAddress = String.join(" ", UserAdd1, UserAdd2);
 
         //warehouseDTO에 뷰에서 입력한 값 넣기
         warehouseDTO.setWarehousetype(warehousetype);
         warehouseDTO.setAddress(fullAddress); // 합친 주소 설정
         warehouseDTO.setCapacity(capacity);
-//        warehouseDTO.setWname(wname);
 
         // 서비스 계층에 DTO 전달
         warehouseService.register(warehouseDTO);
 
-//        Warehouse warehouse = warehouseMapper.getMaxWid();
-//        log.info("될진모르겠는 wid 나와랏!-> "+warehouse.getWid());
-//        long insertWid = warehouse.getWid();
-//        String wname = UserAdd1.substring(0,2)+" "+warehousetype+" "+insertWid;
-//        log.info(warehouse.getWid()+"번 창고의 이름은! "+wname);
-//        warehouseMapper.updateWname(insertWid, wname);
-
-
-
-
+        redirectAttributes.addAttribute("success", true);
         return "redirect:warehouse";
 
     }

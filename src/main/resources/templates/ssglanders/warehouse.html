@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <title>창고 목록</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
     <!--    카카오맵API-->
     <script type="text/javascript"
@@ -114,7 +113,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel2">창고 상세</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel2"></h1>
             </div>
 
             <div class="modal-minititle">
@@ -191,22 +190,60 @@
 
             <!-- 검색창 -->
             <form action="/ssglanders/warehouse" method="get">
-                    <div class="bigcheckbox">
-                        <div class="type-checkbox">
-                            <div>창고타입</div>
-                            <input type="checkbox" name="warehouseTypes" value="냉장"> 냉장
-                            <input type="checkbox" name="warehouseTypes" value="냉동"> 냉동
-                            <input type="checkbox" name="warehouseTypes" value="상온"> 상온
-                            <input type="checkbox" value="전체"> 전체
-                        </div>
-                        <div class="capacity-checkbox">
-                            <div>수용량</div>
-                            <input type="checkbox" name="capacities" value="10"> 소
-                            <input type="checkbox" name="capacities" value="20"> 중
-                            <input type="checkbox" name="capacities" value="40"> 대
-                            <input type="checkbox" value="전체"> 전체
-                        </div>
-                    </div>
+
+
+                <div class="bigcheckbox">
+                    <fieldset>
+                        <legend>창고타입</legend>
+
+                        <input type="checkbox" id="refrigerated" name="warehouseTypes" value="냉장"/>
+                        <label for="refrigerated">냉장</label>
+
+                        <input type="checkbox" id="frozen" name="warehouseTypes" value="냉동"/>
+                        <label for="frozen">냉동</label>
+
+                        <input type="checkbox" id="ambient" name="warehouseTypes" value="상온"/>
+                        <label for="ambient">상온</label>
+
+<!--                        <input type="checkbox" id="alltype" value="전체">-->
+<!--                        <label for="alltype">전체</label>-->
+
+                    </fieldset>
+                    <fieldset>
+                        <legend>수용량</legend>
+
+                        <input type="checkbox" id="10" name="capacities" value="10"/>
+                        <label for="10">소</label>
+
+                        <input type="checkbox" id="20" name="capacities" value="20"/>
+                        <label for="20">중</label>
+
+                        <input type="checkbox" id="40" name="capacities" value="40"/>
+                        <label for="40">대</label>
+
+<!--                        <input type="checkbox" id="allcapa" value="전체">-->
+<!--                        <label for="allcapa">전체</label>-->
+
+                    </fieldset>
+                </div>
+
+
+                <!--                    <div class="bigcheckbox">-->
+                <!--                        <div class="type-checkbox">-->
+                <!--                            <div>창고타입</div>-->
+                <!--                            <input type="checkbox" name="warehouseTypes" value="냉장"> 냉장-->
+                <!--                            <input type="checkbox" name="warehouseTypes" value="냉동"> 냉동-->
+                <!--                            <input type="checkbox" name="warehouseTypes" value="상온"> 상온-->
+                <!--                            <input type="checkbox" value="전체"> 전체-->
+                <!--                        </div>-->
+                <!--                        <div class="capacity-checkbox">-->
+                <!--                            <div>수용량</div>-->
+                <!--                            <input type="checkbox" name="capacities" value="10"> 소-->
+                <!--                            <input type="checkbox" name="capacities" value="20"> 중-->
+                <!--                            <input type="checkbox" name="capacities" value="40"> 대-->
+                <!--                            <input type="checkbox" value="전체"> 전체-->
+                <!--                        </div>-->
+                <!--                    </div>-->
 
                 <div class="input-bigbox">
 
@@ -307,7 +344,7 @@
             </th:block>
 
             <li class="page-item" th:if="${responseDTO.next}">
-                <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                <a class="page-link" th:data-num="${responseDTO.end +1}">Next</a>
             </li>
         </ul>
     </div>

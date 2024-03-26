@@ -164,13 +164,13 @@ $(document).ready(function() {
             },
             success: function(response) {
                 // 성공적으로 삭제되면 페이지를 새로고침하거나 사용자에게 알림
-                alert('창고 삭제 성공');
+                alert('창고가 삭제되었습니다.');
                 location.reload(); // 또는 다른 로직 구현
             },
             error: function(error) {
                 // 오류 처리
                 console.error('삭제 실패:', error);
-                alert('창고 삭제 실패');
+                alert('창고 삭제에 실패했습니다.');
             }
         });
     });
@@ -222,6 +222,23 @@ $(document).ready(function() {
 
 
 
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get('success');
+    if (success) {
+        sessionStorage.setItem('warehouseRegistrationSuccess', '창고가 성공적으로 등록되었습니다.');
+        // alert('창고가 등록되었습니다.');
+        window.location.href = '/ssglanders/warehouse';
+    }
+    const successMessage = sessionStorage.getItem('warehouseRegistrationSuccess');
+    if (successMessage) {
+        alert(successMessage);
+        // 메시지 표시 후 세션 스토리지에서 해당 메시지 제거
+        sessionStorage.removeItem('warehouseRegistrationSuccess');
+    }
+    // window.location.href = '/ssglanders/warehouse';
 });
 
 

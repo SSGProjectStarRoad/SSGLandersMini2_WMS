@@ -13,12 +13,11 @@ public interface WarehouseMapper {
     void update(Warehouse warehouse); //창고를 수정하는 메서드
     void delete(long wid); //id에 해당하는 창고를 삭제하는 메서드
 
-
-    int getCount(PageRequestDTO pageRequestDTO);
+    int getCount(PageRequestDTO pageRequestDTO); //창고 항목의 개수 세는 메소드
     List<Warehouse> selectList(PageRequestDTO pageRequestDTO);
 
     Warehouse getWarehouse(String wname);
-    Warehouse getMaxWid();
+    Warehouse getMaxWid(); //가장 최근에 등록된 창고wid를 가져오기위한 메소드
 
     void updateWname(@Param("wid") Long wid, @Param("wname") String wname);
 
