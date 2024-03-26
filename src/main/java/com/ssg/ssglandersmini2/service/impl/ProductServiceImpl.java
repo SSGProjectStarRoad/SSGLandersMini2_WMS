@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
         int total = productMapper.getCount(pageRequestDTO);
 
 
-        return PageResponseDTO.<ProductDTO>All()
+        return PageResponseDTO.<ProductDTO>withAll()
                 .dtoList(dtoList)
                 .total(total)
                 .pageRequestDTO(pageRequestDTO)
