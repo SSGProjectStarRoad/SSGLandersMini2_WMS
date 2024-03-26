@@ -32,8 +32,8 @@ public class OutcomingTests {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
-                .types(new String[] {"name"})
-                .keyword("맥북")
+                .types(new String[] {"id"})
+                .keyword("15")
                 .build();
         List<Outcoming> voList = outcomingMapper.selectOutcomingList(pageRequestDTO);
         voList.forEach(vo -> log.info(vo));
@@ -82,8 +82,17 @@ public class OutcomingTests {
         log.info(outcomingMapper.getOutcomingByOid(1l));
     }
 
+    @Test void testupdateOutcomingStatusByValue(){
+        outcomingMapper.updateOutcomingStatusByValue("테스트",1l);
+    }
 
+    @Test void testupdateWaybillSidByWbidAndSid(){
+        outcomingMapper.updateWaybillSidByWbidAndSid(1l,2l);
+    }
 
+    @Test void testdeleteOutcomingByOid(){
+        outcomingMapper.deleteOutcomingByOid(2l);
+    }
 
 
 }

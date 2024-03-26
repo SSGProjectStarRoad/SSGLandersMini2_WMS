@@ -4,25 +4,27 @@
 
 
     <select id="selectOutcomingList" resultType="com.ssg.ssglandersmini2.domain.Outcoming">
-
         select * from outcoming o inner join product p on o.pid = p.pid
         <where>
             <!-- 타입에 따른 검색 -->
             <if test="types != null and types.length > 0">
                 <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
-                    <if test="type == 'num'.toString()">
-                        o.oid like concat('%', #{keyword}, '%')
+                    <if test="type == 'id'">
+                        o.oid like concat(#{keyword})
                     </if>
-
-                    <if test="type == 'name'.toString()">
+                    <if test="type == 'name'">
                         p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        o.oid like concat(#{keyword}) or p.name like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </if>
-
         </where>
         order by oid limit #{skip}, #{size}
     </select>
+
+
 
     <select id="getCount" resultType="int">
         select count(*) from outcoming
@@ -73,7 +75,15 @@
         select * from outcoming where oid = #{oid};
     </select>
 
+    <update id="updateOutcomingStatusByValue">
+        update outcoming set status = #{value} where oid = #{oid}
+    </update>
 
+    <update id = "updateWaybillSidByWbidAndSid">
+        update waybill set sid = #{sid} where wbid = #{wbid}
+    </update>
 
-
+    <delete id="deleteOutcomingByOid">
+        delete from outcoming where oid = #{oid}
+    </delete>
 </mapper>
