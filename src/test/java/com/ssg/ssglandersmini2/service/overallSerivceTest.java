@@ -15,6 +15,11 @@ public class overallSerivceTest {
 
 
     @Test
+    public void testgetIncomingArriveCountl(){
+        log.info(overallService.getIncomingArriveCount());
+    }
+
+    @Test
     public void testgetWarehouseCityTotal(){
         log.info(overallService.getWarehouseCityTotal());
     }
