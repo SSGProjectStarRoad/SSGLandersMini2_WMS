@@ -15,6 +15,10 @@
 
 </head>
 <body>
+<div class="nav-role vcard">
+    <i class="bi bi-person-vcard nav-link active">관리자</i>
+</div>
+<!--            role에 따라 문자 들어가게해주세여-->
 <div class="left-div animatedl">
     <div class="imag-div">
         <img class="nav-img" th:src="@{/images/v62_560.png}" alt="errorimg" />
@@ -35,7 +39,7 @@
             <span class="nav-menu">입고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-plus"></i>
-                <a class="nav-link" href="#">입고현황</a>
+                <a class="nav-link" th:href="@{/ssglanders/inList}">입고현황</a>
             </li>
             <span class="nav-menu">출고</span>
             <li class="nav-item">
@@ -45,17 +49,21 @@
             <span class="nav-menu">재고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-range"></i>
-                <a class="nav-link" href="#">재고현황</a>
+                <a class="nav-link" th:href="@{/ssglanders/stock}">재고현황</a>
             </li>
             <span class="nav-menu">창고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-week"></i>
-                <a class="nav-link" href="#">창고관리</a>
+                <a class="nav-link" th:href="@{/ssglanders/warehouse}">창고관리</a>
             </li>
             <span class="nav-menu">승인</span>
             <li class="nav-item">
                 <i class="bi bi-calendar2-check"></i>
-                <a class="nav-link" href="#">승인관리</a>
+                <a class="nav-link" th:href="@{/ssglanders/inApproval}">입고승인</a>
+            </li>
+            <li class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <a class="nav-link" th:href="@{/ssglanders/outApproval}">출고승인</a>
             </li>
             <span class="nav-menu">내 정보</span>
             <li class="nav-item">
@@ -76,6 +84,9 @@
 </div>
 
 <div layout:fragment="modal10">
+</div>
+<div layout:fragment="modal60">
+
 
 </div>
 
