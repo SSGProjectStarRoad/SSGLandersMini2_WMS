@@ -59,7 +59,7 @@ public class IncomingServiceImpl implements IncomingService {
         int total = incomingMapper.getCount(pageRequestDTO);
 
 
-        return PageResponseDTO.<IncomingListDTO>All()
+        return PageResponseDTO.<IncomingListDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
                 .total(total)
