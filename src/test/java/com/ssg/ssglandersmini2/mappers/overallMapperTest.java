@@ -28,4 +28,20 @@ public class overallMapperTest {
     @Test
     public void testgetIncomingArriveCount() {log.info(overallMapper.getIncomingArriveCount());}
 
+    @Test
+    public void testgetNotApprovalIncomingCount() {log.info(overallMapper.getNotApprovalIncomingCount());}
+    @Test
+    public void testgetNotApprovalOutcomingCount() {log.info(overallMapper.getNotApprovalOutcomingCount());}
+
+    @Test
+    public void testgetTotalUsingCapacity() {log.info(overallMapper.getTotalUsingCapacity());}
+
+    @Test
+    public void testgetWarehouselist() {log.info(overallMapper.getWarehouseList());}
+
+    @Test
+    public void testgetIncominglist() {log.info(overallMapper.getIncomingList());}
+
+    @Test
+    public void testgetOutcominglist() {log.info(overallMapper.getOutcomingList());}
 }

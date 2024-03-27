@@ -49,7 +49,6 @@ public class PageRequestDTO {
     // 검색 키워드를 나타내는 필드
     private String keyword;
 
-
     // 시작일을 나타내는 필드
     private LocalDate from;
 
@@ -79,4 +78,5 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
 }

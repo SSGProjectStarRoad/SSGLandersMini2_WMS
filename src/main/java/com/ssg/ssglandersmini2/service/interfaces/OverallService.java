@@ -1,13 +1,31 @@
 package com.ssg.ssglandersmini2.service.interfaces;
 
+import com.ssg.ssglandersmini2.dto.MonthlyDTO;
+import com.ssg.ssglandersmini2.dto.WarehouseCityDTO;
+
+import java.util.List;
+import java.util.Optional;
+
 public interface OverallService {
 
-    int getIncomingCount();
+    Optional<Integer> getIncomingCount();
 
-    int getOutcomingCount();
+    Optional<Integer> getOutcomingCount();
 
-    int getIncomingBeforeCount();
+    Optional<Integer> getIncomingBeforeCount();
 
-    int getIncomingArriveCount();
+    Optional<Integer> getIncomingArriveCount();
+
+    Optional<Integer> getOutcomingBeforeCount();
+
+    Optional<Integer> getOutcomingArriveCount();
+
+    Optional<Integer> getNotApprovalCount();
+
+    Optional<Integer> getTotalUsingCapacity();
+
+    List<WarehouseCityDTO> getWarehouseCityTotal();
+
+    MonthlyDTO getMonthlyInOut();
 
 }

@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.ProductMapper">
 
+    <select id="selectProductList" resultType="com.ssg.ssglandersmini2.domain.Product">
+        select * from product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by pid limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!--    <insert id="insert">-->
+    <!--        insert into incoming(pid, wid, quantity, date, status, approval)-->
+    <!--        values(#{pid},#{},#{quantity}, now(),'배달 미완료','승인 미완료')-->
+    <!--    </insert>-->
+
+    <select id="getProductByPid" resultType="com.ssg.ssglandersmini2.domain.Product">
+        select *
+        from product
+        where pid = #{pid}
+    </select>
+
+
 </mapper>
