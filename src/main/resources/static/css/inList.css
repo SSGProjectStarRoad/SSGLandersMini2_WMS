@@ -19,9 +19,6 @@ h1,h2{
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-
-
-
 /* 메인 div */
 
 
@@ -66,7 +63,9 @@ h1,h2{
 }
 
 
-
+/*.open-modify-btn, .open-delivery-button{*/
+/*  width: ;*/
+/*}*/
 
 
 button {
@@ -177,13 +176,16 @@ ul.value {
   margin-bottom: 10px;
   height: 40px;
   width: 330px;
+  display: flex;
+  white-space: nowrap;
 }
 
 input {
   background-color: rgb(226, 226, 226);
   border-color: white;
   margin-left: 20px;
-  width: 350px;
+  width: 40px;
+  white-space: nowrap;
 }
 
 .modal-header h1 {
@@ -227,9 +229,15 @@ input {
 .modal-table{
   width: 370px;
 }
+.quantity-label{
+  align-content: center;
+  margin-left: 20px;
+}
 
-
-
+.modal-footer{
+  display: flex;
+  flex-direction: row;
+}
 /* search-toggle */
 
 .form-select {

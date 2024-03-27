@@ -42,6 +42,7 @@ public class PageResponseDTO<E> {
         this.start = this.end - 9;
         // 마지막 페이지 번호 계산
         int last = Math.max((int)(Math.ceil((total / (double) size))),1);
+
         this.end = end > last ? last : end;
         // 이전 페이지의 존재 여부 설정
         this.prev = this.start > 1;
