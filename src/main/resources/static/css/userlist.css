@@ -1,0 +1,979 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: rgb(233, 233, 233);
+}
+
+/* 이중 모달 */
+
+#myModal {
+    overflow: auto;
+}
+#myModal2 {
+    overflow: auto;
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* 배경색 설정 */
+}
+.modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.5); /* 배경색 설정 */
+}
+
+/*  nav bar */
+
+.left-div {
+    width: 220px;
+    background-color: rgb(233, 233, 233);
+}
+
+.nav-img {
+    width: 180px;
+}
+
+.imag-div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.nav-div {
+    height: 700px;
+    width: 250px;
+    /* border: solid 1px white; */
+    padding-top: 10px;
+    /* padding-left: 50px; */
+}
+
+.nav flex-column {
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-link {
+    color: black;
+    padding-left: 10px;
+}
+
+.nav-item {
+    color: black;
+    padding-left: 10px;
+    transition: background-color 0.3s ease;
+    /* 부드러운 색상 전환 효과 */
+}
+
+.nav-item:hover {
+    background-color: rgb(164, 199, 255);
+    /* 마우스를 올렸을 때의 배경색 */
+}
+
+.nav-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.bi-grid {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-calendar-plus {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-calendar-minus {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-calendar-range {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-calendar-week {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-calendar2-check {
+    color: black;
+    margin-top: 7px;
+}
+
+.bi-person {
+    color: black;
+    margin-top: 7px;
+}
+
+.nav-item {
+    display: flex;
+    padding-left: 50px;
+}
+
+.nav-menu {
+    color: black;
+    margin-left: 48px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: smaller;
+}
+
+
+/* 햄버거 메뉴 스타일 */
+.mobile-nav-toggle {
+    display: none;
+    /* 초기에는 숨김 처리 */
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+    /* 아이콘 색상 설정 */
+    position: fixed;
+    /* 모바일 화면에서 상단에 고정 */
+    top: 0;
+    /* 상단에 위치 */
+    right: 0;
+    /* 우측에 위치 */
+    z-index: 1050;
+    /* 다른 내용보다 상위에 위치 */
+}
+
+
+/* 메인 div */
+
+
+.main {
+    position: relative;
+    z-index: 1;
+    background-color: rgb(233, 233, 233);
+    width: 100%;
+    height: 100%;
+
+}
+
+.main-background {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 160px;
+    margin-top: 60px;
+    background-color: rgb(61, 135, 255);
+}
+
+.main-box {
+    margin-left: 30px;
+    margin-top: 110px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main h1 {
+    position: relative;
+    z-index: 3;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+.btn,
+.form-control {
+    height: 40px;
+}
+
+
+
+
+button {
+    background-color: rgb(217, 237, 255);
+    border-color: #36064D;
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+    width: 130px;
+    height: 34.5px;
+}
+
+.primary-btn{
+    width: 49.95px;
+}
+
+
+.main-stateboxes {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    z-index: 3;
+    justify-content: center;
+}
+
+
+.input-box {
+    width: 30vw;
+    margin-right: 20px;
+}
+
+.input-btn {
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+    white-space: noWrap
+}
+
+
+.input-btn button {
+    background-color: rgb(217, 237, 255);
+    border-color: #36064D;
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+
+}
+
+.btn-register {
+    margin: 0px;
+}
+
+/* 버튼 색 돌아오는 거 */
+.input-btn button:focus {
+    background-color: rgb(217, 237, 255);
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+}
+
+.approval-btn button:focus {
+    background-color: rgb(217, 237, 255);
+    color: black;
+    font-weight: bold;
+    border: 0px;
+    font-size: 15px;
+    width: 130px;
+    height: 40px;
+}
+
+i.icon-home {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    background-color: #36064D;
+    width: 24px;
+    /* 이미지 너비 */
+    height: 24px;
+    /* 이미지 높이 */
+    display: inline-block;
+    /* 이미지를 inline 요소로 표시 */
+    /* 이미지 파일의 경로를 지정해야 할 수도 있습니다. 예: background-image: url('path/to/image.png'); */
+}
+
+ul {
+    padding-left: 10px;
+}
+
+ul.value {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.table-div {
+    background-color: white;
+    z-index: 4;
+    border-color: rgb(254, 0, 0);
+}
+
+
+
+/* Modal */
+
+.modal-input {
+    margin-bottom: 10px;
+    height: 40px;
+    width: 330px;
+}
+
+input {
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+    margin-left: 20px;
+    width: 350px;
+}
+
+.modal-header h1 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modal-minititle {
+    text-align: left;
+    width: 100%;
+    font-size: small;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.modal-dialog {
+    width: 400px;
+}
+
+
+.modal-body{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-second-body {
+    width: 40vw;
+}
+.modal-table{
+    width: 370px;
+}
+
+.agree-checkbox {
+    display: flex;
+
+}
+.agree-checkbox input[type="checkbox"] {
+    display: inline-block;
+    width: 15px;
+}
+.agree-checkbox label {
+    margin-left: 0.5em;
+
+}
+
+.btn-secondary {
+    background-color: gray;
+}
+
+/* search-toggle */
+
+.form-select {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    margin-right: 1vw;
+    text-align: center;
+    border: 0px;
+}
+
+
+/* toggle dropdown */
+
+.select-toggle select {
+    margin-bottom: 10px;
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+    margin-left: 20px;
+    width: 350px;
+    text-align: center;
+    height: 40px;
+    border-radius: 5px;
+}
+
+
+
+.table-div {
+    /* margin-top: 30px; */
+    border-radius: 15px;
+    margin-left: 20px;
+
+}
+
+.left {
+    width: 900px;
+    z-index: 10;
+
+}
+
+.right-way {
+    background-color: white;
+    width: 350px;
+    height: 470px;
+    border-radius: 5px;
+    /* margin-top: 30px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* position: absolute; */
+    z-index: 2;
+    margin: 0 2vw;
+    padding-top: 20px;
+}
+
+.right {
+    background-color: white;
+    width: 350px;
+    height: 600px;
+    border-radius: 5px;
+    /* margin-top: 30px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* position: absolute; */
+    z-index: 2;
+    margin-left: 10px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding-top: 90px;
+
+}
+
+.table-way {
+    display: flex;
+    margin: 0 15px;
+}
+
+/* 테이블 */
+.main-detail {
+    width: 80vw;
+    margin-left: 10px;
+    font-size: 13px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+}
+
+.main-detail h2 {
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main-detail thead {
+    text-align: left;
+    border-radius: solid
+}
+
+.main-detail thead th {
+    width: 250px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+table {
+    padding-left: 10px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: rgb(164, 199, 255);
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.main-detail tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+    /* 테이블의 왼쪽 하단 모서리 */
+}
+
+.main-detail tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+    /* 테이블의 오른쪽 하단 모서리 */
+}
+
+/* 테이블 끝 */
+
+.content-down {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* top: -10px; */
+    /* top: 150px; */
+}
+
+.table-div table tbody tr td button {
+    background-color: rgb(178, 145, 203);
+    border: white;
+    font-weight: bold;
+}
+
+.table-div table thead tr th {
+    border: white;
+}
+
+
+
+/* waybil */
+
+.waybill-title {
+    text-align: center;
+    /* border: solid 1px black; */
+    margin-bottom: 10px;
+}
+
+.waybill-title h3 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.waybill-content {
+    /* border: solid 1px black; */
+    height: 50px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.waybill-content-left {
+    width: 150px;
+    /* border: solid 1px black; */
+    /* text-align: center; */
+    padding-top: 10px;
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+
+.waybill-content-right {
+    width: 250px;
+    /* border: solid 1px black; */
+}
+
+.waybill-content-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+}
+
+.waybill-content-right input {
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+}
+
+.waybill-content button {
+    margin-top: 30px;
+    height: 40px;
+    background-color: rgb(0, 123, 255);
+    /* #36064D */
+    color: white;
+    border-color: white;
+    border-radius: 15px;
+    width: 100px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.waybill-content-bottom {
+    height: 20px;
+    width: 10px;
+}
+
+/* 출고 현황 */
+
+.right-minititle {
+    text-align: left;
+    width: 100%;
+    margin-left: 40px;
+    font-size: small;
+    color: #9c9c9c;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+.right-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+
+input {
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+
+}
+
+.qr-img {
+    width: 70px;
+    margin-top: 10px;
+}
+
+
+
+.qr-img-div {
+    display: flex;
+    justify-content: center;
+}
+
+.right-div-btn {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 50px;
+
+}
+
+.update-btn button {
+    margin-right: 20px;
+    background-color: rgb(0, 123, 255);
+    border: white;
+}
+
+.delete-btn button {
+    margin-right: 40px;
+    background-color: rgb(0, 123, 255);
+    border: white;
+}
+
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        flex-direction: column;
+        background-color: rgb(233, 233, 233);
+        /* html과 body의 flex 방향을 수직으로 변경 */
+    }
+
+
+
+    /* 미디어쿼리 navbar */
+
+    .left-div {
+        position: fixed;
+        /* left-div 내부에서 절대 위치를 사용하기 위한 기준 설정 */
+        display: flex;
+        /* 네비게이션 바와 햄버거 메뉴를 함께 표시 */
+        flex-direction: column;
+        /* 세로 정렬 */
+        width: 100%;
+        /* 너비를 화면 전체로 설정 */
+        height: 20vw;
+        z-index: 1040;
+        /* z-index 조정 */
+        align-items: center;
+        /* 가운데 정렬 */
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        /* Show the hamburger menu */
+        position: absolute;
+        background-color: rgb(233, 233, 233);
+        /* White background */
+        color: black;
+        /* Black icon, adjust as needed */
+        top: 50%;
+        transform: translateY(-50%);
+        right: 50px;
+        font-size: 7vw;
+        /* Rest of your styling */
+    }
+
+    .nav-div {
+        height: 280px;
+        display: flex;
+        /* 항상 flex로 설정하여 항목들이 나타나게 합니다 */
+        flex-direction: row;
+        width: 100%;
+        /* 너비를 화면 전체로 설정 */
+
+        background-color: rgba(211, 211, 211, 0.85);
+        align-items: center;
+        /* 내용을 중앙 정렬 */
+        position: absolute;
+        /* left-div에 상대적으로 배치 */
+        top: 100%;
+        /* left-div의 하단에 위치 */
+        left: 0;
+        z-index: 1050;
+        /* 다른 내용보다 상위에 위치 */
+        transition: all 0.5s ease;
+        /* 부드러운 전환 효과 */
+        transform: scaleY(0);
+        /* 초기에는 보이지 않도록 설정 */
+        transform-origin: top;
+        /* 확장 기준점을 상단으로 설정 */
+        overflow: hidden;
+        /* 내용이 넘칠 경우 숨김 */
+        max-height: 100vh;
+        /* 최대 높이를 화면 높이로 제한 */
+    }
+
+    .nav-div.show {
+        transform: scaleY(1);
+        /* 클릭 시 내용을 펼쳐 보임 */
+    }
+
+    .imag-div {
+        width: 10vw;
+        margin: auto;
+    }
+
+
+    .nav-img {
+        width: 30vw;
+        margin: 0 auto;
+        /* 중앙 정렬 */
+    }
+
+
+
+    .nav-div .nav.flex-column {
+        display: none;
+        /* 초기 상태에서 네비게이션 항목 숨김 */
+
+    }
+
+    .nav.flex-column {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .nav-item {
+        display: inline-flex;
+        margin-right: 20px;
+        /* 각 항목 사이의 간격 조절 */
+    }
+
+    .nav-menu {
+        display: none;
+        /* 화면이 768px 이하일 때 항상 nav-menu 숨김 */
+    }
+
+
+    /* nav-div에 show 클래스가 있을 때만 flex-column 표시 */
+    /* .nav-div.show .nav.flex-column {
+      display: flex;
+      flex-direction: column;
+    } */
+
+
+    /* show 클래스가 있을 때만 nav-item과 nav-link를 표시 */
+    /* .nav-div.show .nav-item, .nav-div.show .nav-link {
+      display: block;
+    } */
+
+    /* 위에 검색이랑 버튼들 */
+
+    .input-box {
+        /* margin-top: 10px; */
+        width: 40vw;
+        /* margin-left: 20px; */
+    }
+
+    .input-btn {
+        display: flex;
+        align-items: center;
+    }
+
+    .incoming {
+        margin-left: 0.5px;
+    }
+
+    .incoming,
+    .outcoming {
+        width: 100%;
+    }
+
+    .approval-btn {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -24px;
+
+    }
+
+    .approval-btn button {
+        background-color: rgb(217, 237, 255);
+        border-color: #36064D;
+        color: black;
+        font-weight: bold;
+        border: 0px;
+        font-size: 15px;
+        width: 100vw;
+        height: 40px;
+        margin-left: -45px;
+    }
+
+    .input-btn button:focus {
+        background-color: rgb(217, 237, 255);
+        color: black;
+        font-weight: bold;
+        border: 0px;
+        font-size: 15px;
+    }
+
+    .approval-btn button:focus {
+        background-color: rgb(217, 237, 255);
+        color: black;
+        font-weight: bold;
+        border: 0px;
+        font-size: 15px;
+        width: 100vw;
+        height: 40px;
+    }
+
+    /* 운송장과 테이블 감싸는 div */
+
+    .table-way {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0;
+    }
+
+    .right-way {
+        background-color: white;
+        width: 350px;
+        height: 500px;
+        border-radius: 5px;
+        /* margin-top: 30px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* position: absolute; */
+        z-index: 2;
+        margin-left: 70px;
+        margin-top: 20px;
+        padding-top: 20px;
+        margin-bottom: 50px;
+    }
+
+    /* 상세정보 right  */
+
+    .right {
+        background-color: white;
+        width: 400px;
+        height: 700px;
+        border-radius: 5px;
+        /* margin-top: 30px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* position: absolute; */
+        z-index: 2;
+        margin-left: 30px;
+        /* overflow: scroll; */
+        /* overflow-x: hidden; */
+        padding-top: 10px;
+        margin-left: 43px;
+        border: 1px solid 1px;
+        margin-bottom: 50px;
+    }
+
+    /* 미디어쿼리 메인문 */
+
+    .main {
+        width: 100%;
+        /* main의 너비를 화면 전체로 설정 */
+        position: relative;
+        /* main의 위치를 상대적으로 설정 */
+        z-index: 2;
+        /* 필요한 경우 z-index 조정 */
+        top: 20vw;
+        background-color: (233, 233, 233);
+    }
+
+
+    .main-stateboxes {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        white-space: nowrap;
+        align-items: center;
+    }
+
+    .main-detail {
+        width: 85%;
+        margin: 20px auto;
+        /* 상하 마진은 20px, 좌우 마진은 자동으로 설정하여 중앙 정렬 */
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        /* 블록 요소로 변환하여 세로로 쌓임 */
+    }
+
+    thead tr {
+        position: absolute;
+        /* 헤더를 보이지 않게 설정 */
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin: 0 0 1rem 0;
+        /* 각 행(카드)에 마진 추가 */
+        border: 1px solid #ddd;
+        /* 행에 테두리 추가 */
+
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        /* 그림자 효과 추가 */
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+        /* 각 데이터 아래 테두리 추가 */
+        position: relative;
+        padding: .625rem;
+        text-align: left;
+        padding-left: 50%;
+        border-bottom-left-radius: 0px;
+    }
+
+    td:before {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: .625rem;
+        font-weight: bold;
+        content: attr(data-label);
+        /* 라벨 표시 */
+    }
+
+    .main-detail tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 0;
+        /* 모서리 라운딩 제거 */
+    }
+
+    .main-detail tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 0;
+    }
+
+    .main-detail h2 {
+        margin-bottom: 15px;
+    }
+
+}

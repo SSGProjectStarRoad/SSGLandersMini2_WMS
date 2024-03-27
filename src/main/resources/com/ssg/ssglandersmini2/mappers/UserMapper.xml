@@ -2,4 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.UserMapper">
 
+
+    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.User">
+        select * from user
+        <where>
+            1=1
+            <if test="types != null and types.length > 0">
+                and (
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 't'.toString()">
+                        pname like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+        order by username desc limit #{skip}, #{size}
+    </select>
+
+    <select id="selectOne" resultType="com.ssg.ssglandersmini2.domain.User">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
+    <update id="update">
+        update user
+        set
+        <if test="password != null"> password = #{password}, </if>
+        <if test="usertype != null"> usertype = #{usertype}, </if>
+        <if test="name != null"> name = #{name}, </if>
+        <if test="address != null"> address = #{address}, </if>
+        <if test="telnum != null"> telnum = #{telnum} </if>
+        where username = #{username}
+    </update>
+
+    <delete id="delete">
+        delete from user where username = #{username}
+    </delete>
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        from user
+        <where>
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 't'.toString()">
+                        pname like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>
