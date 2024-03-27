@@ -42,10 +42,6 @@ private final ModelMapper modelMapper;
         return 0;
     }
 
-    @Override
-    public PageResponseDTO<StockDTO> pagelist(PageRequestDTO pageRequestDTO) {
-        return null;
-    }
 
     @Override
     public PageResponseDTO<StockDTO> getList(PageRequestDTO pageRequestDTO) {
@@ -76,4 +72,10 @@ private final ModelMapper modelMapper;
         return whList;
     }
 
+    @Override
+    public List<StockDTO> getWarehouseList() {
+        List<StockDTO> wrList = stockMapper.getWarehouseList().stream().map(wr -> modelMapper.map(wr, StockDTO.class))
+                .collect(Collectors.toList());
+        return wrList;
+    }
 }

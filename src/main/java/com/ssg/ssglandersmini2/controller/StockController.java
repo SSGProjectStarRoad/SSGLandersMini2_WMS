@@ -23,13 +23,11 @@ public class StockController {
 
     @GetMapping("/stock")
     public void stock(PageRequestDTO pageRequestDTO, Model model) {
-        log.info(stockService.getList(pageRequestDTO).getDtoList());
-        log.info(pageRequestDTO.getTypes());
-        log.info(pageRequestDTO.getKeyword());
-        log.info(pageRequestDTO.getSize());
+        log.info(stockService.getWarehouseList());
         model.addAttribute("responseDTO", stockService.getList(pageRequestDTO));
         model.addAttribute("list", stockService.getAll());
         model.addAttribute("whList", stockService.getWareHouse());
+        model.addAttribute("wrList",stockService.getWarehouseList());
 
     }
 
@@ -37,6 +35,7 @@ public class StockController {
     public void outcomingRequest(@RequestParam("productSelect") String productSelect,
                                  @RequestParam("warehouseSelect") String warehouseSelect,
                                  @RequestParam("quantity") int quantity,
+                                 @RequestParam("")
                                  RedirectAttributes redirectAttributes) {
         log.info("outcomingRequest~~~!!");
         log.info(productSelect + warehouseSelect + quantity);

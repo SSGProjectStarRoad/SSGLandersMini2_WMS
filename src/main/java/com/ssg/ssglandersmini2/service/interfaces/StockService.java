@@ -15,9 +15,9 @@ public interface StockService {
     Page<Stock> serchAll(String[] types, String keyword, Pageable pageable);
     long getCount(String[] types, String keyword);
     List<StockDTO> getAll();
-    PageResponseDTO<StockDTO> pagelist(PageRequestDTO pageRequestDTO);
+    List<StockDTO> getWarehouseList();
 PageResponseDTO<StockDTO> getList(PageRequestDTO pageRequestDTO); // 페이징 처리
-    public List<StockDTO> getWareHouse();
+List<StockDTO> getWareHouse();
 
     // 검색, 리스트 띄우기, 변환, 출고요청 데이터 리스트에 담아 넘기기
 }
