@@ -6,6 +6,7 @@ body {
     display: flex;
     background-color: rgb(233,233,233);
 }
+
 /* 메인 div */
 
 .main {
@@ -36,15 +37,71 @@ body {
     color: white;
     font-size: 20px;
     margin-bottom: 10px;
+    width: 100px;
 }
+
+
+/*상단에 검색박스 등등*/
+.bigcheckbox{
+    display: flex;
+    justify-content: center;
+    margin-top: -72px;
+    margin-left: 7vw;
+    margin-bottom: 5px;
+    flex-direction: row;
+    display: flex;
+    color: white;
+
+}
+fieldset{
+margin-left: 20px;
+    font-size: 12px;
+
+}
+legend {
+    /*background-color: rgb(217, 237, 255);*/
+    color: white;
+    padding: 3px 6px;
+    width: auto;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+input[type="checkbox"] {
+    margin: 0.4rem;
+    display: none;
+}
+
+input[type="checkbox"] + label{
+    cursor: pointer;
+    padding-left: 23px; /* 이미지 너비만큼 padding-left를 주어 텍스트와 이미지가 겹치지 않게 합니다. */
+    background-repeat: no-repeat;
+    background-image: url('../images/checkboxoff2.png');
+    display: inline-block; /* 라벨을 인라인 블록 요소로 만들어 줍니다. */
+    height: 20px; /* 백그라운드 이미지의 높이에 맞춰 라벨의 높이를 지정합니다. */
+    min-width: 45px; /* 백그라운드 이미지의 너비에 맞춰 라벨의 너비를 지정합니다. */
+    background-size: contain; /* 백그라운드 이미지가 라벨 크기에 맞게 조절됩니다. */
+}
+
+input[type="checkbox"]:checked + label{
+    background-image: url("../images/checkboxon2.png");
+
+    /*height: 20px;*/
+    /*margin-bottom: -5px;*/
+}
+
+
 
 
 .input-bigbox {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-left: 16vw;
+    padding-left: 14vw;
+    margin-top: 10px;
 }
+
 
 .coming-btn {
     display: flex;
@@ -85,7 +142,7 @@ body {
 
 .input-box {
     width: 420px;
-    margin-left: 140px;
+    margin-left: 40px;
 }
 
 
@@ -181,43 +238,6 @@ body {
 
 }
 
-
-
-.right-way {
-    background-color: white;
-    width: 350px;
-    height: 400px;
-    border-radius: 5px;
-    /* margin-top: 30px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* position: absolute; */
-    z-index: 2;
-    margin-left: 30px;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-.right {
-    background-color: white;
-    width: 400px;
-    height: 600px;
-    border-radius: 5px;
-    /* margin-top: 30px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* position: absolute; */
-    z-index: 2;
-    margin-left: 30px;
-    overflow: auto;
-    overflow-x: hidden;
-    padding-top: 90px;
-
-}
 
 .table-way{
     margin: 0 auto;
@@ -435,7 +455,11 @@ tr:nth-child(even) {
     width: 10px;
 }
 
-
+.float-end{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
 
 
 
@@ -449,17 +473,48 @@ tr:nth-child(even) {
         width: 100%;
         flex-direction: column; /* html과 body의 flex 방향을 수직으로 변경 */
     }
+
+
+    /* 상단 검색이랑 버튼들 */
+
+    .main h1{
+    /*flex-direction: column;*/
+    /*    width: 80px;*/
+        margin-top: -30px;
+
+    }
+
+    .bigcheckbox{
+        margin-top: -100px;
+        margin-left: 1.5vw;
+        min-width: 200px;
+        padding-left: 3vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+    }
+    legend{
+        display: none;
+    }
+
+    fieldset{
+        /*margin-left: 20px;*/
+        font-size: 10px;
+    }
     /* 위에 검색이랑 버튼들 */
 
     .input-bigbox {
         display: flex;
         flex-direction: row;
         padding-left: 1vw;
+        margin-top: -20px;
     }
     .input-box {
         margin-top: 10px;
         width: 420px;
         margin-left: 10px;
+        z-index: 5000;
     }
 
     .input-btn {
@@ -516,6 +571,7 @@ tr:nth-child(even) {
     .main-stateboxes {
         display: flex;
         width: 90%;
+        margin-top: 121px;
         flex-direction: column;
         left: 7%;
 
@@ -539,9 +595,10 @@ tr:nth-child(even) {
     .register-btn button {
         width: 100vW; /* 버튼이 가능한 최대 너비를 사용 */
         /* margin: 10px auto; */
-        margin-top: -36px;
-        margin-right: 27px;
-        height: 50px;
+        margin-top: -58px;
+        /*margin-right: 27px;*/
+        margin-left: -30px;
+        height:50px;
         display: flex;
         justify-content: center;
         align-items: center;
