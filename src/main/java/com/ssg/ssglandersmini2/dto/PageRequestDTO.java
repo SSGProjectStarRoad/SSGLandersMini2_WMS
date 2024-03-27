@@ -50,8 +50,6 @@ public class PageRequestDTO {
     // 검색 키워드를 나타내는 필드
     private String keyword;
 
-
-
     // 완료 여부를 나타내는 필드
     private boolean finished;
 
@@ -64,8 +62,6 @@ public class PageRequestDTO {
     //창고타입관련 체크박스 만들려고 만든 필드
     private List<String> warehouseTypes;
     private List<Integer> capacities;
-
-//    private List<>
 
 
     // 페이지당 건너뛸 항목 수를 계산하는 메서드

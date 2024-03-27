@@ -17,7 +17,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-
 /* 메인 div */
 
 
@@ -208,6 +207,8 @@ ul.value {
   height: 40px;
   
   width: 350px;
+  display: flex;
+  white-space: nowrap;
 }
 
 input {
@@ -243,6 +244,9 @@ input {
   
 }
 
+.warehouse-align{
+  display: flex;
+}
 
 
 
@@ -550,6 +554,15 @@ tr:nth-child(even) {
   }
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> ada423a (입고 관련 기능 구현)
+=======
+>>>>>>> 6724a6b (메인 브랜치 -> 입고 관련 기능 구현)
   /* 위에 검색이랑 버튼들 */
 
   .input-box {
@@ -656,7 +669,7 @@ tr:nth-child(even) {
     /* overflow-x: hidden; */
     padding-top: 10px;
     margin-left: 43px;
-    border: 1px solid 1px;
+    border: 1px solid;
     margin-bottom: 50px;
   }
 

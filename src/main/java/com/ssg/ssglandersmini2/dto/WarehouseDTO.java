@@ -2,12 +2,12 @@ package com.ssg.ssglandersmini2.dto;
 
 import lombok.*;
 
-@ToString
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+
 public class WarehouseDTO {
     private long wid;
     private String address;
