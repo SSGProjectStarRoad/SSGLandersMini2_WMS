@@ -20,7 +20,7 @@ class Ssglandersmini2ApplicationTests {
                 .warehousetype("테스트타입")
                 .address("테스트주소")
                 .capacity(1234).build();
-        warehouseService.register(warehouseDTO);
+        warehouseService.registerWarehouse(warehouseDTO);
     }
 
 }

@@ -7,117 +7,7 @@ body {
     background-color: rgb(233,233,233);
 }
 
-/*  nav bar */
-
-.left-div {
-    width: 220px;
-    background-color: rgb(233,233,233);
-}
-.imag-div{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-.nav-img{
-    width: 180px;
-}
-.nav-div{
-    height: 600px;
-    width: 250px;
-    /* 좌측내비하단 하얗게 나오는거 수정 */
-    background-color: rgb(233,233,233);
-    /* border: solid 1px white; */
-    padding-top: 10px;
-    /* padding-left: 50px; */
-}
-.nav flex-column{
-    color: black;
-    display: flex;
-    flex-direction: column;
-}
-.nav-link{
-    color: black;
-    padding-left: 10px;
-}
-.nav-item {
-    color: black;
-    padding-left: 10px;
-    transition: background-color 0.3s ease; /* 부드러운 색상 전환 효과 */
-}
-
-.nav-item:hover {
-    background-color:rgb(164, 199, 255); /* 마우스를 올렸을 때의 배경색 */
-}
-.nav-icon{
-    width: 10px;
-    height: 10px;
-}
-.bi-grid {
-    color: black;
-    margin-top: 7px;
-}
-.bi-calendar-plus{
-    color: black;
-    margin-top: 7px;
-}
-.bi-calendar-minus{
-    color: black;
-    margin-top: 7px;
-}
-.bi-calendar-range{
-    color: black;
-    margin-top: 7px;
-}
-.bi-calendar-week{
-    color: black;
-    margin-top: 7px;
-}
-.bi-calendar2-check{
-    color: black;
-    margin-top: 7px;
-}
-.bi-person{
-    color: black;
-    margin-top: 7px;
-}
-.nav-item{
-    display: flex;
-    padding-left: 50px;
-}
-.nav-menu{
-    color: black;
-    margin-left: 48px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-size: smaller;
-}
-
-
-/* 햄버거 메뉴 스타일 */
-.mobile-nav-toggle {
-    display: none;
-    /* 초기에는 숨김 처리 */
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    color: white;
-    /* 아이콘 색상 설정 */
-    position: fixed;
-    /* 모바일 화면에서 상단에 고정 */
-    top: 0;
-    /* 상단에 위치 */
-    right: 0;
-    /* 우측에 위치 */
-    z-index: 1050;
-    /* 다른 내용보다 상위에 위치 */
-}
-
-
 /* 메인 div */
-
 
 .main {
     position: relative;
@@ -147,15 +37,71 @@ body {
     color: white;
     font-size: 20px;
     margin-bottom: 10px;
+    width: 100px;
 }
+
+
+/*상단에 검색박스 등등*/
+.bigcheckbox{
+    display: flex;
+    justify-content: center;
+    margin-top: -72px;
+    margin-left: 7vw;
+    margin-bottom: 5px;
+    flex-direction: row;
+    display: flex;
+    color: white;
+
+}
+fieldset{
+margin-left: 20px;
+    font-size: 12px;
+
+}
+legend {
+    /*background-color: rgb(217, 237, 255);*/
+    color: white;
+    padding: 3px 6px;
+    width: auto;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+input[type="checkbox"] {
+    margin: 0.4rem;
+    display: none;
+}
+
+input[type="checkbox"] + label{
+    cursor: pointer;
+    padding-left: 23px; /* 이미지 너비만큼 padding-left를 주어 텍스트와 이미지가 겹치지 않게 합니다. */
+    background-repeat: no-repeat;
+    background-image: url('../images/checkboxoff2.png');
+    display: inline-block; /* 라벨을 인라인 블록 요소로 만들어 줍니다. */
+    height: 20px; /* 백그라운드 이미지의 높이에 맞춰 라벨의 높이를 지정합니다. */
+    min-width: 45px; /* 백그라운드 이미지의 너비에 맞춰 라벨의 너비를 지정합니다. */
+    background-size: contain; /* 백그라운드 이미지가 라벨 크기에 맞게 조절됩니다. */
+}
+
+input[type="checkbox"]:checked + label{
+    background-image: url("../images/checkboxon2.png");
+
+    /*height: 20px;*/
+    /*margin-bottom: -5px;*/
+}
+
+
 
 
 .input-bigbox {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-left: 16vw;
+    padding-left: 14vw;
+    margin-top: 10px;
 }
+
 
 .coming-btn {
     display: flex;
@@ -196,7 +142,7 @@ body {
 
 .input-box {
     width: 420px;
-    margin-left: 140px;
+    margin-left: 40px;
 }
 
 
@@ -285,56 +231,13 @@ body {
 
 
 
-
-
-
-
-
-
 .table-div {
     /* margin-top: 30px; */
     border-radius: 15px;
-    margin-left: 20spx;
+    margin-left: 20px;
 
 }
 
-
-
-.right-way {
-    background-color: white;
-    width: 350px;
-    height: 400px;
-    border-radius: 5px;
-    /* margin-top: 30px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* position: absolute; */
-    z-index: 2;
-    margin-left: 30px;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-.right {
-    background-color: white;
-    width: 400px;
-    height: 600px;
-    border-radius: 5px;
-    /* margin-top: 30px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* position: absolute; */
-    z-index: 2;
-    margin-left: 30px;
-    overflow: auto;
-    overflow-x: hidden;
-    padding-top: 90px;
-
-}
 
 .table-way{
     margin: 0 auto;
@@ -552,7 +455,11 @@ tr:nth-child(even) {
     width: 10px;
 }
 
-
+.float-end{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
 
 
 
@@ -567,108 +474,47 @@ tr:nth-child(even) {
         flex-direction: column; /* html과 body의 flex 방향을 수직으로 변경 */
     }
 
-    /* 미디어쿼리 navbar */
 
-    .left-div {
-        position: fixed; /* left-div 내부에서 절대 위치를 사용하기 위한 기준 설정 */
-        display: flex; /* 네비게이션 바와 햄버거 메뉴를 함께 표시 */
-        flex-direction: column; /* 세로 정렬 */
-        width: 100%; /* 너비를 화면 전체로 설정 */
-        height: 20vw;
-        z-index: 1040; /* z-index 조정 */
-        align-items: center; /* 가운데 정렬 */
-    }
+    /* 상단 검색이랑 버튼들 */
 
-    .mobile-nav-toggle {
-        display: flex; /* Show the hamburger menu */
-        position: absolute;
-        background-color: rgb(233,233,233); /* White background */
-        color: black; /* Black icon, adjust as needed */
-        top: 50%;
-        transform: translateY(-50%);
-        right: 50px;
-        font-size: 7vw;
-        /* Rest of your styling */
-    }
-    .nav-div {
-        height: 280px;
-        display: flex; /* 항상 flex로 설정하여 항목들이 나타나게 합니다 */
-        flex-direction: row;
-        width: 100%; /* 너비를 화면 전체로 설정 */
-
-        background-color: rgba(211, 211, 211, 0.85);
-        align-items: center; /* 내용을 중앙 정렬 */
-        position: absolute; /* left-div에 상대적으로 배치 */
-        top: 100%; /* left-div의 하단에 위치 */
-        left: 0;
-        z-index: 1050; /* 다른 내용보다 상위에 위치 */
-        transition: all 0.5s ease; /* 부드러운 전환 효과 */
-        transform: scaleY(0); /* 초기에는 보이지 않도록 설정 */
-        transform-origin: top; /* 확장 기준점을 상단으로 설정 */
-        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
-        max-height: 100vh; /* 최대 높이를 화면 높이로 제한 */
-    }
-    .nav-div.show {
-        transform: scaleY(1); /* 클릭 시 내용을 펼쳐 보임 */
-    }
-
-    .imag-div {
-        width: 10vw;
-        margin: auto;
-    }
-
-
-    .nav-img {
-        width: 30vw;
-        margin: 0 auto; /* 중앙 정렬 */
-    }
-
-
-
-    .nav-div .nav.flex-column {
-        display: none; /* 초기 상태에서 네비게이션 항목 숨김 */
+    .main h1{
+    /*flex-direction: column;*/
+    /*    width: 80px;*/
+        margin-top: -30px;
 
     }
-    .nav.flex-column {
+
+    .bigcheckbox{
+        margin-top: -100px;
+        margin-left: 1.5vw;
+        min-width: 200px;
+        padding-left: 3vw;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
         justify-content: center;
+        flex-direction: column;
+
+    }
+    legend{
+        display: none;
     }
 
-    .nav-item {
-
-        display: inline-flex;
-        margin-right: 20px; /* 각 항목 사이의 간격 조절 */
+    fieldset{
+        /*margin-left: 20px;*/
+        font-size: 10px;
     }
-    .nav-menu {
-        display: none; /* 화면이 768px 이하일 때 항상 nav-menu 숨김 */
-    }
-
-
-    /* nav-div에 show 클래스가 있을 때만 flex-column 표시 */
-    /* .nav-div.show .nav.flex-column {
-      display: flex;
-      flex-direction: column;
-    } */
-
-
-    /* show 클래스가 있을 때만 nav-item과 nav-link를 표시 */
-    /* .nav-div.show .nav-item, .nav-div.show .nav-link {
-      display: block;
-    } */
-
     /* 위에 검색이랑 버튼들 */
 
     .input-bigbox {
         display: flex;
         flex-direction: row;
         padding-left: 1vw;
+        margin-top: -20px;
     }
     .input-box {
         margin-top: 10px;
         width: 420px;
         margin-left: 10px;
+        z-index: 5000;
     }
 
     .input-btn {
@@ -725,6 +571,7 @@ tr:nth-child(even) {
     .main-stateboxes {
         display: flex;
         width: 90%;
+        margin-top: 121px;
         flex-direction: column;
         left: 7%;
 
@@ -748,9 +595,10 @@ tr:nth-child(even) {
     .register-btn button {
         width: 100vW; /* 버튼이 가능한 최대 너비를 사용 */
         /* margin: 10px auto; */
-        margin-top: -36px;
-        margin-right: 27px;
-        height: 50px;
+        margin-top: -58px;
+        /*margin-right: 27px;*/
+        margin-left: -30px;
+        height:50px;
         display: flex;
         justify-content: center;
         align-items: center;

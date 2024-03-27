@@ -16,7 +16,10 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
+.page-align{
+  justify-content: center;
+  margin-top: 10px;
+}
 
 /* 메인 div */
 
@@ -92,6 +95,8 @@ button {
 .input-box {
   width: 30vw;
   margin-right: 20px;
+  display: flex;
+  white-space: nowrap;
 }
 
 .input-btn {
@@ -169,6 +174,8 @@ ul.value {
   margin-bottom: 10px;
   height: 40px;
   width: 330px;
+  display: flex;
+  white-space: nowrap;
 }
 
 input {

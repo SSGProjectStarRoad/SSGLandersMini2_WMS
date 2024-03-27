@@ -1,0 +1,574 @@
+html {
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    background-color: rgb(233, 233, 233);
+}
+
+/* 메인 div */
+.main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    background-color: rgb(233, 233, 233);
+    width: 100%;
+    min-height: 100vh;
+}
+
+.main-background {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 160px;
+    margin-top: 60px;
+    background-color: rgb(61, 135, 255);
+}
+
+.main-box {
+
+    margin-left: 30px;
+    margin-top: 50px;
+}
+
+.main h1 {
+    position: relative;
+    z-index: 3;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+.main-detail {
+    width: 80vw;
+    height: auto;
+    margin-left: 40px;
+    font-size: 13px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 40px;
+
+}
+
+.main-detail h2 {
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main-detail thead {
+    text-align: left;
+    border-radius: solid;
+
+}
+
+.main-detail thead th {
+    width: 250px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+table {
+    padding-left: 10px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    border-radius: 10px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: rgb(164, 199, 255);
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.main-detail tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; /* 테이블의 왼쪽 하단 모서리 */
+}
+
+.main-detail tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; /* 테이블의 오른쪽 하단 모서리 */
+}
+
+/* 내가 수정한 코드들 */
+
+.float-end {
+    float: right;
+}
+
+.request {
+    width: 85px;
+    height: 30px;
+    background-color: rgb(61, 135, 255);
+    color: #f2f2f2;
+    border-radius: 5px;
+    border: none;
+}
+
+.list th, td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+/*
+.list a{
+    color: white;
+    text-decoration: none;
+}*/
+.list tbody tr {
+    transition: background-color 0.3s ease; /* 배경색이 부드럽게 변화하도록 설정*/
+}
+
+.list tbody tr:hover {
+    background-color: #f0f0f0; /* 마우스를 올렸을 때의 배경색 설정 */
+}
+
+.product {
+    background-color: rgb(61, 135, 255);
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+}
+
+.search1 {
+    font-size: 15px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.search3 {
+    display: none;
+    font-size: 15px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.select1 {
+    width: 160px;
+    height: 34.5px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    line-height: 40px;
+    /* border: 1px solid #000; */
+    color: #000000;
+    text-align: center;
+}
+
+.select2 {
+    width: 160px;
+    height: 34.5px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    line-height: 40px;
+    /* border: 1px solid #000; */
+    color: #000000;
+    text-align: center;
+}
+
+.category1 {
+    display: flex;
+    justify-content: end;
+    position: relative;
+    width: 97%;
+    z-index: 3;
+
+
+}
+
+.listmenu {
+    display: flex;
+    justify-content: flex-end;
+    width: 96%;
+}
+
+.search2 {
+    float: right;
+    width: 400px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    line-height: 50px;
+    color: #727272;
+    padding-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.searchbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: rgb(61, 135, 255);
+    color: #f2f2f2;
+    margin-right: 10px;
+    border: none;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #000000;
+}
+
+/* .dropdownthree{
+  display: flex;
+  justify-content: center;
+align-items: center;
+  width : 100px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  margin-right: 45px;
+} */
+.windows {
+    /*background-image: url("../images/test.png");*/
+    /*background-size: cover;*/
+    width: 96%;
+    height: 400px;
+    background-color: #ffffff;
+    margin-top: 240px;
+    margin-left: 30px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    /* margin-right: 30px; */
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.stocktitle {
+    position: relative;
+    width: 200px;
+    color: #ffffff;;
+    z-index: 3;
+}
+
+.stocklist {
+    width: 97%;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.stocklist h1 {
+    color: #000000;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.stocklist thead {
+    background-color: rgb(164, 199, 255);
+}
+
+.form-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    margin-right: 5px;
+    text-align: center;
+    margin-left :0px ;
+}
+
+.windows table {
+    border-collapse: collapse;
+}
+
+.windows thead td {
+    padding: 1px;
+    margin: 1px;
+    text-align: center;
+
+}
+
+.windows tbody td {
+    width: 70px;
+    height: 30px;
+    border: 1px solid #000;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1px;
+}
+
+.windows h1 {
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#infoPrompt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 10px;
+    z-index: 9999;
+    display: none;
+}
+
+#test1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#test2 {
+    margin-inline: 50px;
+}
+
+#test3 {
+    margin-inline: 50px;
+}
+
+.modal-input {
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+.modal-input input {
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+    margin-left: 20px;
+    width: 350px;
+}
+
+.modal-header h1 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modal-minititle {
+    text-align: left;
+    width: 100%;
+    font-size: small;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.modal-dialog {
+    width: 400px;
+}
+
+.select-toggle select {
+    margin-bottom: 10px;
+    background-color: rgb(226, 226, 226);
+    border-color: white;
+    margin-left: 20px;
+    width: 350px;
+    text-align: center;
+    height: 40px;
+    border-radius: 5px;
+    color: #727272;
+}
+
+#myTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 200px;
+    float: left;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+#myTable th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    height: 42px;
+}
+
+#myTable td {
+    border: 1px solid black;
+    padding: 8px;
+    margin: 4px;
+    text-align: center;
+    height: 40px;
+    font-size: small;
+}
+.warehouse {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    transition: transform 1s ease;
+}
+
+.warehouse h2 {
+    color: #333;
+    margin-top: 0;
+}
+
+.capacity-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.capacity-bar .icon {
+    font-size: 24px;
+    margin: 0 10px;
+    color: #666;
+}
+
+.capacity-bar .bar {
+    height: 30px;
+    width: 200px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.capacity-bar .bar .fill {
+    background-color: #ffc107;
+    height: 100%;
+    width: 70%;
+    border-radius: 15px;
+    transition: width 0.5s ease;
+}
+
+
+@media (max-width: 768px) {
+    html, body {
+        width: 100%;
+        flex-direction: column; /* html과 body의 flex 방향을 수직으로 변경 */
+    }
+
+
+    /* 미디어쿼리 메인문 */
+    .main {
+        width: 100%; /* main의 너비를 화면 전체로 설정 */
+        position: relative; /* main의 위치를 상대적으로 설정 */
+        z-index: 2; /* 필요한 경우 z-index 조정 */
+        top: 20vw;
+    }
+
+    .main-detail {
+        width: 85%;
+        margin: 20px auto; /* 상하 마진은 20px, 좌우 마진은 자동으로 설정하여 중앙 정렬 */
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block; /* 블록 요소로 변환하여 세로로 쌓임 */
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin: 0 0 1rem 0; /* 각 행(카드)에 마진 추가 */
+        border: 1px solid #ddd; /* 행에 테두리 추가 */
+
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    }
+
+    td {
+        border-bottom: 1px solid #ddd; /* 각 데이터 아래 테두리 추가 */
+        position: relative;
+        padding: .625rem;
+        text-align: left;
+        padding-left: 50%;
+        border-bottom-left-radius: 0px;
+    }
+
+    td:before {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: .625rem;
+        font-weight: bold;
+        content: attr(data-label); /* 라벨 표시 */
+    }
+
+    .main-detail tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 0; /* 모서리 라운딩 제거 */
+    }
+
+    .main-detail tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 0;
+    }
+
+    .main-detail h2 {
+        margin-bottom: 15px;
+    }
+
+    /* 미디어 쿼리 내가 수정한 코드들 */
+    .windows {
+        width: 100%;
+        height: auto;
+        background-color: #ffffff;
+        margin-top: 240px;
+        margin-left: 0px;
+        /* margin-right: 30px; */
+        border-radius: 10px;
+    }
+
+    .search2 {
+        width: 200px;
+    }
+
+    .windows tr {
+        display: flex;
+        flex-direction: row;
+        border: none;
+        box-shadow: none;
+    }
+
+    .windows td {
+        width: 100%;
+        height: 30px;
+        padding: 0px;
+        margin: 1px;
+        border: none;
+    }
+
+    .searchBtn {
+        width: 80px;
+    }
+}
+  
+
+ 

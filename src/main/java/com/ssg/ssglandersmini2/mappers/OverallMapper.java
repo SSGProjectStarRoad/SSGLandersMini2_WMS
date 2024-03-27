@@ -18,6 +18,9 @@ public interface OverallMapper {
     int getIncomingBeforeCount();
     int getIncomingArriveCount();
 
+    int getOutcomingBeforeCount();
+    int getOutcomingArriveCount();
+
     int getNotApprovalIncomingCount();
     int getNotApprovalOutcomingCount();
 

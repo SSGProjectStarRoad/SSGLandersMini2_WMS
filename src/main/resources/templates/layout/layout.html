@@ -18,6 +18,17 @@
 
 </head>
 <body>
+<div class="nav-role animatedr">
+    <i class="bi bi-person-vcard nav-link active">총관리자</i>
+<!--    <i class="bi bi-person-vcard nav-link active">창고관리자</i>-->
+</div>
+<div class="nav-logout animatedr">
+    <a th:href="@{/}">
+    <i class="bi bi-escape nav-link active">로그아웃</i>
+    </a>
+</div>
+
+<!--            role에 따라 문자 들어가게해주세여-->
 <div class="left-div animatedl">
     <div class="imag-div">
         <img class="nav-img" th:src="@{/images/v62_560.png}" alt="errorimg" />
@@ -38,7 +49,11 @@
             <span class="nav-menu">입고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-plus"></i>
-                <a class="nav-link" href="#">입고현황</a>
+                <a class="nav-link" th:href="@{/ssglanders/inRegister}">입고등록</a>
+            </li>
+            <li class="nav-item">
+                <i class="bi bi-calendar-plus"></i>
+                <a class="nav-link" th:href="@{/ssglanders/inList}">입고현황</a>
             </li>
             <span class="nav-menu">출고</span>
             <li class="nav-item">
@@ -48,17 +63,21 @@
             <span class="nav-menu">재고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-range"></i>
-                <a class="nav-link" href="#">재고현황</a>
+                <a class="nav-link" th:href="@{/ssglanders/stock}">재고현황</a>
             </li>
             <span class="nav-menu">창고</span>
             <li class="nav-item">
                 <i class="bi bi-calendar-week"></i>
-                <a class="nav-link" href="#">창고관리</a>
+                <a class="nav-link" th:href="@{/ssglanders/warehouse}">창고관리</a>
             </li>
             <span class="nav-menu">승인</span>
             <li class="nav-item">
                 <i class="bi bi-calendar2-check"></i>
-                <a class="nav-link" href="#">승인관리</a>
+                <a class="nav-link" th:href="@{/ssglanders/inApproval}">입고승인</a>
+            </li>
+            <li class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <a class="nav-link" th:href="@{/ssglanders/outApproval}">출고승인</a>
             </li>
             <span class="nav-menu">내 정보</span>
             <li class="nav-item">
@@ -78,15 +97,60 @@
 
 </div>
 
-<div layout:fragment="modal1">
+
+<div layout:fragment="modal">
 
 </div>
+
+<div layout:fragment="modal1">
+</div>
+
+
 
 <div layout:fragment="modal2">
 
 </div>
 
-<div layout:fragment="modal1">
+<div layout:fragment="modal3">
+
+</div>
+
+<div layout:fragment="modal4">
+
+</div>
+
+<div layout:fragment="modal5">
+
+</div>
+
+<div layout:fragment="modal6">
+
+</div>
+
+<div layout:fragment="modal10">
+</div>
+
+<div layout:fragment="modal11">
+
+</div>
+
+<div layout:fragment="modal41">
+</div>
+
+
+<div layout:fragment="modal42">
+
+</div>
+
+
+<div layout:fragment="modal43">
+
+</div>
+
+<div layout:fragment="modal45">
+
+</div>
+<div layout:fragment="modal60">
 
 </div>
 
@@ -99,5 +163,8 @@
 
 <th:block layout:fragment="script" >
 </th:block>
+
 </body>
 </html>
+
+

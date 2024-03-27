@@ -12,7 +12,7 @@ public class Warehouse {
     private long wid;
     private String warehousetype;
     private String address;
-    private long capacity;
-    private long usingcapacity;
+    private int capacity;
+    private int usingcapacity;
     private String wname;
 }
