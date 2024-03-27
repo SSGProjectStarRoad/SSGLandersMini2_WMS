@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/userlist.css}"/>
+    <link rel="stylesheet" th:href="@{/js/userlist.js}"/>
+    <script th:src="@{/js/userlist.js}"></script>
+    <script src="../../static/js/userlist.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+<div class="modal" id="myModal" aria-hidden="true"
+     th:style="'display: none; z-index: 1050; background-color: transparent;'">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">회원정보 수정</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                <div class="modal-minititle">
+                    아이디
+                </div>
+                <div class="modal-input">
+                    <input id="username" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1" name="username" readonly>
+                </div>
+                <div class="modal-minititle">
+                    비밀번호
+                </div>
+                <div class="modal-input">
+                    <input id="password" type="password" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1" readonly/>
+                </div>
+                <div class="modal-minititle">
+                    이름
+                </div>
+                <div class="modal-input">
+                    <input id="name" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="modal-minititle">
+                    전화번호(-제외)
+                </div>
+                <div class="modal-input">
+                    <input id="telnum" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="modal-minititle">
+                    주소
+                </div>
+                <div class="modal-input">
+                    <input id="address" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn-update">완료</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="left-div">
+    <div class="imag-div">
+        <img class="nav-img" th:src="@{/images/v62_560.png}" alt="errorimg"/>
+    </div>
+    <div class="mobile-nav-toggle">
+        <i class="bi bi-list"></i>
+    </div>
+    <div class="nav-div">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <i class="bi bi-grid"></i>
+                <a class="nav-link active" aria-current="page" href="#">메인페이지</a>
+            </li>
+            <span class="nav-menu">입고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-plus"></i>
+                <a class="nav-link" href="#">입고현황</a>
+            </li>
+            <span class="nav-menu">출고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-minus"></i>
+                <a class="nav-link" href="#">출고현황</a>
+            </li>
+            <span class="nav-menu">재고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-range"></i>
+                <a class="nav-link" href="#">재고현황</a>
+            </li>
+            <span class="nav-menu">창고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-week"></i>
+                <a class="nav-link" href="#">창고관리</a>
+            </li>
+            <span class="nav-menu">승인</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <a class="nav-link" href="#">승인관리</a>
+            </li>
+            <span class="nav-menu">회원</span>
+            <li class="nav-item">
+                <i class="bi bi-person"></i>
+                <a class="nav-link" href="#">회원수정</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<div class="main">
+    <div class="main-background"></div>
+    <form action="${contextPath }/board/review" method="get" id="searchFoam" name="search-form">
+        <div class="main-box">
+            <h1>회원 관리</h1>
+            <div class="main-stateboxes">
+                <div class="search-toggle">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>---</option>
+                        <option value="1">아이디</option>
+                        <option value="2">이름</option>
+                        <option value="3">권한</option>
+                        <option value="4">주소</option>
+                        <option value="5">전화번호</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="search" class="form-control" name="keyword" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="input-btn">
+                    <button type="button" class="btn primary-btn">검색</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="content-down">
+    </div>
+    <div class="table-way">
+        <div class="main-detail">
+            <h2>회원 조회</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>권한</th>
+                    <th>이름</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                <!-- Thymeleaf 문법으로 변환 -->
+                <tbody>
+                <tr th:each="dto : ${responseDTO.dtoList}">
+                    <td th:text="${dto.username}">Username</td>
+                    <td th:text="${dto.password}">Password</td>
+                    <td th:text="${dto.usertype}">Usertype</td>
+                    <td th:text="${dto.name}">Name</td>
+                    <td th:text="${dto.address}">Address</td>
+                    <td th:text="${dto.telnum}">Telnum</td>
+
+                    <td data-label="수정">
+                        <button class="btn btn-primary edit-btn"
+                                th:data-username="${dto.username}"
+                                th:data-password="${dto.password}"
+                                th:data-name="${dto.name}"
+                                th:data-telnum="${dto.telnum}"
+                                th:data-address="${dto.address}">
+                            수정
+                        </button>
+                    </td>
+
+                    <td data-label="삭제">
+                        <button data-toggle="modal" href="#myModal2" class="btn btn-primary confirmDelete"
+                                th:data-username="${dto.username}">삭제
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- 페이지네이션 -->
+            <div class="float-end">
+                <ul class="pagination flex-wrap">
+
+                    <li class="page-item" th:if="${responseDTO.prev}">
+                        <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+                    </li>
+
+                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                        <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">
+                            <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                        </li>
+                    </th:block>
+
+                    <li class="page-item" th:if="${responseDTO.next}">
+                        <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        // 검색 버튼 클릭 시
+        $('.primary-btn').on('click', function () {
+            // 선택된 검색 조건과 검색어 가져오기
+            var searchType = $('.form-select').val();
+            var keyword = $('input[name="keyword"]').val();
+
+            // AJAX를 이용하여 검색 요청 보내기
+            $.ajax({
+                type: 'GET',
+                url: '/user/search',
+                data: {
+                    searchType: searchType,
+                    keyword: keyword
+                },
+                success: function (response) {
+                    // 검색 결과를 받아서 리스트 목록에 표시
+                    displaySearchResults(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error("검색 중 오류 발생:", error);
+                    alert("검색 중 오류가 발생했습니다. 다시 시도해주세요.");
+                }
+            });
+        });
+
+        // 검색 결과를 리스트 목록에 표시하는 함수
+        function displaySearchResults(results) {
+            // 결과를 받아와서 리스트 목록에 추가하는 코드를 작성
+            var resultList = $('.content-down');
+            resultList.empty(); // 이전 검색 결과 지우기
+
+            if (results.length === 0) {
+                resultList.append('<p>검색 결과가 없습니다.</p>');
+            } else {
+                var tableHtml = '<table><thead><tr><th>아이디</th><th>비밀번호</th><th>권한</th><th>이름</th><th>주소</th><th>전화번호</th><th>수정</th><th>삭제</th></tr></thead><tbody>';
+
+                // 각 결과를 테이블에 추가
+                results.forEach(function (result) {
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + result.username + '</td>';
+                    tableHtml += '<td>' + result.password + '</td>';
+                    tableHtml += '<td>' + result.usertype + '</td>';
+                    tableHtml += '<td>' + result.name + '</td>';
+                    tableHtml += '<td>' + result.address + '</td>';
+                    tableHtml += '<td>' + result.telnum + '</td>';
+                    tableHtml += '<td><button class="btn btn-primary edit-btn" data-username="' + result.username + '">수정</button></td>';
+                    tableHtml += '<td><button class="btn btn-primary confirmDelete" data-username="' + result.username + '">삭제</button></td>';
+                    tableHtml += '</tr>';
+                });
+
+                tableHtml += '</tbody></table>';
+                resultList.append(tableHtml);
+            }
+        }
+
+    //회원정보 수정
+        // "수정" 버튼 클릭 시 모달 열고 원래 정보 표시
+        var editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var username = this.dataset.username;
+                var password = this.dataset.password;
+                var name = this.dataset.name;
+                var telnum = this.dataset.telnum;
+                var address = this.dataset.address;
+                // 모달에 가져온 사용자 정보 표시
+                fillModalWithData(username, password, name, telnum, address);
+            });
+        });
+
+
+        // 수정 완료 버튼의 클릭 이벤트 핸들러 추가
+        $(document).on('click', '#btn-update', function () {
+            // 수정된 정보 가져오기
+            // var username = $('#username').val();
+            // var password = $('#password').val();
+            var name = $('#name').val();
+            var telnum = $('#telnum').val();
+            var address = $('#address').val();
+
+            // 수정된 정보를 객체로 만듦
+            var userData = {
+                // username: username,
+                // password: password,
+                name: name,
+                telnum: telnum,
+                address: address
+            };
+
+            // AJAX 요청으로 서버의 update 컨트롤러 호출
+            $.ajax({
+                url: '/user/update', // 서버의 URL. 필요에 따라 수정하세요.
+                type: 'POST',
+                contentType: 'application/json', // JSON 형식의 데이터 전송을 명시
+                data: JSON.stringify(userData), // JavaScript 객체를 JSON 문자열로 변환
+                success: function (response) {
+                    // 성공적으로 수정되면 페이지를 새로고침하거나 사용자에게 알림
+                    alert('사용자 정보가 성공적으로 수정되었습니다.');
+                    location.reload(); // 또는 다른 로직 구현
+                },
+                error: function (error) {
+                    // 오류 처리
+                    console.error('수정 실패:', error);
+                    alert('사용자 정보 수정 실패');
+                }
+            });
+        });
+
+        // 모달에 데이터를 채우는 기능
+        function fillModalWithData(username, password, name, telnum, address) {
+            // 모달의 입력 필드에 데이터를 채웁니다.
+            $('#username').val(username);
+            $('#password').val(password);
+            $('#name').val(name);
+            $('#telnum').val(telnum);
+            $('#address').val(address);
+
+
+            // Show the modal
+            $('#myModal').modal('show');
+        }
+
+        // 회원 삭제 버튼 클릭 시
+        $('.confirmDelete').on('click', function () {
+            console.log("========================================")
+            var username = $(this).data('username');
+
+            $.ajax({
+                type: 'POST',
+                url: '/user/delete',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "username": username
+                }),
+                success: function (response) {
+                    alert("사용자가 성공적으로 삭제되었습니다.");
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("사용자 삭제 에러:", error);
+                    alert("사용자 삭제에 실패했습니다. 다시 시도해주세요.");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $(".pagination").on("click", "a", function (e) {
+                e.preventDefault(); // 기본 이동 방지
+
+                const num = $(this).data("num"); // 클릭된 페이지 번호
+                const currentUrl = window.location.href;
+                const newUrl = updateQueryStringParameter(currentUrl, 'page', num); // 페이지 번호를 업데이트한 새 URL 생성
+
+                window.location.href = newUrl; // 새 URL로 페이지 이동
+            });
+        });
+
+// URL의 쿼리 스트링 파라미터를 업데이트하는 함수
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        }
+
+    });
+</script>
+
+<!-- jQuery 라이브러리 추가 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JavaScript 추가 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+

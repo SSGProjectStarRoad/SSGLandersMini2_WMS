@@ -45,26 +45,31 @@ public class IncomingServiceImpl implements IncomingService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public PageResponseDTO<IncomingListDTO> getIncomingList(PageRequestDTO pageRequestDTO) {
-        List<Incoming> list = incomingMapper.selectIncomingList(pageRequestDTO);
-
-        List<IncomingListDTO> dtoList = list.stream()
-                .map(vo -> modelMapper.map(vo, IncomingListDTO.class)).collect(Collectors.toList());
-
-        dtoList.forEach(dto -> modelMapper.map(
-                productMapper.getProductByPid(dto.getPid()), dto));
-
-
-        int total = incomingMapper.getCount(pageRequestDTO);
-
-
-        return PageResponseDTO.<IncomingListDTO>All()
-                .pageRequestDTO(pageRequestDTO)
-                .dtoList(dtoList)
-                .total(total)
-                .build();
+        return null;
     }
+
+//    @Override
+//    @Transactional(readOnly = true)
+//    public PageResponseDTO<IncomingListDTO> getIncomingList(PageRequestDTO pageRequestDTO) {
+//        List<Incoming> list = incomingMapper.selectIncomingList(pageRequestDTO);
+//
+//        List<IncomingListDTO> dtoList = list.stream()
+//                .map(vo -> modelMapper.map(vo, IncomingListDTO.class)).collect(Collectors.toList());
+//
+//        dtoList.forEach(dto -> modelMapper.map(
+//                productMapper.getProductByPid(dto.getPid()), dto));
+//
+//
+//        int total = incomingMapper.getCount(pageRequestDTO);
+//
+//
+//        return PageResponseDTO.<IncomingListDTO>All()
+//                .pageRequestDTO(pageRequestDTO)
+//                .dtoList(dtoList)
+//                .total(total)
+//                .build();
+//    }
 
 }
 

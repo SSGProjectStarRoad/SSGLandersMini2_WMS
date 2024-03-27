@@ -44,17 +44,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageResponseDTO<ProductDTO> getProductList(PageRequestDTO pageRequestDTO) {
-        List<Product> list = productMapper.selectProductList(pageRequestDTO);
-        List<ProductDTO> dtoList = list.stream()
-                .map(vo->modelMapper.map(vo, ProductDTO.class)).toList();
-
-        int total = productMapper.getCount(pageRequestDTO);
-
-
-        return PageResponseDTO.<ProductDTO>All()
-                .dtoList(dtoList)
-                .total(total)
-                .pageRequestDTO(pageRequestDTO)
-                .build();
+        return null;
     }
+
+//    @Override
+//    public PageResponseDTO<ProductDTO> getProductList(PageRequestDTO pageRequestDTO) {
+//        List<Product> list = productMapper.selectProductList(pageRequestDTO);
+//        List<ProductDTO> dtoList = list.stream()
+//                .map(vo->modelMapper.map(vo, ProductDTO.class)).toList();
+//
+//        int total = productMapper.getCount(pageRequestDTO);
+//
+//
+//        return PageResponseDTO.<ProductDTO>All()
+//                .dtoList(dtoList)
+//                .total(total)
+//                .pageRequestDTO(pageRequestDTO)
+//                .build();
+//    }
 }

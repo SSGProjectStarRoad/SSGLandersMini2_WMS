@@ -32,6 +32,7 @@ public class PageRequestDTO {
 
     private String link;
     private String keyword;
+
     public String getLink() {
         if (link == null) {
             StringBuilder builder = new StringBuilder();
@@ -43,12 +44,13 @@ public class PageRequestDTO {
     }
 
     // 검색 유형이 주어진 유형과 일치하는지 확인하는 메서드
-    public boolean checkType(String type) {
-        if (types == null || types.length == 0) {
-            return false;
-        }
-        return Arrays.stream(types).anyMatch(type::equals);
-    }
-
+//    public boolean checkType(String type) {
+//        if (types == null || types.length == 0) {
+//            return false;
+//        }
+//        return Arrays.stream(types).anyMatch(type::equals);
+//    }
+//
+//}
 }
 
