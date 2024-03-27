@@ -205,6 +205,7 @@ ul.value {
 .modal-input {
   margin-bottom: 10px;
   height: 40px;
+  
   width: 350px;
   display: flex;
   white-space: nowrap;
@@ -554,11 +555,14 @@ tr:nth-child(even) {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 
 >>>>>>> ada423a (입고 관련 기능 구현)
+=======
+>>>>>>> 6724a6b (메인 브랜치 -> 입고 관련 기능 구현)
   /* 위에 검색이랑 버튼들 */
 
   .input-box {
