@@ -50,6 +50,7 @@ public class OutcomingServiceImpl implements OutcomingService {
                 .total(total)
                 .pageRequestDTO(pageRequestDTO)
                 .build();
+
         return pageResponseDTO;
     }
 
@@ -58,6 +59,10 @@ public class OutcomingServiceImpl implements OutcomingService {
 
         Outcoming outcoming = outcomingMapper.getOutcomingByOid(oid);
         DetailsDTO detailsDTO = modelMapper.map(outcoming, DetailsDTO.class);
+
+        if(detailsDTO.getWid() == null) {
+            // 처리할 내용을 여기에 작성합니다.
+        }
 
         // 승인완료일때 다 매핑
         if(outcoming.getApproval().equals("승인완료")){
@@ -80,25 +85,25 @@ public class OutcomingServiceImpl implements OutcomingService {
             detailsDTO.setDestination("미등록");
             detailsDTO.setDate(null);
             detailsDTO.setSname("미등록");
-            detailsDTO.setQr(null);
             detailsDTO.setApproval("승인대기");
         }
-
-
-
         return detailsDTO;
     }
 
     @Override
     public void modifyStatus(long value, long oid){
         String status;
-        if(value == 2){
+        if(outcomingMapper.selectOutcomingApprovalByOid(oid).equals("승인대기")){
+            outcomingMapper.updateOutcomingStatusByValue(null,oid);
+        }
+        else if(value == 2){
             status = "출고후";
+            outcomingMapper.updateOutcomingStatusByValue(status,oid);
         }
         else {
             status="츨고전";
+            outcomingMapper.updateOutcomingStatusByValue(status,oid);
         }
-        outcomingMapper.updateOutcomingStatusByValue(status,oid);
     }
 
     @Override
@@ -122,6 +127,69 @@ public class OutcomingServiceImpl implements OutcomingService {
     @Override
     public void removeOutcomingByOid(long oid){
         outcomingMapper.deleteOutcomingByOid(oid);
+    }
+
+    @Override
+    public PageResponseDTO<OutcomingListDTO> getApprovalList(PageRequestDTO pageRequestDTO) {
+
+        // outcoming 리스트
+        List<Outcoming> voList = outcomingMapper.selectOutcomingNoApprovalList(pageRequestDTO);
+
+        // dto리스트에 outcoming 내용 넣음
+        List<OutcomingListDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, OutcomingListDTO.class))
+                .collect(Collectors.toList());
+
+        // dto리스트에 상품 name 내용 넣음
+        dtoList.forEach(dto -> dto.setName(outcomingMapper.getProductNameByPid(dto.getPid())));
+
+        // dto리스트에 wid 이용해서 창고 이름 가져오기
+        dtoList.forEach(dto -> dto.setWarehousetype(outcomingMapper.getWarehouseTypeByWid(dto.getWid())));
+
+        // 전체갯수 가져오기
+        int total = outcomingMapper.getApprovalCount(pageRequestDTO);
+
+
+        PageResponseDTO<OutcomingListDTO> pageResponseDTO = PageResponseDTO.<OutcomingListDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+        return pageResponseDTO;
+    }
+
+    @Override
+    public long getLastWbidRegisterWaybill(String destination, String date, long sid){
+
+        // 운송장 등록
+        outcomingMapper.insertWaybill(destination, date, sid);
+
+        // 현재 라스트 wbid 반환
+        return outcomingMapper.selectWaybillWbidLast();
+    }
+
+    @Override
+    public void modifyOutcomingWbidByOid(long oid, long wbid){
+        outcomingMapper.insertOutcomingWbidByOid(oid,wbid);
+    }
+
+    @Override
+    public void modifyOutcomingApprovalByOid(long oid){
+        outcomingMapper.updateOutcomingApprovalByOid(oid);
+    }
+
+    @Override
+    public void registerOutcomingByNameWnameQuantity(String name, String wname, long quantity){
+
+        // pid 갖고 오기
+        long pid = outcomingMapper.selectProductPidByName(name);
+
+        // wid 갖고 오기
+        long wid = outcomingMapper.selectWarehouseWidByWname(wname);
+
+        outcomingMapper.insertOutcoming(pid,wid,quantity);
+
+
     }
 
 

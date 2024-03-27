@@ -13,11 +13,12 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/ssglanders")
@@ -33,7 +34,13 @@ public class OutcomingController {
             DetailsDTO detailsDTO = outcomingService.getDetails(oid);
             model.addAttribute("detail", detailsDTO);
             //oid의 waybill 정보
-            Waybill waybill = outcomingService.getWaybill(oid);
+            Waybill waybill = Optional.ofNullable(outcomingService.getWaybill(oid)).orElse(Waybill.builder()
+                            .wbid(0l)
+                            .destination("미등록")
+                            .date(LocalDate.of(2000,01,01))
+                            .sid(0l)
+
+                    .build());
             model.addAttribute("waybill", waybill);
 
             Shippingcompany shippingcompany = outcomingService.getShippingcompanyByWbid(waybill.getWbid());
@@ -57,43 +64,102 @@ public class OutcomingController {
         return "redirect:/ssglanders/outList";
     }
 
-    @PostMapping("/status")
-    public String handleStatusRequest(@RequestParam("selectedValue") String selectedValue
-            , @RequestParam("selectedOid") Long oid) {
-        // 선택된 값에 대한 처리
-        log.info("Selected value:$$$$$$$$$$$$$$$ " + selectedValue);
-        log.info("oid " + oid);
 
-        outcomingService.modifyStatus(Long.parseLong(selectedValue), oid);
 
-        return "redirect:/ssglanders/outList";
+
+
+
+
+//    출고승인
+    @GetMapping("/outApproval")
+    public void approvalList(@RequestParam(name = "oid", required = false) Long oid, PageRequestDTO pageRequestDTO, Model model){
+        PageResponseDTO<OutcomingListDTO> pageResponseDTO = outcomingService.getApprovalList(pageRequestDTO);
+        log.info(pageResponseDTO+"=========페이지 리퀘스트========");
+        log.info(oid+"get에서 받은거!!!");
+        model.addAttribute("responseDTO",pageResponseDTO);
+        model.addAttribute("oid",oid);
     }
 
-    @PostMapping("/modifyShipping")
-    public String modifyShipping(@RequestParam("selectShipping") long selectShipping,
-                                 @RequestParam("wbid") long wbid){
+//    @PostMapping("/outApproval")
+//    public String approvalClick(@RequestParam(name = "oid", required = false) Long oid, RedirectAttributes redirectAttributes){
+//        redirectAttributes.addAttribute("oid", oid);
+//        log.info(oid + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//        return "redirect:/ssglanders/outApproval";
+//    }
 
-        outcomingService.modifyWaybillSidByWbidAndSid(wbid,selectShipping);
+    @PostMapping("/outApproval")
+    public String approvalClick(@RequestParam(name = "oid", required = false) Long oid,
+                                @RequestParam(name = "page", required = false) Long page ,RedirectAttributes redirectAttributes){
+        redirectAttributes.addAttribute("oid", oid);
+        log.info(page + "페이지~~@###@@#@$");
+        log.info(oid + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        return "redirect:/ssglanders/outApproval?page="+page.toString();
+    }
+
+    @PostMapping("/status")
+    @ResponseBody
+    public String handleStatusRequest(@RequestBody Map<String, String> request) {
+
+        String oid = request.get("oid");
+        String status = request.get("status");
+
+        log.info(oid+"여기다");
+        log.info(status+"여기야");
+
+        outcomingService.modifyStatus(Long.parseLong(status), Long.parseLong(oid));
 
         return "redirect:/ssglanders/outList";
     }
 
     @PostMapping("/removeOid")
-    public String removeOid(@RequestParam("oid") long oid){
+    @ResponseBody
+    public void removeOid(@RequestBody Map<String, String> request){
 
-        log.info(oid+"삭제할 oid !!!");
-        outcomingService.removeOutcomingByOid(oid);
+        String oid = request.get("oid");
+        outcomingService.removeOutcomingByOid(Long.parseLong(oid));
 
-        return "redirect:/ssglanders/outList";
     }
 
-//    출고승인
-    @GetMapping("/outApproval")
-    public void approvalList(@RequestParam(name = "oid", required = false) Long oid, PageRequestDTO pageRequestDTO, Model model){
-        PageResponseDTO<OutcomingListDTO> pageResponseDTO = outcomingService.getList(pageRequestDTO);
-        log.info(pageResponseDTO+"=========페이지 리퀘스트========");
-
-        model.addAttribute("responseDTO",pageResponseDTO);
+    @PostMapping("/modifyShipping")
+    @ResponseBody
+    public void modifyShipping(@RequestBody Map<String, String> request){
+        String wbid = request.get("wbid");
+        String sid = request.get("sid");
+        outcomingService.modifyWaybillSidByWbidAndSid(Long.parseLong(wbid),Long.parseLong(sid));
+        log.info("wbid = "+wbid);
+        log.info("sid = "+sid);
     }
+
+    @PostMapping("/registerWay")
+    @ResponseBody
+    public void registerWay1(@RequestBody Map<String, String> request) {
+        String uponNum = request.get("uponNum");
+        String userAdd1 = request.get("userAdd1");
+        String userAdd2 = request.get("userAdd2");
+        String oid = request.get("oid");
+
+        String fullAddress = uponNum+" "+userAdd1+" "+userAdd2;
+        String date = request.get("date");
+        String tekbe = request.get("tekbe");
+
+        log.info(fullAddress);
+        log.info(oid+" oid");
+        log.info(tekbe+" 택배");
+
+        //라스트 wbid가져오기
+        long wbid = outcomingService.getLastWbidRegisterWaybill(fullAddress,date,Long.parseLong(tekbe));
+        //outcoming에 wbid부여
+        outcomingService.modifyOutcomingWbidByOid(Long.parseLong(oid),wbid);
+        //승인완료
+        outcomingService.modifyOutcomingApprovalByOid(Long.parseLong(oid));
+
+
+    }
+
+
+
+
+
 
 }
