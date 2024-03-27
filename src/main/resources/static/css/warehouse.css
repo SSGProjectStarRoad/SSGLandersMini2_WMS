@@ -457,7 +457,8 @@ tr:nth-child(even) {
 
 .float-end{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
 
 

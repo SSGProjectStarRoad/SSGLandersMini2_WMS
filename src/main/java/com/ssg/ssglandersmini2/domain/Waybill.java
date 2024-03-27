@@ -16,5 +16,4 @@ public class Waybill {
     private String destination;
     private LocalDate date;
     private long sid;
-    private Blob qr; // Blob 데이터를 위한 필드
 }

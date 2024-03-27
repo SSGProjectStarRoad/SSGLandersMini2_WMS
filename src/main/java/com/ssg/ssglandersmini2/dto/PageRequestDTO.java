@@ -13,8 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Arrays;
 
-
-
 // PageRequestDTO 클래스는 페이지 요청 정보를 전달하기 위한 데이터 전송 객체(DTO)입니다.
 
 // @Builder 어노테이션은 빌더 패턴을 사용하여 객체를 생성하는 데 도움을 줍니다.
@@ -53,6 +51,7 @@ public class PageRequestDTO {
     private String keyword;
 
 
+
     // 완료 여부를 나타내는 필드
     private boolean finished;
 
@@ -68,11 +67,11 @@ public class PageRequestDTO {
 
 //    private List<>
 
+
     // 페이지당 건너뛸 항목 수를 계산하는 메서드
     public int getSkip(){
         return (page-1) * 10;
     }
-
 
 
     // 링크 정보를 반환하는 메서드
@@ -94,6 +93,8 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
 }
+
 
 

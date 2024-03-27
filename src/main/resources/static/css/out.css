@@ -127,6 +127,11 @@ body {
   background-color: white;
 }
 
+.page-item.active .page-link {
+  background-color: blue;
+  color: white; /* 텍스트 색상을 흰색으로 설정합니다. */
+}
+
 
 
 .input-box {
@@ -245,6 +250,8 @@ button {
 
 }
 
+
+
 .right-way {
   background-color: white;
   width: 350px;
@@ -267,7 +274,7 @@ button {
   width: 400px;
   height: 550px;
   border-radius: 5px;
-  /* margin-top: 30px; */
+   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,7 +284,7 @@ button {
   margin-left: 30px;
   overflow: auto;
   overflow-x: hidden;
-  padding-top: 140px;
+  padding-top: 100px;
 
 }
 
@@ -353,6 +360,7 @@ tr:nth-child(even) {
   /* 테이블의 오른쪽 하단 모서리 */
 }
 
+
 /* 테이블 끝 */
 
 .content-down {
@@ -373,6 +381,16 @@ tr:nth-child(even) {
 .table-div table thead tr th {
   border: white;
 }
+
+/*페이지*/
+
+
+.page-link:hover {
+  background-color: #007bff; /* 페이지 번호에 마우스를 올렸을 때 배경색 */
+  border-color: #007bff;
+  color: #fff; /* 페이지 번호에 마우스를 올렸을 때 텍스트 색상 */
+}
+
 
 
 
@@ -450,6 +468,12 @@ tr:nth-child(even) {
   background-color: rgb(226, 226, 226);
   border-color: white;
 }
+.waybill-content-right select {
+  background-color: rgb(226, 226, 226);
+  border-color: white;
+  width: 100%;
+  margin-left: -0px;
+}
 
 .waybill-content button {
   margin-top: 30px;
@@ -488,6 +512,19 @@ tr:nth-child(even) {
   margin-top: 5px;
 }
 
+.right-div2 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.right-div2 select{
+  width: 350px;
+  background-color: rgb(226, 226, 226);
+  margin-left: 20px;
+  margin-bottom: 10px;
+
+}
 
 
 .right-text {
@@ -537,17 +574,20 @@ tr:nth-child(even) {
 
 
 
-.select-toggle-way-modal select{
-  margin-bottom: 10px;
-  background-color: rgb(226, 226, 226);
-  border-color: white;
-  margin-left: 20px;
-  width: 350px;
-  text-align: center;
-  height: 40px;
-  border-radius: 5px;
-  padding-right: 4px;
-}
+/*.waybill-content-right select{*/
+/*  margin-bottom: 10px;*/
+/*  background-color: rgb(226, 226, 226);*/
+/*  border-color: white;*/
+/*  margin-left: -20px;*/
+/*  width: 250px;*/
+/*  text-align: center;*/
+/*  height: 40px;*/
+/*  border-radius: 5px;*/
+
+/*  !*padding-right: 4px;*!*/
+/*}*/
+
+
 
 .modal-footer{
   background-color: white;
@@ -732,7 +772,7 @@ tr:nth-child(even) {
     margin-left: 30px;
     /* overflow: scroll; */
     /* overflow-x: hidden; */
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     margin-left: 43px;
     /*border: 1px solid 1px;*/
     margin-bottom: 50px;
