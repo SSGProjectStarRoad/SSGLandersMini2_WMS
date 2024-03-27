@@ -1,6 +1,6 @@
 @keyframes slideInFromLeft {
     from {
-        transform: translateX(-100%);
+        transform: translateX(-10%);
         opacity: 0;
     }
     to {
@@ -11,13 +11,13 @@
 
 .animatedl{
     animation-name: slideInFromLeft;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-fill-mode: both;
 }
 
 @keyframes slideInFromTop {
     from {
-        transform: translateY(-100%);
+        transform: translateY(-10%);
         opacity: 0;
     }
     to {
@@ -28,13 +28,13 @@
 
 .animatedt {
     animation-name: slideInFromTop;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: both;
 }
 
 @keyframes slideInFromRight {
     from {
-        transform: translateX(100%);
+        transform: translateX(10%);
         opacity: 0;
     }
     to {
@@ -45,7 +45,7 @@
 
 .animatedr {
     animation-name: slideInFromRight;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: both;
 }
 
@@ -72,7 +72,13 @@
 .nav-role {
     width: 150px;
     position: absolute;
-    right : 50px;
+    right : 100px;
+    z-index: 999;
+}
+.nav-logout {
+    width: 150px;
+    position: absolute;
+    right : 10px;
     z-index: 999;
 }
 
@@ -187,6 +193,10 @@
     color: black;
     margin-top: 7px;
 }
+.bi-escape{
+    color: black;
+    margin-top: 7px;
+}
 
 .nav-menu{
     color: black;
@@ -226,7 +236,8 @@
         flex-direction: column; /* 세로 정렬 */
         width: 100%; /* 너비를 화면 전체로 설정 */
         height: 20vw;
-        z-index: 1040; /* z-index 조정 */
+        z-index: 990; /* z-index 조정 */
+        right: 0;
         align-items: center; /* 가운데 정렬 */
     }
 
@@ -242,7 +253,7 @@
         /* Rest of your styling */
     }
     .nav-div {
-        height: 395px;
+        height: 435px;
         display: flex; /* 항상 flex로 설정하여 항목들이 나타나게 합니다 */
         flex-direction: row;
         width: 100%; /* 너비를 화면 전체로 설정 */
