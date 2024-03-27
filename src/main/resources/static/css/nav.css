@@ -11,7 +11,7 @@
 
 .animatedl{
     animation-name: slideInFromLeft;
-    animation-duration: 0.3s;
+    animation-duration: 0.8s;
     animation-fill-mode: both;
 }
 
@@ -28,7 +28,7 @@
 
 .animatedt {
     animation-name: slideInFromTop;
-    animation-duration: 0.5s;
+    animation-duration: 0.8s;
     animation-fill-mode: both;
 }
 
@@ -45,7 +45,7 @@
 
 .animatedr {
     animation-name: slideInFromRight;
-    animation-duration: 0.5s;
+    animation-duration: 0.8s;
     animation-fill-mode: both;
 }
 
@@ -62,7 +62,7 @@
 
 .animatednav {
     animation-name: slideNav;
-    animation-duration: 0.5s;
+    animation-duration: 0.8s;
     animation-fill-mode: both;
 }
 
