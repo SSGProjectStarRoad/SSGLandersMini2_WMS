@@ -5,11 +5,13 @@ import com.ssg.ssglandersmini2.dto.PageResponseDTO;
 import com.ssg.ssglandersmini2.dto.WarehouseDTO;
 import com.ssg.ssglandersmini2.mappers.WarehouseMapper;
 import com.ssg.ssglandersmini2.service.interfaces.WarehouseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,7 +27,13 @@ public class WarehouseController {
 
 
     @GetMapping("/warehouse")
-    public String list(PageRequestDTO pageRequestDTO, Model model) {
+    public String list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            // 유효성 검사에 실패한 경우, 페이지 요청 DTO를 새로 생성하여 사용
+            pageRequestDTO = PageRequestDTO.builder().build();
+        }
+
         PageResponseDTO<WarehouseDTO> responseDTO = warehouseService.listWarehouse(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
         return "ssglanders/warehouse"; // 검색 결과를 보여줄 뷰 페이지 경로
@@ -34,12 +42,12 @@ public class WarehouseController {
 
 
 
-    @GetMapping("/registerWarehouse")
-    public String showRegisterForm(Model model) {
-        log.info("warehouse register GetMapping doing......");
-        model.addAttribute("warehouseDTO", new WarehouseDTO());
-        return "warehouse"; // 창고 등록 폼을 보여주는 Thymeleaf 템플릿의 이름
-    }
+//    @GetMapping("/registerWarehouse")
+//    public String showRegisterForm(Model model) {
+//        log.info("warehouse register GetMapping doing......");
+//        model.addAttribute("warehouseDTO", new WarehouseDTO());
+//        return "warehouse"; // 창고 등록 폼을 보여주는 Thymeleaf 템플릿의 이름
+//    }
 
 
     @PostMapping("/registerWarehouse")
@@ -69,11 +77,11 @@ public class WarehouseController {
 
     }
 
-    @GetMapping({"/readWarehouse"})
-    public void read(long wid, Model model) {
-        WarehouseDTO warehouseDTO = warehouseService.getOneWarehouse(wid);
-        model.addAttribute("warehouseDTO", warehouseDTO);
-    }
+//    @GetMapping({"/readWarehouse"})
+//    public void read(long wid, Model model) {
+//        WarehouseDTO warehouseDTO = warehouseService.getOneWarehouse(wid);
+//        model.addAttribute("warehouseDTO", warehouseDTO);
+//    }
 
 //    @PostMapping("/modifyWarehouse")
 //    public String modify(@RequestBody WarehouseDTO warehouseDTO) {

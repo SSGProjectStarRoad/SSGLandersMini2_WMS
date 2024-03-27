@@ -8,12 +8,12 @@
     </insert>
 
     <!--    창고목록조회 쿼리-->
-    <select id="getAll" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+    <select id="getAllWarehouse" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         select * from warehouse order by wid;
     </select>
 
     <!--    창고하나 상세조회 쿼리-->
-    <select id="getOne" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+    <select id="getOneWarehouse" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         select * from warehouse where wid = #{wid};;
     </select>
 
@@ -24,17 +24,17 @@
     </select>
 
     <!--    창고삭제 쿼리-->
-    <delete id="delete">
+    <delete id="deleteWarehouse">
         delete from warehouse where wid = #{wid}
     </delete>
 
     <!--    창고수정 쿼리-->
-    <update id="update">
+    <update id="updateWarehouse">
         update warehouse set wname = #{wname}, warehousetype =  #{warehousetype}, address = #{address}, capacity = #{capacity}  where wid = #{wid}
     </update>
 
 <!--    검색창 쿼리-->
-    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+    <select id="selectWarehouseList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         SELECT * FROM warehouse
         <where>
             <!-- 타입 필터링 조건 -->

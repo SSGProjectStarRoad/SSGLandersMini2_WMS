@@ -243,44 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //페이지네이션
-
-// $(document).querySelector(".pagination").addEventListener("click", function (e) {
-//     e.preventDefault()
-//     e.stopPropagation()
-//
-//     const target = e.target
-//
-//     if (target.tagName !== 'A') {
-//         return
-//     }
-//
-//     const num = target.getAttribute("data-num")
-//
-//     const formObj = document.querySelector("form")
-//
-//     formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
-//
-//     formObj.submit();
-//
-// }, false)
-//
-// document.querySelector(".clearBtn").addEventListener("click", function (e) {
-//     e.preventDefault()
-//     e.stopPropagation()
-//
-//     self.location = '/board/list'
-//
-// }, false)
-//
-// //show modal
-// const result = [[${result}]]
-//
-// const modal = new bootstrap.Modal(document.querySelector(".modal"))
-//
-// if (result) {
-//     modal.show()
-// }
-
 $(document).ready(function() {
     $(".pagination").on("click", "a", function(e) {
         e.preventDefault(); // 기본 이동 방지
