@@ -45,6 +45,7 @@
             w.warehousetype, w.wname, w.capacity, sum(w.usingcapacity) as usingcapacity
         FROM
             warehouse w
+        group by wname
     </select>
     <select id="getWarehouseList" resultType="com.ssg.ssglandersmini2.dto.StockDTO">
         select w.wname, p.name as name, i.quantity from incoming i left join product p on i.pid=p.pid left join warehouse w on w.wid = i.wid
