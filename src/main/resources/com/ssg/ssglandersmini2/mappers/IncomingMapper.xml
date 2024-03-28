@@ -19,7 +19,7 @@
                 </foreach>
             </if>
         </where>
-        order by iid desc limit #{skip}, #{size}
+        order by iid limit #{skip}, #{size}
     </select>
 
     <select id="selectIncomingNotApprovalList" resultType="com.ssg.ssglandersmini2.domain.Incoming">
@@ -40,7 +40,7 @@
             </if>
         </where>
         where name = '승인대기'
-        order by iid desc limit #{skip}, #{size}
+        order by iid limit #{skip}, #{size}
     </select>
 
     <select id="getCount" resultType="int">
@@ -63,7 +63,7 @@
 
     <update id="updateOne">
         update incoming set quantity = #{quantity}, date = #{date}, status = #{status}
-                        where iid = #{iid}
+        where iid = #{iid}
     </update>
 
     <select id="findListByWarehouseType" resultType="com.ssg.ssglandersmini2.domain.Warehouse">

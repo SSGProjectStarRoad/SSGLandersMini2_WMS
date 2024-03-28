@@ -19,7 +19,7 @@
                 </foreach>
             </if>
         </where>
-        order by pid desc limit #{skip}, #{size}
+        order by pid limit #{skip}, #{size}
     </select>
 
     <select id="getCount" resultType="int">

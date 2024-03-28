@@ -32,8 +32,8 @@ public class OutcomingTests {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(1)
                 .size(10)
-                .types(new String[] {"id"})
-                .keyword("15")
+//                .types(new String[] {"id"})
+//                .keyword("15")
                 .build();
         List<Outcoming> voList = outcomingMapper.selectOutcomingList(pageRequestDTO);
         voList.forEach(vo -> log.info(vo));
