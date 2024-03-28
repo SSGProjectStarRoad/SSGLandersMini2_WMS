@@ -364,7 +364,10 @@ input {
 
 .main-detail thead {
   text-align: left;
+<<<<<<< HEAD
 /*border-radius: solid*/
+=======
+>>>>>>> dec2e95 (last)
 }
 
 .main-detail thead th {

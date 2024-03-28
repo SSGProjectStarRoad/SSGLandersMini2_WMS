@@ -132,6 +132,16 @@ public class IncomingController {
         log.info(requestBody.get("iid"));
         incomingService.changeStatus(requestBody.get("iid"));
     }
+
+    @PostMapping("/checkWarehouseCapacity")
+    @ResponseBody
+    public ResponseEntity<?> checkWarehouseCapacity(@RequestBody Map<String, String> requestBody, BindingResult bindindingResult){
+
+        if (incomingService.compareCapacity(Long.parseLong(requestBody.get("wid")), Integer.parseInt(requestBody.get("quantity")))){
+            return ResponseEntity.ok().body(true);
+        }else return ResponseEntity.ok().body(false);
+
+    }
 }
 
 

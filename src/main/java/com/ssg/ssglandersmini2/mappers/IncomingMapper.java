@@ -1,7 +1,6 @@
 package com.ssg.ssglandersmini2.mappers;
 
 import com.ssg.ssglandersmini2.domain.Incoming;
-import com.ssg.ssglandersmini2.domain.Warehouse;
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
 
 import java.util.List;
@@ -18,4 +17,5 @@ public interface IncomingMapper {
     Long findWidByWarehouseName(String wname);
     void updateApprovalByIid(Long iid);
     void updateStatus(Long iid);
+    int getWarehouseQuantity(Long wid);
 }

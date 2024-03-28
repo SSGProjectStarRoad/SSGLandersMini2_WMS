@@ -88,4 +88,10 @@
         where iid = #{iid}
     </update>
 
+    <select id="getWarehouseQuantity" resultType="int">
+        select (capacity - usingcapacity)
+        from warehouse
+        where wid = #{wid};
+    </select>
+
 </mapper>
