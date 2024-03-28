@@ -5,11 +5,21 @@
     <select id="selectProductList" resultType="com.ssg.ssglandersmini2.domain.Product">
         select * from product
         <where>
-            <if test="keyword != null and keyword != ''">
-                name like concat('%', #{keyword}, '%')
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        pid like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'name'">
+                        name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        pid like concat('%', #{keyword}, '%') or name like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
             </if>
         </where>
-        order by pid limit #{skip}, #{size}
+        order by pid desc limit #{skip}, #{size}
     </select>
 
     <select id="getCount" resultType="int">

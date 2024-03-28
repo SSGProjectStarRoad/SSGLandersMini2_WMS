@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DetailsDTO {
     private long oid;
-    private long wid;
+    private Long wid;
     private String name;
     private long quantity;
     private String warehousetype;
@@ -23,6 +23,5 @@ public class DetailsDTO {
     private String destination;//
     private LocalDate date;//
     private String sname;//
-    private Blob qr;//
     private String approval;//
 }

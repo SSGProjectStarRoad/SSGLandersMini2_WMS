@@ -73,8 +73,8 @@ private final ModelMapper modelMapper;
     }
 
     @Override
-    public List<StockDTO> getWarehouseList() {
-        List<StockDTO> wrList = stockMapper.getWarehouseList().stream().map(wr -> modelMapper.map(wr, StockDTO.class))
+    public List<StockDTO> getWarehouseList(String wname) {
+        List<StockDTO> wrList = stockMapper.getWarehouseList(wname).stream().map(wr -> modelMapper.map(wr, StockDTO.class))
                 .collect(Collectors.toList());
         return wrList;
     }

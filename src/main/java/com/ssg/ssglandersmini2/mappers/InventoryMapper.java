@@ -1,5 +1,8 @@
 package com.ssg.ssglandersmini2.mappers;
 
-public interface InventoryMapper {
 
+import com.ssg.ssglandersmini2.domain.Inventory;
+
+public interface InventoryMapper {
+void insertInventory(Inventory inventory);
 }

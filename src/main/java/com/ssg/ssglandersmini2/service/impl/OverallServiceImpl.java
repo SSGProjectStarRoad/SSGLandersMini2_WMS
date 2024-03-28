@@ -97,7 +97,7 @@ public class OverallServiceImpl implements OverallService {
     }
 
 
-    private static void substringAddress(Warehouse warehouse, WarehouseCityDTO dto, String cityKey, Map<String, WarehouseCityDTO> cityDTOMap) {
+    private void substringAddress(Warehouse warehouse, WarehouseCityDTO dto, String cityKey, Map<String, WarehouseCityDTO> cityDTOMap) {
         if (dto == null) {
             // 해당 city에 대한 DTO가 아직 없는 경우 새로 생성
             dto = WarehouseCityDTO.builder()

@@ -24,10 +24,73 @@
         order by oid limit #{skip}, #{size}
     </select>
 
+    <select id="selectOutcomingNoApprovalList" resultType="com.ssg.ssglandersmini2.domain.Outcoming">
+        select * from outcoming o inner join product p on o.pid = p.pid
+        <where>
+            <!-- 타입에 따른 검색 -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        o.oid like concat(#{keyword})
+                    </if>
+                    <if test="type == 'name'">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        o.oid like concat(#{keyword}) or p.name like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+            and approval = '승인대기'
+
+        </where>
+        order by oid limit #{skip}, #{size}
+    </select>
+
 
 
     <select id="getCount" resultType="int">
-        select count(*) from outcoming
+        select count(*) from outcoming o inner join product p on o.pid = p.pid
+        <where>
+            <!-- 타입에 따른 검색 -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        o.oid like concat(#{keyword})
+                    </if>
+                    <if test="type == 'name'">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        o.oid like concat(#{keyword}) or p.name like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getApprovalCount" resultType="int">
+        select count(*) from outcoming o inner join product p on o.pid = p.pid
+        <where>
+            <!-- 타입에 따른 검색 -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        o.oid like concat(#{keyword})
+                    </if>
+                    <if test="type == 'name'">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        o.oid like concat(#{keyword}) or p.name like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+            and approval = '승인대기'
+        </where>
     </select>
 
     <select id="getProductByPid" resultType="com.ssg.ssglandersmini2.domain.Product">
@@ -86,4 +149,38 @@
     <delete id="deleteOutcomingByOid">
         delete from outcoming where oid = #{oid}
     </delete>
+
+    <insert id="insertWaybill">
+        insert into waybill(destination, date, sid) values(#{destination}, #{date}, #{sid})
+    </insert>
+
+    <select id="selectWaybillWbidLast" resultType="long">
+        select wbid from waybill order by wbid desc limit 1;
+    </select>
+
+    <update id="insertOutcomingWbidByOid">
+        update outcoming set wbid = #{wbid} where oid = #{oid}
+    </update>
+
+    <update id="updateOutcomingApprovalByOid">
+        update outcoming set approval = '승인완료' where oid = #{oid}
+    </update>
+
+    <select id="selectProductPidByName" resultType="long">
+        select pid from product where name = #{name}
+    </select>
+
+    <select id="selectWarehouseWidByWname" resultType="long">
+        select wid from warehouse where wname = #{wname}
+    </select>
+
+    <insert id="insertOutcoming">
+        insert into outcoming (pid, wid, quantity, date, status, approval) values (#{pid}, #{wid}, #{quantity},DATE(NOW()), "출고전", "승인대기");
+    </insert>
+
+    <select id="selectOutcomingApprovalByOid" resultType="String">
+        select approval from outcoming where oid = #{oid}
+    </select>
+
+
 </mapper>

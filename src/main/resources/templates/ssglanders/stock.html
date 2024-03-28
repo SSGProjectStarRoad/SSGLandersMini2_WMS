@@ -3,11 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout/layout.html}">
 <head>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js}"
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/css/out.css}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link th:href="@{/css/stock.css}" rel="stylesheet"/>
     <script th:src="@{/js/stock.js}"></script>
     <title>Document</title>
@@ -47,7 +48,7 @@
                     </div>
                     <div class="right-div">
                         <div class="modal-input">
-                            <input type="text" name="quantity" class="form-control" placeholder="" aria-label="Username"
+                            <input type="text" id="quantity" class="form-control" placeholder="" aria-label="Username"
                                    aria-describedby="basic-addon1">
                         </div>
                     </div>
@@ -71,9 +72,10 @@
                         <select class="select1" id="storage1" name="wname"
                                 onchange="updateDestination(), displayStorage(), updatefill(), updatecapacity(), submitwnameselect()">
                             <option value>창고 선택</option>
-                            <option th:each="whlist : ${whList}" th:text="${whlist.wname}"
+                            <option th:each="whlist : ${whList}"
+                                    th:text="${whlist.wname}"
                                     th:value="${whlist.usingcapacity}"
-                                    th:attr="data-usingcapacity=${whlist.usingcapacity}, data-capacity=${whlist.capacity}"></option>
+                                    th:attr="data-wname=${whlist.wname}, data-usingcapacity=${whlist.usingcapacity}, data-capacity=${whlist.capacity}"></option>
                         </select>
                     </form>
                 </div>
@@ -99,9 +101,13 @@
                 <tr>
                     <td id="totalcapacity" colspan="2"></td>
                 </tr>
-                <tr th:each="wrlist : ${wrList}">
-                    <td th:text="${wrlist.name} + ${wrlist.quantity}"></td>
+                <tbody id = "stocktable" >
+                <tr>
+                    <td>
+                        <li>안녕?</li>
+                    </td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -124,7 +130,7 @@
 
             <div>
                 <select class="form-select" name="size" id="pageSizeSelect" onchange="submitselect()">
-                    <option selected value="3">페이지 수</option>
+                    <option selected value="10">페이지 수</option>
                     <option value="3">3개씩</option>
                     <option value="5">5개씩</option>
                     <option value="10">10개씩</option>
@@ -149,7 +155,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="dto, index : ${responseDTO.dtoList}">
+            <tr th:each="dto, index : ${responseDTO.dtoList}" th:attr = "data-index=${index.index}">
                 <td data-label="#" th:text="${index.index + 1}"></td>
                 <td data-label="상품명" id="dtoname" th:text="${dto.name}"></td>
                 <td data-label="카테고리"
@@ -160,10 +166,10 @@
                 <td data-label="현 상태" th:if="${dto.status == 'on'}" th:text="적재완료"></td>
                 <td data-label="현 상태" th:if="${dto.status == 'off'}" th:text="적재대기"></td>
                 <td data-label="요청사항">
-                    <button class="open-modal-btn" th:if="${dto.status == 'on'}" data-bs-toggle="modal"
+                    <button type="submit" class="btn btn-primary"  id="test" th:if="${dto.status == 'on'}" data-bs-toggle="modal"
                             data-bs-target="#outmodal"
-                            th:data-name="${dto.name}"
-                            th:data-wname="${dto.wname}" onclick="inputdata()">
+                            th:attr = "data-index=${index.index}, data-dtoname=${dto.name}, data-dtowname=${dto.wname}"
+                            onclick="inputdata(), submitData()">
                         출고 요청
                     </button>
                 </td>
