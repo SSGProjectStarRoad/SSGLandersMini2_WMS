@@ -40,6 +40,18 @@ public class OutcomingTests {
 
     }
 
+    @Test void testselectOutcomingNoApprovalList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+//                .types(new String[] {"id"})
+//                .keyword("15")
+                .build();
+        List<Outcoming> voList = outcomingMapper.selectOutcomingNoApprovalList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+
+    }
+
     @Test
     public void testGetProductName(){
         Product product = outcomingMapper.getProductByPid(1l);
@@ -94,5 +106,35 @@ public class OutcomingTests {
         outcomingMapper.deleteOutcomingByOid(2l);
     }
 
+    @Test void testinsertWaybill(){
+        outcomingMapper.insertWaybill("니네집","2022-12-12",3);
+    }
 
+    @Test void testselectWaybillWbidLast(){
+        log.info(outcomingMapper.selectWaybillWbidLast()+"~~~~");
+    }
+
+    @Test void testinsertOutcomingWbidByOid(){
+        outcomingMapper.insertOutcomingWbidByOid(6l,3l);
+    }
+
+    @Test void testupdateOutcomingApprovalByOid(){
+        outcomingMapper.updateOutcomingApprovalByOid(6l);
+    }
+
+    @Test void testselectProductPidByName(){
+        log.info(outcomingMapper.selectProductPidByName("맥북에어"));
+    }
+
+    @Test void testselectWarehouseWidByWname(){
+        log.info(outcomingMapper.selectWarehouseWidByWname("광명냉장1")+" 여기다 이눔아");
+    }
+
+    @Test void testinsertOutcoming(){
+        outcomingMapper.insertOutcoming(1l,1l,77l);
+    }
+
+    @Test void testselectOutcomingStatusByOid(){
+        log.info(outcomingMapper.selectOutcomingApprovalByOid(11l));
+    }
 }

@@ -11,14 +11,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:src="@{/js/nav.js}"></script>
+<<<<<<< HEAD
     <title>Layout page</title>
     <script src="../../static/js/userlist.js"></script>
 
+=======
+    <title>SSgLandersRetail</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+>>>>>>> 173dc010e6fb7fe729bfe3724462a6e6c918837c
 </head>
 <body>
-<div class="nav-role vcard">
-    <i class="bi bi-person-vcard nav-link active">관리자</i>
+<div class="nav-role animatedr">
+    <i class="bi bi-person-vcard nav-link active">총관리자</i>
+<!--    <i class="bi bi-person-vcard nav-link active">창고관리자</i>-->
 </div>
+<div class="nav-logout animatedr">
+    <a th:href="@{/}">
+    <i class="bi bi-escape nav-link active">로그아웃</i>
+    </a>
+</div>
+
 <!--            role에 따라 문자 들어가게해주세여-->
 <div class="left-div animatedl">
     <div class="imag-div">
@@ -38,6 +50,10 @@
                 >
             </li>
             <span class="nav-menu">입고</span>
+            <li class="nav-item">
+                <i class="bi bi-calendar-plus"></i>
+                <a class="nav-link" th:href="@{/ssglanders/inRegister}">입고등록</a>
+            </li>
             <li class="nav-item">
                 <i class="bi bi-calendar-plus"></i>
                 <a class="nav-link" th:href="@{/ssglanders/inList}">입고현황</a>
@@ -84,23 +100,75 @@
 
 </div>
 
-<div layout:fragment="modal1">
+
+<div layout:fragment="modal">
 
 </div>
+
+<div layout:fragment="modal1">
+</div>
+
+
 
 <div layout:fragment="modal2">
 
 </div>
 
+<<<<<<< HEAD
 <div layout:fragment="modal21">
 
 </div>
 
 <div layout:fragment="modal1">
+=======
+<div layout:fragment="modal3">
+
+</div>
+
+<div layout:fragment="modal4">
+
+</div>
+
+<div layout:fragment="modal5">
+
+</div>
+
+<div layout:fragment="modal6">
+
+</div>
+
+<div layout:fragment="modal10">
+</div>
+
+<div layout:fragment="modal11">
+
+</div>
+
+<div layout:fragment="modal41">
+</div>
+
+
+<div layout:fragment="modal42">
+
+</div>
+
+
+<div layout:fragment="modal43">
+
+</div>
+
+<div layout:fragment="modal45">
+
+</div>
+<div layout:fragment="modal60">
+>>>>>>> 173dc010e6fb7fe729bfe3724462a6e6c918837c
 
 </div>
 
 <th:block layout:fragment="script" >
 </th:block>
+
 </body>
 </html>
+
+

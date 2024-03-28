@@ -1,6 +1,5 @@
 package com.ssg.ssglandersmini2.dto;
 
-
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
@@ -9,8 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-
+import java.util.List;
+import java.util.Arrays;
 
 // PageRequestDTO 클래스는 페이지 요청 정보를 전달하기 위한 데이터 전송 객체(DTO)입니다.
 
@@ -50,10 +51,28 @@ public class PageRequestDTO {
     private String keyword;
 
 
+
+    // 완료 여부를 나타내는 필드
+    private boolean finished;
+
+    // 시작일을 나타내는 필드
+    private LocalDate from;
+
+    // 종료일을 나타내는 필드
+    private LocalDate to;
+
+    //창고타입관련 체크박스 만들려고 만든 필드
+    private List<String> warehouseTypes;
+    private List<Integer> capacities;
+
+//    private List<>
+
+
     // 페이지당 건너뛸 항목 수를 계산하는 메서드
     public int getSkip(){
         return (page-1) * 10;
     }
+
 
     // 링크 정보를 반환하는 메서드
     public String getLink() {
@@ -66,6 +85,7 @@ public class PageRequestDTO {
         return link;
     }
 
+
     // 검색 유형이 주어진 유형과 일치하는지 확인하는 메서드
     public boolean checkType(String type) {
         if (types == null || types.length == 0) {
@@ -73,15 +93,5 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-

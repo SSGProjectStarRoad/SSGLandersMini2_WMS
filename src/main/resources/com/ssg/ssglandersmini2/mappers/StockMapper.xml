@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.StockMapper">
     <select id="selectAll">
-                select s.stock_id as sid, p.name, p.firstcategory,p.secondcategory,p.thirdcategory,
+                select p.name, p.firstcategory,p.secondcategory,p.thirdcategory,
                s.quantity, w.warehousetype, b.status
         from stock s left join product p on s.pid = p.pid
                      left join warehouse w on s.wid = w.wid
-                     left join inventory b on s.stock_id = b.bid
+                    left join inventory b on w.wid = b.wid
                 group by p.name;
     </select>
     <select id ="getCount" resultType="int">
-        select count(stock_id) from stock;
+        select count(*) from stock;
     </select>
     <select id="selectList">
         SELECT
-        s.stock_id as sid, p.name, p.firstcategory, p.secondcategory, p.thirdcategory ,
-        s.quantity, w.warehousetype, b.status
+        p.name, p.firstcategory, p.secondcategory, p.thirdcategory ,
+        s.quantity, substring(w.wname,1,2) as wname, w.warehousetype, b.status
         FROM
         stock s
         LEFT JOIN
@@ -23,7 +23,7 @@
         LEFT JOIN
         warehouse w ON s.wid = w.wid
         LEFT JOIN
-        inventory b ON s.stock_id = b.bid
+        inventory b on w.wid = b.wid
         <where>
             <if test="types != null and types.length > 0">
                 <trim prefix="AND" prefixOverrides="AND">
@@ -43,12 +43,10 @@
                 </trim>
             </if>
         </where>
-        ORDER BY sid ASC
         LIMIT #{skip}, #{size}
     </select>
     <select id = "getWarehouse">
         SELECT
-            s.stock_id as sid,
             s.quantity, w.warehousetype, w.wname, sum(w.usingcapacity) as usingcapacity
         FROM
             stock s

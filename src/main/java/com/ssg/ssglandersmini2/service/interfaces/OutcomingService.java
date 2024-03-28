@@ -27,5 +27,22 @@ public interface OutcomingService {
     //oid이용해서 outcoming삭제하기
     void removeOutcomingByOid(long oid);
 
+    // requestDTO로 PageResponseDTO 가져오기 (미승인)
+    PageResponseDTO<OutcomingListDTO> getApprovalList(PageRequestDTO pageRequestDTO);
+
+    // destination, date, sid 받아서 waybill 생성하고 가장 최근 wbid 반환하기
+    long getLastWbidRegisterWaybill(String destination, String date, long sid);
+
+    // oid, wbid 받아서 outcoming wbid update
+    void modifyOutcomingWbidByOid(long oid, long wbid);
+
+    // oid받아서 승인와료로 바꾸기
+    void modifyOutcomingApprovalByOid(long oid);
+
+    // name, wname, quantity 받아서 출고 신청
+    void registerOutcomingByNameWnameQuantity(String name, String wname, long quantity);
+
+
+
 
 }

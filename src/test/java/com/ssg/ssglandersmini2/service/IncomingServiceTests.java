@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.ModelMap;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -33,5 +34,46 @@ public class IncomingServiceTests {
                 .build();
 
         log.info(incomingService.getIncomingList(pageRequestDTO));
+    }
+
+    @Test
+    public void testRegister(){
+        IncomingDTO incomingDTO = IncomingDTO.builder()
+                .pid(3L)
+                .wid(3L)
+                .date(LocalDate.now())
+                .quantity(20)
+                .build();
+
+        incomingService.register(incomingDTO);
+    }
+
+    @Test
+    public void testModify(){
+        IncomingListDTO incomingListDTO = IncomingListDTO.builder()
+                .pid(2L)
+                .wid(3L)
+                .date(LocalDate.now())
+                .name("hosang")
+                .firstcategory("식품")
+                .secondcategory("라면")
+                .thirdcategory("진라면")
+                .palletperquantity(80L)
+                .approval("입고 승인")
+                .status("배달 완료")
+                .type("상온")
+                .build();
+
+//        incomingService.modify(incomingListDTO);
+    }
+
+    @Test
+    public void testRemove(){
+        incomingService.remove(13L);
+    }
+
+    @Test
+    public void testStatus(){
+        incomingService.changeStatus(3L);
     }
 }

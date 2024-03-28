@@ -21,6 +21,6 @@ public class OutcomingListDTO {
     private LocalDate date;
     private String approval;
     private String status;
-    private long wbid ;
+    private long wbid;
 
 }
