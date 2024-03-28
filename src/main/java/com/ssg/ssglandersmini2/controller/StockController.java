@@ -1,17 +1,19 @@
 package com.ssg.ssglandersmini2.controller;
 
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
+import com.ssg.ssglandersmini2.dto.StockDTO;
 import com.ssg.ssglandersmini2.mappers.StockMapper;
 import com.ssg.ssglandersmini2.service.interfaces.StockService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ssglanders")
@@ -23,10 +25,6 @@ public class StockController {
 
     @GetMapping("/stock")
     public void stock(PageRequestDTO pageRequestDTO, Model model) {
-        log.info(stockService.getList(pageRequestDTO).getDtoList());
-        log.info(pageRequestDTO.getTypes());
-        log.info(pageRequestDTO.getKeyword());
-        log.info(pageRequestDTO.getSize());
         model.addAttribute("responseDTO", stockService.getList(pageRequestDTO));
         model.addAttribute("list", stockService.getAll());
         model.addAttribute("whList", stockService.getWareHouse());
@@ -34,17 +32,14 @@ public class StockController {
     }
 
     @PostMapping("/stock")
-    public void outcomingRequest(@RequestParam("productSelect") String productSelect,
-                                 @RequestParam("warehouseSelect") String warehouseSelect,
-                                 @RequestParam("quantity") int quantity,
-                                 RedirectAttributes redirectAttributes) {
-        log.info("outcomingRequest~~~!!");
-        log.info(productSelect + warehouseSelect + quantity);
-        redirectAttributes.addFlashAttribute("productSelect", productSelect);
-        redirectAttributes.addFlashAttribute("warehouseSelect", warehouseSelect);
-        redirectAttributes.addFlashAttribute("quantity", quantity);
-        return ;
+    @ResponseBody
+    public ResponseEntity<?> outcomingRequest(@RequestBody Map<String, String> requestbody,
+                                           Model model) {
+        List<StockDTO> stocklist = stockService.getWarehouseList(requestbody.get("wname"));
+        log.info("여기 뭐야?" + stocklist);
+        log.info("여기 뭐야?2" + requestbody.get("wname"));
 
+        return ResponseEntity.ok().body(stocklist);
     }
 }
 

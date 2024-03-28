@@ -22,4 +22,5 @@ public class StockDTO {
     private String status; //inventory
     private String wname; // 창고명
     private int usingcapacity;  // 창고 사용량
+    private int capacity; // 창고수용량
 }
