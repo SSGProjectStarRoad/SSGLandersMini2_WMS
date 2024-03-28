@@ -3,52 +3,117 @@
 <mapper namespace="com.ssg.ssglandersmini2.mappers.WarehouseMapper">
 
 <!--    창고등록쿼리-->
-    <insert id="insert">
+    <insert id="insertWarehouse" useGeneratedKeys="true" keyProperty="wid">
         insert into warehouse(warehousetype, address, capacity, wname) values(#{warehousetype}, #{address}, #{capacity}, #{wname})
     </insert>
 
     <!--    창고목록조회 쿼리-->
-    <select id="getAll" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+    <select id="getAllWarehouse" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         select * from warehouse order by wid;
     </select>
 
     <!--    창고하나 상세조회 쿼리-->
-    <select id="getOne" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+    <select id="getOneWarehouse" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         select * from warehouse where wid = #{wid};;
     </select>
 
+
+<!--    인벤토리용 창고가져오는 쿼리-->
+    <select id="getWarehouse" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        select * from warehouse where wname = #{wname};;
+    </select>
+
     <!--    창고삭제 쿼리-->
-    <delete id="delete">
+    <delete id="deleteWarehouse">
         delete from warehouse where wid = #{wid}
     </delete>
 
     <!--    창고수정 쿼리-->
-    <update id="update">
+    <update id="updateWarehouse">
         update warehouse set wname = #{wname}, warehousetype =  #{warehousetype}, address = #{address}, capacity = #{capacity}  where wid = #{wid}
     </update>
 
-    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
-        select * from warehouse
-            <where>
-                <if test="types != null and types.length > 0">
-                    <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
-                        <if test="type == 'type'.toString()">
-                            warehousetype like concat('%', #{keyword}, '%')
-                        </if>
-                        <if test="type == 'address'.toString()">
-                            address like concat('%', #{keyword}, '%')
-                        </if>
-                        <if test="type == 'all'.toString()">
-                            address like concat('%', #{keyword}, '%') or warehousetype like concat('%', #{keyword},'%') or wname like concat('%', #{keyword}, '%')
-                        </if>
-                    </foreach>
-                </if>
-            </where>
-            order by wid limit #{skip}, #{size}
-        </select>
+<!--    검색창 쿼리-->
+    <select id="selectWarehouseList" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        SELECT * FROM warehouse
+        <where>
+            <!-- 타입 필터링 조건 -->
+            <if test="warehouseTypes != null and !warehouseTypes.isEmpty()">
+                warehousetype IN
+                <foreach collection="warehouseTypes" item="type" open="(" close=")" separator=",">
+                    #{type}
+                </foreach>
+            </if>
+            <!-- 용량 필터링 조건, 이전 조건이 있을 경우 AND로 연결 -->
+            <if test="capacities != null and !capacities.isEmpty()">
+                <choose>
+                    <!-- 이전 조건이 있을 경우 AND를 추가 -->
+                    <when test="warehouseTypes != null and !warehouseTypes.isEmpty()">
+                        AND
+                    </when>
+                    <!-- 이전 조건이 없을 경우 (빈 <otherwise> 태그는 선택적) -->
+                    <otherwise></otherwise>
+                </choose>
+                capacity IN
+                <foreach collection="capacities" item="capacity" open="(" close=")" separator=",">
+                    #{capacity}
+                </foreach>
+            </if>
+            <!-- 키워드 검색 조건 -->
+            <if test="keyword != null and keyword != ''">
+                AND (
+                address LIKE CONCAT('%', #{keyword}, '%')
+                OR warehousetype LIKE CONCAT('%', #{keyword}, '%')
+                OR wname LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+        ORDER BY wid LIMIT #{skip}, #{size}
+    </select>
 
+
+
+    <!--    창고목록 개수 세는 쿼리문-->
     <select id="getCount" resultType="int">
         select count(*) from warehouse
+            <where>
+                <!-- 타입 필터링 조건 -->
+                <if test="warehouseTypes != null and !warehouseTypes.isEmpty()">
+                    warehousetype in
+                    <foreach collection="warehouseTypes" item="type" open="(" close=")" separator=",">
+                        #{type}
+                    </foreach>
+                </if>
+                <!-- 용량 필터링 조건 -->
+                <if test="capacities != null and !capacities.isEmpty()">
+                    and capacity in
+                    <foreach collection="capacities" item="capacity" open="(" close=")" separator=",">
+                        #{capacity}
+                    </foreach>
+                </if>
+                <!-- 키워드 검색 조건 -->
+                <if test="keyword != null and keyword != ''">
+                    and (
+                    address like CONCAT('%', #{keyword}, '%')
+                    OR warehousetype LIKE CONCAT('%', #{keyword}, '%')
+                    OR wname LIKE CONCAT('%', #{keyword}, '%')
+                    )
+                </if>
+    </where>
     </select>
+
+    <!-- 가장 최근에 등록된 창고 wid를 검색하는 쿼리 -->
+    <select id="getMaxWid" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
+        SELECT * FROM warehouse WHERE wid = (SELECT MAX(wid) FROM warehouse);
+
+    </select>
+
+<!--    wid에 따른 창고wname 업데이트 쿼리-->
+    <update id="updateWname">
+        UPDATE warehouse
+        SET wname = #{wname}
+        WHERE wid = #{wid}
+    </update>
+
 
 </mapper>

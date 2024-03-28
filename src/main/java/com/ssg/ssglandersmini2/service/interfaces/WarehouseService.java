@@ -8,16 +8,20 @@ import com.ssg.ssglandersmini2.dto.WarehouseDTO;
 import java.util.List;
 
 public interface WarehouseService {
-    void register(WarehouseDTO warehouseDTO);
+    void registerWarehouse(WarehouseDTO warehouseDTO);
 
-    WarehouseDTO getOne(long wid);
+    WarehouseDTO getOneWarehouse(long wid);
 
-    List<WarehouseDTO> getAll();
-    PageResponseDTO<WarehouseDTO> list(PageRequestDTO pageRequestDTO);
+    List<WarehouseDTO> getAllWarehouse();
+    PageResponseDTO<WarehouseDTO> listWarehouse(PageRequestDTO pageRequestDTO);
 
-    void modify(WarehouseDTO warehouseDTO);
+//    void modify(WarehouseDTO warehouseDTO);
 
-    void remove(long wid);
+    void removeWarehouse(long wid);
+
+    void addWarehouseAndPopulateInventory(Warehouse warehouse);
+
+    void updateWarehouseName(long warehouseId, String warehousetype, String address);
 
 
 }
