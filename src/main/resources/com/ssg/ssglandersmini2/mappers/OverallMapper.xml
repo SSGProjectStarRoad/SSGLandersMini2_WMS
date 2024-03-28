@@ -14,10 +14,10 @@
         select * from outcoming
     </select>
     <select id="getIncomingBeforeCount" resultType="int">
-        select count(*) from incoming where status = "배달중"
+        select count(*) from incoming where status = "배송전" and approval ="승인완료"
     </select>
     <select id="getIncomingArriveCount" resultType="int">
-        select count(*) from incoming where status = "배달완료"
+        select count(*) from incoming where status = "배송후"
     </select>
     <select id="getOutcomingBeforeCount" resultType="int">
         select count(*) from outcoming where status = "출고전" and approval ="승인완료"
