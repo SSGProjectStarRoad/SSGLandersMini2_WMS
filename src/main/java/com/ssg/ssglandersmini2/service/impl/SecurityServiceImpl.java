@@ -1,12 +1,10 @@
 package com.ssg.ssglandersmini2.service.impl;
 
 import com.ssg.ssglandersmini2.domain.User;
-import com.ssg.ssglandersmini2.dto.PageRequestDTO;
-import com.ssg.ssglandersmini2.dto.PageResponseDTO;
 import com.ssg.ssglandersmini2.dto.UserDTO;
 import com.ssg.ssglandersmini2.exception.ApplicationException;
-import com.ssg.ssglandersmini2.mappers.UserMapper;
-import com.ssg.ssglandersmini2.service.interfaces.UserService;
+import com.ssg.ssglandersmini2.mappers.SecurityMapper;
+import com.ssg.ssglandersmini2.service.interfaces.SecurityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,16 +14,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
-public class UserServiceImpl implements UserService {
+public class SecurityServiceImpl implements SecurityService{
 
-    private final UserMapper userMapper;
+    private final SecurityMapper securityMapper;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,19 +30,19 @@ public class UserServiceImpl implements UserService {
     public UserDTO register(UserDTO userDTO) { //사용자 생성
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword())); //userDTO에서 암호화 먼저 하기
         User user = modelMapper.map(userDTO, User.class);
-        userMapper.insert(user); // 사용자 정보 저장
+        securityMapper.insert(user); // 사용자 정보 저장
         log.info("Created user: {}", user);
         return modelMapper.map(user, UserDTO.class); // 생성된 User 객체를 UserDTO로 변환하여 반환
     }
     @Override
     public String findUserIdByNameAndPhone(String name, String phone) { // 아이디 찾기(이름,핸드폰 번호 입력받아서)
-        return userMapper.findUserIdByNameAndPhone(name, phone);
+        return securityMapper.findUserIdByNameAndPhone(name, phone);
     }
 
 
     @Override
     public User getOne(String username) { // 사용자 조회
-        Optional<User> user = userMapper.selectOne(username);
+        Optional<User> user = securityMapper.selectOne(username);
         if (user.isPresent()) {
             return user.get();
         } else {
@@ -54,50 +51,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageResponseDTO<UserDTO> getList(PageRequestDTO pageRequestDTO) {
-        return null;
-    }
-
-//    @Override
-//    public PageResponseDTO<UserDTO> getList(PageRequestDTO pageRequestDTO) {
-//        List<User> users = userMapper.selectList(pageRequestDTO);
-//        List<UserDTO> userDTOS = users.stream().map(vo->modelMapper.map(vo,UserDTO.class)).toList();
-//        int total = userMapper.getCount(pageRequestDTO); //현재 조회 조건에 맞는 총 사용자 수 조회
-//        // 페이징 처리에 필요한 전체 페이지 수를 계산하는 데 사용
-//        PageResponseDTO<UserDTO> pageResponseDTO = PageResponseDTO.<UserDTO>All()
-//                .dtoList(userDTOS).total(total).pageRequestDTO(pageRequestDTO).build();
-//
-//        return pageResponseDTO;
-//    }
-    //PageResponseDTO<UserDTO> 객체를 생성하여,
-    // 위에서 변환된 userDTOS 목록과 총 사용자 수(total), 요청한 페이지 정보(pageRequestDTO)를 포함
-    // 이 PageResponseDTO 객체를 반환
-    // PageResponseDTO는 페이징 처리된 조회 결과를 나타내는데 사용되며,
-    // 클라이언트에게 사용자 목록과 페이징 관련 정보를 전달하는 데 사용
-    // 이를 통해 대량의 데이터를 효율적으로 관리하고 사용자 경험을 개선
-
-    @Override
     public void modify(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
-        userMapper.update(user);
+        securityMapper.update(user);
     }
 
     @Override
     public void remove(String username) {
-        userMapper.delete(username);
+        securityMapper.delete(username);
     }
 
     // 임시 비밀번호 만들기
     @Override
     public boolean checkUserExists(String username, String telnum) {
-        return userMapper.findUserByUsernameAndPhone(username, telnum) != null;
+        return securityMapper.findUserByUsernameAndPhone(username, telnum) != null;
     }
 
     @Override
     public String resetUserPassword(String username) {
         String tempPassword = RandomStringUtils.randomAlphanumeric(8);
         String encodedPassword = passwordEncoder.encode(tempPassword);
-        userMapper.updatePassword(username, encodedPassword);
+        securityMapper.updatePassword(username, encodedPassword);
         return tempPassword;
     }
 
@@ -107,7 +81,7 @@ public class UserServiceImpl implements UserService {
             // int 반환 타입을 사용하는 것은 이 메서드가 삭제 쿼리를 실행한 후 삭제된 행의 수를 반환할 것이라는 의미
             // 해당 사용자가 데이터베이스에 존재하고 삭제가 성공적으로 수행되면 1(또는 삭제된 행의 수)을 반환하고,
             // 사용자가 존재하지 않아 삭제할 행이 없으면 0을 반환
-            int deletedRows = userMapper.deleteUserByUsername(username);
+            int deletedRows = securityMapper.deleteUserByUsername(username);
             if (deletedRows == 0) {
                 // 삭제할 사용자가 데이터베이스에 없는 경우
                 throw new ApplicationException(ApplicationException.ErrorCode.USER_NOT_FOUND, "해당 사용자를 찾을 수 없습니다: " + username);
@@ -127,14 +101,14 @@ public class UserServiceImpl implements UserService {
         // userDTO를 User 도메인 객체로 변환
         User user = modelMapper.map(userDTO, User.class);
         // 암호화된 비밀번호를 가진 User 객체로 데이터베이스 업데이트
-        userMapper.updateAdmin(user);
+        securityMapper.updateAdmin(user);
         log.info("Updated admin user: {}", user);
     }
 
     @Override
     public UserDTO getUserByUsername(String username) {
         // UserMapper를 사용하여 데이터베이스에서 사용자 정보를 조회
-        User user = userMapper.getUserByUsername(username);
+        User user = securityMapper.getUserByUsername(username);
         if (user == null) {
             throw new ApplicationException(ApplicationException.ErrorCode.USER_NOT_FOUND, "해당 사용자를 찾을 수 없습니다: " + username);
         }

@@ -9,6 +9,7 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body class="body">
+<!--<form class="loginform" onsubmit="submitLoginForm(); return false;">-->
 <form class="loginform" th:action="@{/user/login}" method="post">
     <table class="logintable">
         <tr>
@@ -95,6 +96,7 @@
                 <tr>
                     <td>권한 선택
                         <select id="roleSelect">
+                            <option value="admin">총관리자</option>
                             <option value="warehouse">창고관리자</option>
                         </select>
                     </td>

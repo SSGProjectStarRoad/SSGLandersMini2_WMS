@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,11 +19,13 @@
 </head>
 <body>
 <div class="nav-role animatedr">
-    <i class="bi bi-person-vcard nav-link active">총관리자</i>
-<!--    <i class="bi bi-person-vcard nav-link active">창고관리자</i>-->
+    <!-- 총관리자 역할을 가진 사용자에게만 보임 -->
+    <i sec:authorize="hasRole('ADMIN')" class="bi bi-person-vcard nav-link active">총관리자</i>
+    <!-- 창고관리자 역할을 가진 사용자에게만 보임 -->
+    <i sec:authorize="hasRole('WAREHOUSE')" class="bi bi-person-vcard nav-link active" style="font-size: 0.9em;">창고관리자</i>
 </div>
 <div class="nav-logout animatedr">
-    <a th:href="@{/}">
+    <a href="#" id="logoutButton">
     <i class="bi bi-escape nav-link active">로그아웃</i>
     </a>
 </div>
@@ -85,8 +87,9 @@
                 <a class="nav-link" th:href="@{/user/myInfo}">수정/탈퇴</a>
             </li>
 <!--            권한에 따라 회원관리 안보이게, url 접근도 막을것-->
-            <span class="nav-menu">회원</span>
-            <li class="nav-item">
+            <!-- 관리자 역할을 가진 사용자에게만 보임 -->
+            <span sec:authorize="hasRole('ADMIN')" class="nav-menu">회원</span>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                 <i class="bi bi-person-check"></i>
                 <a class="nav-link" href="#">회원 관리</a>
             </li>
@@ -163,7 +166,27 @@
 
 <th:block layout:fragment="script" >
 </th:block>
-
+<!-- 로그아웃 처리 스크립트 -->
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('로그아웃하시겠습니까?')) {
+            fetch('/user/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('로그아웃 되었습니다!');
+                        window.location.href = '/user/login';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+</script>
 </body>
 </html>
 

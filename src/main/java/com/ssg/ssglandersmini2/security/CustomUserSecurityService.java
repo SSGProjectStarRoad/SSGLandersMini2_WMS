@@ -2,7 +2,7 @@ package com.ssg.ssglandersmini2.security;
 
 
 import com.ssg.ssglandersmini2.domain.User;
-import com.ssg.ssglandersmini2.mappers.UserMapper;
+import com.ssg.ssglandersmini2.mappers.SecurityMapper;
 import com.ssg.ssglandersmini2.security.model.UserRole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,12 +22,12 @@ import java.util.Optional;
 @Service
 public class CustomUserSecurityService implements UserDetailsService {
 
-    private final UserMapper userMapper;
+    private final SecurityMapper securityMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-       Optional<User> _user = userMapper.selectOne(username);
+       Optional<User> _user = securityMapper.selectOne(username);
        if(_user.isEmpty()){
            throw  new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
        }
@@ -42,7 +42,7 @@ public class CustomUserSecurityService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authorities);
     }
 }
-//userMapper.selectOne(username)를 통해 사용자 정보를 데이터베이스에서 조회합니다.
+//securityMapper.selectOne(username)를 통해 사용자 정보를 데이터베이스에서 조회합니다.
 //조회된 사용자 정보(User 객체)에서 usertype 필드를 확인합니다.
 //usertype 필드의 값에 따라 UserRole 열거형의 getValue() 메서드를 사용하여 SimpleGrantedAuthority 객체를 생성합니다.
 //이 객체는 Spring Security에서 사용자의 권한을 나타냅니다.

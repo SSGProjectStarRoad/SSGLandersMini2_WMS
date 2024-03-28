@@ -1,7 +1,8 @@
 package com.ssg.ssglandersmini2.controller;
 
 import com.ssg.ssglandersmini2.dto.UserDTO;
-import com.ssg.ssglandersmini2.service.interfaces.UserService;
+import com.ssg.ssglandersmini2.service.interfaces.SecurityService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -20,17 +21,20 @@ import java.util.Map;
 @RequestMapping("/user")
 @Log4j2
 @RequiredArgsConstructor
-public class UserController {
-    private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+public class SecurityController {
+    private final SecurityService securityService;
 
     @GetMapping("/login")
-    public String loginPage(Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
-            // 사용자가 이미 인증되었다면, /ssglanders/overall로 리다이렉션
-            return "/ssglanders/overall";
+    public String loginPage() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 사용자가 인증되었고, anonymousUser가 아닌 경우
+        if (authentication != null && !authentication.getName().equals("anonymousUser")) {
+            // 이미 로그인된 사용자를 ssglanders/overall 페이지로 리다이렉션
+            return "redirect:/ssglanders/overall";
         }
-        // 인증되지 않은 사용자의 경우, 로그인 페이지로 이동
+
+        // 로그인하지 않은 사용자의 경우, 로그인 페이지로 이동
         return "/user/userLogin";
     }
 
@@ -42,13 +46,6 @@ public class UserController {
     // 로그인 폼 제출과 관련된 POST 요청 처리는 스프링 시큐리티가 담당하므로,
     // 이 부분에 대해 추가적인 구현이 필요하지 않습니다.
 
-    // authentication.isAuthenticated() 메서드의 반환 값이 항상 true를 반환하는 것이 아니라는 점
-    // 스프링 시큐리티에서는 익명 사용자에 대해서도 Authentication 객체를 생성하고, 이 경우 isAuthenticated() 메서드는 false를 반환
-    // 따라서, 이 메서드는 사용자가 실제로 인증되었는지를 정확하게 판단할 수 있게
-    // loginPage 메서드 내에서 Authentication 객체를 직접 사용하는 것은
-    // 스프링 시큐리티의 컨텍스트를 통해 현재 인증된 사용자의 정보를 얻기 위한 표준 방식!!
-    // 컨트롤러는 현재 사용자의 인증 상태에 따라 적절한 뷰나 페이지로 유도
-
     // @ResponseBody를 사용함으로써, 스프링은 메소드가 반환하는 데이터(객체, 문자열 등)를 HTTP 응답의 본문으로 직접 반환할 수 있게 되며,
     // 반환되는 데이터 타입에 따라 HttpMessageConverter를 사용하여 적절한 포맷(JSON, XML 등)으로 자동 변환합니다.
     // 예를 들어, 객체를 반환하면 스프링은 설정에 따라 JSON으로 변환하여 응답 본문에 포함시킬 수 있습니다.
@@ -57,7 +54,8 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
         try {
-            UserDTO registeredUser = userService.register(userDTO);
+            UserDTO registeredUser = securityService.register(userDTO);
+            log.info("회원가입테스트"+registeredUser);
             // 성공적인 처리 메시지와 함께 HTTP 상태 코드 200(OK) 반환
             return ResponseEntity.ok().body(Map.of("message", "회원가입이 성공적으로 처리되었습니다."));
         } catch (Exception e) {
@@ -74,7 +72,7 @@ public class UserController {
         String phone = userData.get("phone");
         log.info("name : " + name);
         log.info("phone : " + phone);
-        String userId = userService.findUserIdByNameAndPhone(name, phone);
+        String userId = securityService.findUserIdByNameAndPhone(name, phone);
         log.info("userid : " + userId);
         if (userId != null) {
             // 사용자 ID를 찾은 경우, ResponseEntity를 사용하여 JSON 형태로 반환
@@ -92,13 +90,13 @@ public class UserController {
         String telnum = requestBody.get("telnum");
 
         // 사용자 존재 여부 확인
-        boolean userExists = userService.checkUserExists(username, telnum);
+        boolean userExists = securityService.checkUserExists(username, telnum);
         if (!userExists) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "사용자 정보가 존재하지 않습니다."));
         }
 
         // 임시 비밀번호 생성 및 업데이트
-        String tempPassword = userService.resetUserPassword(username);
+        String tempPassword = securityService.resetUserPassword(username);
         return ResponseEntity.ok(Map.of("message", "임시 비밀번호가 생성되었습니다.", "tempPassword", tempPassword));
     }
 
@@ -111,7 +109,7 @@ public class UserController {
             String currentUserName = authentication.getName(); // 현재 로그인한 사용자의 username을 얻음
 
             // void 반환 타입을 사용하고, 문제가 발생하면 예외를 던짐
-            userService.deleteUserByUsername(currentUserName);
+            securityService.deleteUserByUsername(currentUserName);
 
             // 성공 응답
             return ResponseEntity.ok().body(Map.of("message", "계정이 성공적으로 삭제되었습니다."));
@@ -127,7 +125,7 @@ public class UserController {
         String username = authentication.getName(); // 현재 로그인한 사용자의 username을 얻음
 
         // 사용자 정보 조회
-        UserDTO userDTO = userService.getUserByUsername(username);
+        UserDTO userDTO = securityService.getUserByUsername(username);
 
         // 조회된 사용자 정보를 Model에 추가하여 뷰에 전달
         model.addAttribute("user", userDTO);
@@ -146,10 +144,11 @@ public class UserController {
         userDTO.setUsername(currentUserName);
         log.info("Received userDTO: {}", userDTO);
 
-        userService.updateAdmin(userDTO);
+        securityService.updateAdmin(userDTO);
         return ResponseEntity.ok().body(Map.of("message", "정보가 성공적으로 업데이트되었습니다."));
     }
     //사용자가 정보를 수정하고 "수정" 버튼을 클릭하면, AJAX를 통해 이 POST 엔드포인트가 호출
 
 }
+
 

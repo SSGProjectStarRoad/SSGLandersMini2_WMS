@@ -2,7 +2,6 @@ package com.ssg.ssglandersmini2.mappers;
 
 import com.ssg.ssglandersmini2.domain.User;
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
-import com.ssg.ssglandersmini2.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mapper
-public interface UserMapper {
+public interface SecurityMapper {
 
     void insert(User user);
 
@@ -35,3 +34,4 @@ public interface UserMapper {
 
     User getUserByUsername(String username);
 }
+

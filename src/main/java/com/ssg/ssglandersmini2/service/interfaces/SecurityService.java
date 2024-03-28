@@ -1,20 +1,21 @@
 package com.ssg.ssglandersmini2.service.interfaces;
 
 import com.ssg.ssglandersmini2.domain.User;
-import com.ssg.ssglandersmini2.dto.PageRequestDTO;
-import com.ssg.ssglandersmini2.dto.PageResponseDTO;
 import com.ssg.ssglandersmini2.dto.UserDTO;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
-public interface UserService {
+public interface SecurityService {
 
     UserDTO register(UserDTO userDTO); // 사용자 등록
 
     String findUserIdByNameAndPhone(String name, String phone); // 사용자 아이디 찾기
 
     User getOne(String username); // 사용자 조회
-    PageResponseDTO<UserDTO> getList(PageRequestDTO pageRequestDTO); // 사용자 조회 리스트
 
     void modify(UserDTO userDTO); // 사용자 수정
     void remove(String username); // 사용자 삭제
@@ -27,3 +28,4 @@ public interface UserService {
     void updateAdmin(UserDTO userDTO);
     UserDTO getUserByUsername(String username);
 }
+

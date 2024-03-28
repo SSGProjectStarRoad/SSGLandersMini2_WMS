@@ -20,99 +20,97 @@ function closeModal(modalId) {
 
 // 모달 창 바깥 클릭 시 닫기 이벤트
 // 사용자가 모달 창 외부를 클릭할 때 해당 모달 창 닫기!!
-window.onclick = function (event) {
-    if (event.target.classList.contains('modal')) {
-        closeModal(event.target.id);
+    window.onclick = function (event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target.id);
+        }
     }
-}
 
 // 아이디 찾기 기능
-function findUserId() {
-    var name = document.getElementById('findname').value;
-    var phone = document.getElementById('phone').value;
+    function findUserId() {
+        var name = document.getElementById('findname').value;
+        var phone = document.getElementById('phone').value;
 
-    // AJAX 요청을 사용하여 서버에 name과 phone 데이터를 전송
-    $.ajax({
-        url: '/user/find-id', // 요청을 보낼 서버의 URL 주소
-        type: 'POST', // HTTP 요청 방식 (GET, POST 등)
-        contentType: 'application/json', // 서버로 보내는 데이터의 타입
-        data: JSON.stringify({name: name, phone: phone}), // 서버로 보낼 데이터
-        success: function (response) {
-            // 서버로부터 응답을 성공적으로 받았을 때 실행할 코드
-            alert('아이디 찾기 성공! 찾은 아이디: ' + response.userId);
-            document.getElementById('findIdModal').querySelector('form').reset();
-            window.location.href = '/userLogin.html'
-        },
-        error: function () {
-            // 요청 실패 시 실행할 코드
-            alert('아이디를 찾을 수 없습니다.');
-        }
-    });
-}
+        // AJAX 요청을 사용하여 서버에 name과 phone 데이터를 전송
+        $.ajax({
+            url: '/user/find-id', // 요청을 보낼 서버의 URL 주소
+            type: 'POST', // HTTP 요청 방식 (GET, POST 등)
+            contentType: 'application/json', // 서버로 보내는 데이터의 타입
+            data: JSON.stringify({name: name, phone: phone}), // 서버로 보낼 데이터
+            success: function (response) {
+                // 서버로부터 응답을 성공적으로 받았을 때 실행할 코드
+                alert('아이디 찾기 성공! 찾은 아이디: ' + response.userId);
+                document.getElementById('findIdModal').querySelector('form').reset();
+                window.location.href = '/user/userLogin'
+            },
+            error: function () {
+                // 요청 실패 시 실행할 코드
+                alert('아이디를 찾을 수 없습니다.');
+            }
+        });
+    }
 
-function findUserPw() {
-    var username = document.getElementById('id').value;
-    var telnum = document.getElementById('phonePw').value;
+    function findUserPw() {
+        var username = document.getElementById('id').value;
+        var telnum = document.getElementById('phonePw').value;
 
-    // AJAX 요청을 사용하여 서버에 사용자 정보를 전송
-    $.ajax({
-        url: '/user/find-pw', // 요청을 보낼 서버의 URL 주소
-        type: 'POST', // HTTP 요청 방식 (GET, POST 등)
-        contentType: 'application/json', // 서버로 보내는 데이터의 타입
-        data: JSON.stringify({username: username, telnum: telnum}), // 서버로 보낼 데이터
-        success: function (response) {
-            // 서버로부터 임시 비밀번호를 성공적으로 받았을 때 실행할 코드
-            alert('임시 비밀번호 생성 완료! 임시 비밀번호: ' + response.tempPassword);
-            document.getElementById('findPwModal').querySelector('form').reset();
-            window.location.href = '/userLogin.html'
-        },
-        error: function () {
-            // 요청 실패 시 실행할 코드
-            alert('비밀번호를 찾을 수 없습니다.');
-        }
-    });
-}
+        // AJAX 요청을 사용하여 서버에 사용자 정보를 전송
+        $.ajax({
+            url: '/user/find-pw', // 요청을 보낼 서버의 URL 주소
+            type: 'POST', // HTTP 요청 방식 (GET, POST 등)
+            contentType: 'application/json', // 서버로 보내는 데이터의 타입
+            data: JSON.stringify({username: username, telnum: telnum}), // 서버로 보낼 데이터
+            success: function (response) {
+                // 서버로부터 임시 비밀번호를 성공적으로 받았을 때 실행할 코드
+                alert('임시 비밀번호 생성 완료! 임시 비밀번호: ' + response.tempPassword);
+                document.getElementById('findPwModal').querySelector('form').reset();
+                window.location.href = '/user/userLogin'
+            },
+            error: function () {
+                // 요청 실패 시 실행할 코드
+                alert('비밀번호를 찾을 수 없습니다.');
+            }
+        });
+    }
 
 // 아이디 유효성 검사
-$(document).ready(function () {
-    $('#registerUsername').on('input', function () {
-        var username = $(this).val();
-        var errorBubble = $('#usernameError');
-        if (username.length < 5 || username.length > 20 || !/^[a-zA-Z0-9]*$/.test(username)) {
-            errorBubble.text("아이디는 최소 5자 이상,영문자와 숫자로 입력합니다.");
-            errorBubble.show(); // 오류 메시지를 보여줍니다.
-        } else {
-            errorBubble.hide(); // 오류 메시지를 숨깁니다.
-        }
+    $(document).ready(function () {
+        $('#registerUsername').on('input', function () {
+            var username = $(this).val();
+            var errorBubble = $('#usernameError');
+            if (username.length < 5 || username.length > 20 || !/^[a-zA-Z0-9]*$/.test(username)) {
+                errorBubble.text("아이디는 최소 5자 이상,영문자와 숫자로 입력합니다.");
+                errorBubble.show(); // 오류 메시지를 보여줍니다.
+            } else {
+                errorBubble.hide(); // 오류 메시지를 숨깁니다.
+            }
+        });
     });
-});
 
 // 비밀번호 유효성 검사
-$(document).ready(function () {
-    // 비밀번호 유효성 검사
-    $('#registerPassword, #confirmPassword').on('input', function () {
-        var password = $('#registerPassword').val();
-        var confirmPassword = $('#confirmPassword').val();
-        var passwordErrorBubble = $('#passwordError');
+    $(document).ready(function () {
+        // 비밀번호 유효성 검사
+        $('#registerPassword, #confirmPassword').on('input', function () {
+            var password = $('#registerPassword').val();
+            var confirmPassword = $('#confirmPassword').val();
+            var passwordErrorBubble = $('#passwordError');
 
-        if (password.length < 8 || !/[a-zA-Z]/.test(password) || !/\d/.test(password) || !/[@#$%^&+=!]/.test(password)) {
-            passwordErrorBubble.text("비밀번호는 최소 8자 이상,영문자와 숫자,특수문자로 입력합니다.");
-            passwordErrorBubble.show(); // 오류 메시지를 보여줍니다.
-        } else if (password !== confirmPassword) {
-            passwordErrorBubble.text("비밀번호가 일치하지 않습니다.");
-            passwordErrorBubble.show(); // 오류 메시지를 보여줍니다.
-        } else {
-            passwordErrorBubble.hide(); // 오류 메시지를 숨깁니다.
-        }
+            if (password.length < 8 || !/[a-zA-Z]/.test(password) || !/\d/.test(password) || !/[@#$%^&+=!]/.test(password)) {
+                passwordErrorBubble.text("비밀번호는 최소 8자 이상,영문자와 숫자,특수문자로 입력합니다.");
+                passwordErrorBubble.show(); // 오류 메시지를 보여줍니다.
+            } else if (password !== confirmPassword) {
+                passwordErrorBubble.text("비밀번호가 일치하지 않습니다.");
+                passwordErrorBubble.show(); // 오류 메시지를 보여줍니다.
+            } else {
+                passwordErrorBubble.hide(); // 오류 메시지를 숨깁니다.
+            }
+        });
     });
-});
-
-
 
 
 // 회원가입 폼 제출 시 실행될 함수 (AJAX 요청 포함)
 // 폼 제출을 AJAX 요청으로 처리해 페이지 리로드 없이 서버에 데이터 전송
-    $('#signupForm').submit(function(e) {
+    $('#signupForm').submit(function (e) {
         e.preventDefault();
 
         var usertype = $('#roleSelect').val();
@@ -137,11 +135,11 @@ $(document).ready(function () {
             url: '/user/register',
             contentType: 'application/json',
             data: JSON.stringify(formData),
-        }).done(function(response) {
+        }).done(function (response) {
             // 회원가입 성공 처리
             alert('회원가입 성공!');
-            window.location.href = '/userLogin.html'
-        }).fail(function(error) {
+            window.location.href = '/user/userLogin'
+        }).fail(function (error) {
             // 회원가입 실패 처리
             alert('회원가입 실패: ' + error.responseText);
         });
@@ -176,7 +174,8 @@ $(document).ready(function () {
 
                 // 선택된 우편번호와 주소 정보를 input 박스에 넣는다.
                 document.getElementById('zipp_code_id').value = data.zonecode;
-                document.getElementById("UserAdd1").value = addr + extraAddr;
+                document.getElementById("UserAdd1").value = addr;
+                document.getElementById("UserAdd1").value += extraAddr;
                 document.getElementById("UserAdd2").focus(); // 우편번호 + 주소 입력이 완료되었음으로 상세주소로 포커스 이동
 
                 // 외부 API에서 가져온 주소를 주소 입력란에 설정
