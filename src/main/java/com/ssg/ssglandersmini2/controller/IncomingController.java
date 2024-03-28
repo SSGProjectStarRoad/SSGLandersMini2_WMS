@@ -27,7 +27,7 @@ public class IncomingController {
     private final ProductService productService;
 
     @GetMapping("/inList")
-    public void list(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+    public void getInList(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
 
         log.info("inList......");
 
@@ -40,7 +40,7 @@ public class IncomingController {
     }
 
     @GetMapping("/inApproval")
-    public void inApproval(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+    public void getInApproval(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
         log.info("inList......");
 
         if (bindingResult.hasErrors()) {
@@ -52,7 +52,7 @@ public class IncomingController {
     }
 
     @GetMapping("/inRegister")
-    public void register(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+    public void getInRegister(PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
         log.info("inRegister......");
 
         if (bindingResult.hasErrors()) {
@@ -65,7 +65,7 @@ public class IncomingController {
 
     @PostMapping("/inRegister")
     @ResponseBody
-    public String postRegister(@RequestBody Map<String, String> requestBody, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String postInRegister(@RequestBody Map<String, String> requestBody, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         log.info("post register incoming.....");
         log.info(requestBody);
 
@@ -85,7 +85,7 @@ public class IncomingController {
     }
 
 
-    @PostMapping("/get_warehouse_list")
+    @PostMapping("/getWarehouseList")
     @ResponseBody
     public ResponseEntity<?> getWarehouseListByType(@RequestBody Map<String, String> requestBody,RedirectAttributes redirectAttributes) {
         String type = requestBody.get("type");
@@ -119,7 +119,7 @@ public class IncomingController {
         incomingService.remove(Long.parseLong(requestBody.get("iid")));
     }
 
-    @PostMapping("/approval")
+    @PostMapping("/approveApprovalData")
     @ResponseBody
     public void approveApproval(@RequestBody Map<String, Long> requestBody){
         incomingService.modifyApprovalByIid(requestBody.get("iid"));
