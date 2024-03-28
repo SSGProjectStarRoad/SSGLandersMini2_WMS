@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.ssg.ssglandersmini2.mappers")
 @SpringBootApplication
 public class Ssglandersmini2Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Ssglandersmini2Application.class, args);
     }
