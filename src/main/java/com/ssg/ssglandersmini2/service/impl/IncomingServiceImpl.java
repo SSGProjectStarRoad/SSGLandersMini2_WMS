@@ -68,7 +68,7 @@ public class IncomingServiceImpl implements IncomingService {
 
     @Override
     public PageResponseDTO<IncomingListDTO> getIncomingNotApprovalList(PageRequestDTO pageRequestDTO) {
-        List<Incoming> list = incomingMapper.selectIncomingList(pageRequestDTO);
+        List<Incoming> list = incomingMapper.selectIncomingNotApprovalList(pageRequestDTO);
 
         List<IncomingListDTO> dtoList = list.stream()
                 .map(vo -> modelMapper.map(vo, IncomingListDTO.class)).collect(Collectors.toList());
