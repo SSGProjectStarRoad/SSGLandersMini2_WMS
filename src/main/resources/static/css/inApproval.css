@@ -556,7 +556,10 @@ tr:nth-child(even) {
     background-color: rgb(233, 233, 233);
     /* html과 body의 flex 방향을 수직으로 변경 */
   }
-
+.please{
+  display: flex;
+  flex-direction: column;
+}
 
 
   /* 위에 검색이랑 버튼들 */

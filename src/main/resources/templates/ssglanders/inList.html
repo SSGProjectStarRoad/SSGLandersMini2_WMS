@@ -85,7 +85,8 @@
                                 </button>
                             </td>
                             <td data-label="배송 상태 변경">
-                                <button type="button" class="btn btn-primary open-delivery-button" th:attr="data-iid=${dto.iid}">배송 상태 변경</button>
+                                <button type="button" class="btn btn-primary open-delivery-button"
+                                        th:attr="data-iid=${dto.iid}, data-status=${dto.status}, data-approval=${dto.approval}">배송 상태 변경</button>
                             </td>
                         </tr>
                         </tbody>

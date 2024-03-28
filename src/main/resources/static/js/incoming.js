@@ -205,6 +205,7 @@ $(document).ready(function () {
 
         });
 
+
         // 토글에서 선택된 warehouseName을 저장
         $(document).on('change', '.search-warehouse-toggle-1 select-incoming-toggle select', function () {
             modifyWareHouseName = $(this).val();
@@ -217,12 +218,12 @@ $(document).ready(function () {
     $(document).on('click', '.update-button', function () {
 
         var quantity = $('#quantity').val();
-        var regdate = updateDate;
+        var regdate = $('#regdate').val();
 
         console.log(quantity);
         console.log(regdate);
 //조건변경 필요
-        if (updateStatusOO === '배송후' || (updateQuantity !== quantity)){
+        if (updateStatusOO === '배송전'){
 
 
             $.ajax({
@@ -247,14 +248,14 @@ $(document).ready(function () {
                     $('#type').val('');
                     $('.search-warehouse-toggle-1 select').val('---'); // 선택 옵션 초기화
                     alert('수정 성공했습니다.')
-                    window.location.href = '/ssglanders/inList'; // 리다이렉트 수행
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     alert('수정 실패했습니다.');
                 }
             });
         }else {
-            alert('배송후에는 창고와 수량을 변경할 수 없습니다.')
+            alert('배송후에는 수정할 수 없습니다.')
         }
 
     });
@@ -265,7 +266,9 @@ $(document).ready(function () {
 
         console.log(updateStatusOO);
 
-        if (updateStatusOO === "배송전") {
+
+
+        if (updateStatusOO === '배송전') {
 
             $.ajax({
                 url: '/ssglanders/deleteIncoming',
@@ -282,15 +285,15 @@ $(document).ready(function () {
                     $('#regdate').val('');
                     $('#type').val('');
                     $('.search-warehouse-toggle-1 select').val('---'); // 선택 옵션 초기화
-                    window.location.href = '/ssglanders/inList'; // 리다이렉트 수행
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     alert('삭제를 실패했습니다.');
                 }
             });
 
-        } else {
-            alert('배송이 시작 됐거나 도착했습니다. 삭제를 실패했습니다.')
+        }else{
+            alert('배송 후에는 삭제할 수 없습니다.')
         }
 
     });
@@ -307,15 +310,17 @@ $(document).ready(function () {
         // data-iid 값을 가져옴
         var iid = $(this).data('iid');
         var status100 = $(this).data('status');
+        var approvalData = $(this).data('approval');
 
         console.log(iid);
         console.log(status100);
+        console.log(approvalData);
 
-        if (status100 === '승인완료'){
 
+        // 확인 버튼 클릭 시
+        if (confirm("배송 상태를 변경하시겠습니까?")) {
+            if (approvalData === '승인완료'){
 
-            // 확인 버튼 클릭 시
-            if (confirm("배송 상태를 변경하시겠습니까?")) {
                 // Ajax 처리
                 $.ajax({
                     url: '/ssglanders/changeStatus',
@@ -327,7 +332,7 @@ $(document).ready(function () {
                     success: function (response) {
                         // 처리가 성공하면 추가 작업 수행
                         alert('배송 상태가 변경되었습니다.');
-                        window.location.href = '/ssglanders/inList'; // 리다이렉트 수행
+                        location.reload();
                     },
                     error: function (xhr, status, error) {
                         // 오류 처리
@@ -335,10 +340,12 @@ $(document).ready(function () {
                         console.error(xhr.responseText);
                     }
                 })
+            }else {
+                alert('승인 완료 시 누를 수 없는 버튼입니다.')
             }
-        }else {
-            alert('승인이 되기 전에는 변경할 수 없습니다.');
+
         }
+
     });
 
     //------------------승인------------------
@@ -348,56 +355,58 @@ $(document).ready(function () {
         var status100 = $(this).data('status');
         var quantity = $(this).data('quantity');
         var wid = $(this).data('wid');
+        var approval = $(this).data('approval');
 
         console.log(iid);
         console.log(status100);
         console.log(quantity);
         console.log(wid);
+        console.log(approval);
 
-        $.ajax({
-            url: '/ssglanders/checkWarehouseCapacity',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                wid: wid,
-                quantity: quantity
-            }),
-            success:function (response){
-                if (response === true){
+        // 확인 버튼 클릭 시
+        if (confirm("입고를 승인하시겠습니까?")) {
 
-                    if (status100 === '배송전'){
-
-                        // 확인 버튼 클릭 시
-                        if (confirm("입고를 승인하시겠습니까?")) {
-                            // Ajax 처리
-                            $.ajax({
-                                url: '/ssglanders/approveApprovalData',
-                                type: 'POST', // 또는 'GET'
-                                contentType: 'application/json',
-                                data: JSON.stringify({
-                                    iid: iid
-                                }), // 요청에 포함할 데이터
-                                success: function (response) {
-                                    // 처리가 성공하면 추가 작업 수행
+            if (status100 === '배송전'){
+                // Ajax 처리
+                $.ajax({
+                    url: '/ssglanders/approveApprovalData',
+                    type: 'POST', // 또는 'GET'
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        iid: iid
+                    }), // 요청에 포함할 데이터
+                    success: function (response) {
+                        $.ajax({
+                            url: '/ssglanders/checkWarehouseCapacity',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                wid: wid,
+                                quantity: quantity
+                            }),
+                            success:function (response2){
+                                if (response2 === true){
+                                    approval = '승인완료';
                                     alert('승인되었습니다.');
-                                    window.location.href = '/ssglanders/inApproval'; // 리다이렉트 수행
-                                },
-                                error: function (xhr, status, error) {
-                                    // 오류 처리
-                                    alert('오류가 발생했습니다.');
-                                    console.error(xhr.responseText);
+                                    location.reload();
+                                }else{
+                                    alert('선택한 창고의 수용가능량보다 많은 파레트 등록입니다. 승인할 수 없습니다.');
+                                    location.reload();
                                 }
-                            })
-                        }
-                    }else{
-                        alert('배송 후에는 변경할 수 없습니다.');
+                            },error:function (xhr, status, error){
+                                alert('올바른 정보가 아닙니다.')
+                            }
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // 오류 처리
+                        alert('승인되지 않았습니다.')
                     }
-                }
-            },error:function (xhr, status, error){
-                alert('선택한 창고의 수용가능량보다 많은 파레트 등록입니다. 다시 등록해주세요');
+                })
+            }else{
+                alert('이미 배송후입니다');
             }
-        });
-
+        }
 
     });
 
@@ -413,4 +422,3 @@ $(document).ready(function () {
 
     // -----------페이지네이션-----------
 })
-

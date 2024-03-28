@@ -10,6 +10,7 @@ public interface IncomingMapper {
     List<Incoming> selectIncomingList(PageRequestDTO pageRequestDTO);
     List<Incoming> selectIncomingNotApprovalList(PageRequestDTO pageRequestDTO);
     int getCount(PageRequestDTO pageRequestDTO);
+    int getCount2(PageRequestDTO pageRequestDTO);
     void insertOne(Incoming incoming);
     void deleteOne(Long iid);
     void updateOne(Incoming incoming);

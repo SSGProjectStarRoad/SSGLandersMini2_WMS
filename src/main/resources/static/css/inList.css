@@ -166,6 +166,10 @@ button {
 }
 
 
+
+
+
+
 i.icon-home {
   position: absolute;
   top: 30px;
@@ -364,10 +368,6 @@ input {
 
 .main-detail thead {
   text-align: left;
-<<<<<<< HEAD
-/*border-radius: solid*/
-=======
->>>>>>> dec2e95 (last)
 }
 
 .main-detail thead th {
@@ -668,7 +668,11 @@ tr:nth-child(even) {
     /* overflow-x: hidden; */
     padding-top: 10px;
     margin-left: 43px;
+  <<<<<<< HEAD
   border: 1px solid;
+  =======
+  border: 1px solid 1px;
+  >>>>>>> d71f2a8 (이게 왜 안 될까요......)
   margin-bottom: 50px;
   }
 
@@ -682,7 +686,11 @@ tr:nth-child(even) {
     z-index: 2;
     /* 필요한 경우 z-index 조정 */
     top: 20vw;
+  <<<<<<< HEAD
   background-color: rgb(233, 233, 233);
+  =======
+  background-color: (233, 233, 233);
+  >>>>>>> d71f2a8 (이게 왜 안 될까요......)
   }
 
 

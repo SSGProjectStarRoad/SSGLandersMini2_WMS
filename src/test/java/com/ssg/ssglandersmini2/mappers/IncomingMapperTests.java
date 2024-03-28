@@ -1,6 +1,5 @@
 package com.ssg.ssglandersmini2.mappers;
 
-import com.ssg.ssglandersmini2.domain.Incoming;
 import com.ssg.ssglandersmini2.dto.PageRequestDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;

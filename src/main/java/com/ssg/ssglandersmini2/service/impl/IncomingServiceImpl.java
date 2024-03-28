@@ -68,7 +68,7 @@ public class IncomingServiceImpl implements IncomingService {
 
     @Override
     public PageResponseDTO<IncomingListDTO> getIncomingNotApprovalList(PageRequestDTO pageRequestDTO) {
-        List<Incoming> list = incomingMapper.selectIncomingList(pageRequestDTO);
+        List<Incoming> list = incomingMapper.selectIncomingNotApprovalList(pageRequestDTO);
 
         List<IncomingListDTO> dtoList = list.stream()
                 .map(vo -> modelMapper.map(vo, IncomingListDTO.class)).collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class IncomingServiceImpl implements IncomingService {
                 productMapper.getProductByPid(dto.getPid()), dto));
 
 
-        int total = incomingMapper.getCount(pageRequestDTO);
+        int total = incomingMapper.getCount2(pageRequestDTO);
 
 
         return PageResponseDTO.<IncomingListDTO>withAll()
@@ -106,7 +106,6 @@ public class IncomingServiceImpl implements IncomingService {
     public void changeStatus(Long iid) {
         incomingMapper.updateStatus(iid);
     }
-
 
     @Override
     public boolean compareCapacity(Long wid, int quantity) {
