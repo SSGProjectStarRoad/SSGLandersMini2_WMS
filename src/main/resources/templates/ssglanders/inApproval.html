@@ -73,21 +73,22 @@
                         <th>계약일</th>
                         <th>승인 여부</th>
                         <th>배송 상태</th>
-                        <th>수정</th>
+                        <th>승인 상태 변경</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.pid}">
-                        <td><span th:text="${dto.iid}"></span></td>
-                        <td><span th:text="${dto.name}"></span></td>
-                        <td><span th:text="${dto.quantity}"></span></td>
-                        <td><span th:text="${dto.type}"></span></td>
-                        <td><span th:text="${dto.date}"></span></td>
-                        <td><span th:text="${dto.approval}"></span></td>
-                        <td><span th:text="${dto.status}"></span></td>
-                        <td>
-                            <button type="button" class="btn btn-primary incoming-approval-button"
-                                    th:attr="data-iid=${dto.iid}">승인
+                    <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-iid=${dto.iid}">
+                        <td data-label="번호"><span th:text="${dto.iid}"></span></td>
+                        <td data-label="상품명"><span th:text="${dto.name}"></span></td>
+                        <td data-label="수량"><span th:text="${dto.quantity}"></span></td>
+                        <td data-label="창고"><span th:text="${dto.type}"></span></td>
+                        <td data-label="계약일"><span th:text="${dto.date}"></span></td>
+                        <td data-label="승인 여부"><span th:text="${dto.approval}"></span></td>
+                        <td data-label="배송 상태"><span th:text="${dto.status}"></span></td>
+                        <td data-label="승인 상태 변경">
+                            <button type="button" class="btn btn-primary incoming-approval-btton"
+                                    th:attr="data-iid=${dto.iid}, data-status=${dto.status},
+                                    data-quantity=${dto.quantity}, data-wid=${dto.wid}">승인
                             </button>
                         </td>
 

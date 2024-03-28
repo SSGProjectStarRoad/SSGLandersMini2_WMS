@@ -5,7 +5,7 @@ $(document).ready(function () {
     var storedWarehouse; // 토글에 선택된 창고
     var registerPid;    // 등록된 상품 id
     var palletQuantity;  // 파레트별 상품 사이즈
-
+    var wwwname;
 
     $(document).on('click', '.open-modal-btn', function () {
         var pid = $(this).attr('data-pid');
@@ -28,6 +28,7 @@ $(document).ready(function () {
         $('#name').val(name);
         $('#palletperquantity').val(palletperquantity);
         $('#type').val(type);
+
         console.log(type);
 
         $.ajax({
@@ -119,9 +120,10 @@ $(document).ready(function () {
                 alert('등록 완료됐습니다.');
             },
             error: function (xhr, status, error) {
-                alert('등록 실패했습니다.');
+                alert('다시 등록해주세요');
             }
         });
+
 
     }
 
@@ -178,6 +180,7 @@ $(document).ready(function () {
         $('#type').val(type);
         $('#status').val(statusOO);
 
+
         $.ajax({
             url: '/ssglanders/getWarehouseList',
             method: 'POST',
@@ -205,6 +208,7 @@ $(document).ready(function () {
         // 토글에서 선택된 warehouseName을 저장
         $(document).on('change', '.search-warehouse-toggle-1 select-incoming-toggle select', function () {
             modifyWareHouseName = $(this).val();
+
         });
     });
     //------------------업데이트------------------
@@ -342,37 +346,59 @@ $(document).ready(function () {
         // data-iid 값을 가져옴
         var iid = $(this).data('iid');
         var status100 = $(this).data('status');
+        var quantity = $(this).data('quantity');
+        var wid = $(this).data('wid');
 
         console.log(iid);
         console.log(status100);
+        console.log(quantity);
+        console.log(wid);
 
-        if (status100 == '배송전'){
+        $.ajax({
+            url: '/ssglanders/checkWarehouseCapacity',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                wid: wid,
+                quantity: quantity
+            }),
+            success:function (response){
+                if (response === true){
 
-            // 확인 버튼 클릭 시
-            if (confirm("입고를 승인하시겠습니까?")) {
-                // Ajax 처리
-                $.ajax({
-                    url: '/ssglanders/approveApprovalData',
-                    type: 'POST', // 또는 'GET'
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        iid: iid
-                    }), // 요청에 포함할 데이터
-                    success: function (response) {
-                        // 처리가 성공하면 추가 작업 수행
-                        alert('승인되었습니다.');
-                        window.location.href = '/ssglanders/inApproval'; // 리다이렉트 수행
-                    },
-                    error: function (xhr, status, error) {
-                        // 오류 처리
-                        alert('오류가 발생했습니다.');
-                        console.error(xhr.responseText);
+                    if (status100 === '배송전'){
+
+                        // 확인 버튼 클릭 시
+                        if (confirm("입고를 승인하시겠습니까?")) {
+                            // Ajax 처리
+                            $.ajax({
+                                url: '/ssglanders/approveApprovalData',
+                                type: 'POST', // 또는 'GET'
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    iid: iid
+                                }), // 요청에 포함할 데이터
+                                success: function (response) {
+                                    // 처리가 성공하면 추가 작업 수행
+                                    alert('승인되었습니다.');
+                                    window.location.href = '/ssglanders/inApproval'; // 리다이렉트 수행
+                                },
+                                error: function (xhr, status, error) {
+                                    // 오류 처리
+                                    alert('오류가 발생했습니다.');
+                                    console.error(xhr.responseText);
+                                }
+                            })
+                        }
+                    }else{
+                        alert('배송 후에는 변경할 수 없습니다.');
                     }
-                })
+                }
+            },error:function (xhr, status, error){
+                alert('선택한 창고의 수용가능량보다 많은 파레트 등록입니다. 다시 등록해주세요');
             }
-        }else{
-            alert('배송 후에는 변경할 수 없습니다.');
-        }
+        });
+
+
     });
 
 
