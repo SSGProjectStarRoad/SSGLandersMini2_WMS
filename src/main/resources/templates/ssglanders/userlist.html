@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <!-- Meta 태그 -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- jQuery 및 Bootstrap JavaScript 라이브러리 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap 및 사용자 정의 CSS 파일 추가 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/userlist.css}"/>
+    <link rel="stylesheet" th:href="@{/js/userlist.js}"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
+    <!-- 사용자 정의 JavaScript 파일 -->
+    <script th:src="@{/js/userlist.js}"></script>
+
+</head>
+
+
+<!-- 회원 검색 폼 -->
+<div class="main" layout:fragment="content">
+    <div class="main-background"></div>
+    <form action="/ssglanders/list" method="get">
+        <div class="main-box">
+            <h1>회원 관리</h1>
+            <div class="main-stateboxes">
+                <div class="search-toggle">
+                    <!-- 회원 검색 필드 -->
+                    <select class="form-select" name="types" aria-label="Default select example">
+                        <option value="username">아이디</option>
+                        <option value="name">이름</option>
+                        <option value="usertype">권한</option>
+                        <option value="address">주소</option>
+                        <option value="telnum">전화번호</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="form-control" name="keyword" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="input-btn">
+                    <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 회원 목록 테이블 -->
+    <div class="content-down">
+    </div>
+    <div class="table-way">
+        <div class="main-detail">
+            <h2>회원 조회</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>권한</th>
+                    <th>이름</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                <!-- Thymeleaf 문법으로 변환 -->
+                <tbody>
+                <tr th:each="dto : ${responseDTO.dtoList}">
+                    <td th:text="${dto.username}">Username</td>
+                    <td th:text="${dto.usertype}">Usertype</td>
+                    <td th:text="${dto.name}">Name</td>
+                    <td th:text="${dto.address}">Address</td>
+                    <td th:text="${dto.telnum}">Telnum</td>
+
+                    <!-- 수정 및 삭제 버튼 -->
+                    <td data-label="수정">
+                        <button type="button" data-bs-toggle="modal"  class="btn btn-primary edit-btn"
+                                th:data-username="${dto.username}"
+                                th:data-password="${dto.password}"
+                                th:data-name="${dto.name}"
+                                th:data-telnum="${dto.telnum}"
+                                th:data-address="${dto.address}">
+                            수정
+                        </button>
+                    </td>
+
+                    <td data-label="삭제">
+                        <button class="btn btn-primary confirmDelete"
+                                href="" th:data-username="${dto.username}">삭제
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 페이지네이션 -->
+            <div class="float-end">
+                <ul class="pagination flex-wrap">
+                    <!-- 이전 페이지 링크 -->
+                    <li class="page-item" th:if="${responseDTO.prev}">
+                        <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+                    </li>
+                    <!-- 페이지 번호 반복문 -->
+                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                        <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">
+                            <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                        </li>
+                    </th:block>
+                    <!-- 다음 페이지 링크 -->
+                    <li class="page-item" th:if="${responseDTO.next}">
+                        <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 회원 정보 수정 및 삭제 모달 -->
+<div class="modal" id="myModal" aria-hidden="true" layout:fragment="modal21"
+     th:style="'display: none; z-index: 1050; background-color: transparent;'">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">회원정보 수정</h1>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                <div class="modal-minititle">
+                    아이디
+                </div>
+                <div class="modal-input">
+                    <input id="username" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1" name="username" readonly>
+                </div>
+                <div class="modal-minititle">
+                    비밀번호
+                </div>
+                <div class="modal-input">
+                    <input id="password" type="password" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1" readonly/>
+                </div>
+                <div class="modal-minititle">
+                    이름
+                </div>
+                <div class="modal-input">
+                    <input id="name" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="modal-minititle">
+                    전화번호(-제외)
+                </div>
+                <div class="modal-input">
+                    <input id="telnum" type="text" class="form-control" placeholder="" aria-label="Username"
+                           aria-describedby="basic-addon1"/>
+                </div>
+                <div class="modal-minititle">
+                    주소
+                </div>
+<!--                <div class="modal-input">-->
+<!--                    <input id="address" type="text" class="form-control" placeholder="" aria-label="Username"-->
+<!--                           aria-describedby="basic-addon1"/>-->
+<!--                </div>-->
+                <!-- 우편번호 검색 모달 -->
+                <div class="col-sm-10">
+                    <!-- <label for="zipp_btn" class="form-label">■ 주소 *</label><br /> -->
+                    <input type="text" class="form-control mb-2" id="zipp_code" name="zipp_code" maxlength="10"
+                           placeholder="우편번호" style="width: 40%; display: inline;">
+                    <input type="button" id="zipp_btn" class="btn btn-primary" onclick="execDaumPostcode()"
+                           value="우편번호 찾기" style="width: 120PX; margin-left: -1px; margin-bottom: 3px;"><br>
+                    <input type="text" class="form-control mb-2" name="UserAdd1" id="UserAdd1" maxlength="40"
+                           placeholder="기본 주소를 입력하세요" required>
+                    <div class="invalid-feedback">주소를 입력해주시기 바랍니다!</div>
+                    <input type="text" class="form-control" name="UserAdd2" id="UserAdd2" maxlength="40"
+                           placeholder="상세 주소를 입력하세요">
+                </div>
+            </div>
+
+            <!-- 수정할 회원 정보 입력 폼 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-update-real" id="btn-update">완료</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

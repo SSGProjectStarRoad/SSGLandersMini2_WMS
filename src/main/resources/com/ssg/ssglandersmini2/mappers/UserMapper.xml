@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssg.ssglandersmini2.mappers.UserMapper">
+
+    <!-- 사용자 목록을 페이징하여 조회하는 쿼리 -->
+    <select id="selectList" resultType="com.ssg.ssglandersmini2.domain.User">
+        select * from user
+        <where>
+            <!-- 다양한 유형으로 검색할 수 있는 동적 SQL -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'username'.toString()">
+                        username like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'name'.toString()">
+                        name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'usertype'.toString()">
+                        usertype like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'address'.toString()">
+                        address like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'telnum'.toString()">
+                        telnum like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+
+        </where>
+        order by username desc limit #{skip}, #{size}
+    </select>
+
+    <!-- 주어진 사용자 이름에 해당하는 단일 사용자 정보를 조회하는 쿼리 -->
+    <select id="selectOne" resultType="com.ssg.ssglandersmini2.domain.User">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
+    <!-- 사용자 정보를 업데이트하는 쿼리 -->
+    <update id="update">
+        update user
+        set name    = #{name},
+            address = #{address},
+            telnum  = #{telnum}
+        where username = #{username}
+    </update>
+
+    <!-- 주어진 사용자 이름에 해당하는 사용자를 삭제하는 쿼리 -->
+    <delete id="delete">
+        delete
+        from user
+        where username = #{username}
+    </delete>
+
+    <!-- 검색 결과에 따른 전체 사용자 수를 조회하는 쿼리 -->
+    <select id="getCount" resultType="int">
+        select count(*)
+        from user
+        <where>
+            <!-- 다양한 유형으로 검색할 수 있는 동적 SQL -->
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'username'.toString()">
+                        username like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'name'.toString()">
+                        name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'usertype'.toString()">
+                        usertype like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'address'.toString()">
+                        address like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'telnum'.toString()">
+                        telnum like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+
+        </where>
+    </select>
+
+</mapper>
