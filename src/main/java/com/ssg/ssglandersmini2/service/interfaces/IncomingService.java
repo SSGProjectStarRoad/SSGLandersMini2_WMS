@@ -17,4 +17,6 @@ public interface IncomingService {
     Long getWidByWarehouseName(String wname);
     void modifyApprovalByIid(Long iid);
     void changeStatus(Long iid);
+
+    boolean compareCapacity(Long wid, int quantity);
 }
