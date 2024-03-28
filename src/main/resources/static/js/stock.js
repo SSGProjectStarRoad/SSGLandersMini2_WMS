@@ -41,10 +41,12 @@ function submitData() {
     var stockproduct = $('#modal-stock-name').val();
     var stockwarehouse = $('#modal-stock-wname').val();
     var stockquantity = $('#quantity').val();
-
+ console.log(stockquantity);
+ console.log(stockwarehouse);
+ console.log(stockproduct);
 
     $.ajax({
-        url: '/ssglanders/outList',
+        url: '/ssglanders/registerOutcoming',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
@@ -58,7 +60,7 @@ function submitData() {
             $('#quantity').val('');
             alert('요청 성공했습니다.');
         },
-        error: function (xhr, status, error) {
+        error: function (error) {
             alert('요청에 실패했습니다.');
         }
     });

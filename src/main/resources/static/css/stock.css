@@ -400,7 +400,7 @@ align-items: center;
 #myTable{
     border-collapse: collapse;
     border-spacing: 0;
-    width: 200px;
+    width: 300px;
     float: left;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">요청</button>
+                        <button type="button" class="btn btn-primary" onclick="submitData()">요청</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -104,7 +104,6 @@
                 <tbody id = "stocktable" >
                 <tr>
                     <td>
-                        <li>안녕?</li>
                     </td>
                 </tr>
                 </tbody>
@@ -169,7 +168,7 @@
                     <button type="submit" class="btn btn-primary"  id="test" th:if="${dto.status == 'on'}" data-bs-toggle="modal"
                             data-bs-target="#outmodal"
                             th:attr = "data-index=${index.index}, data-dtoname=${dto.name}, data-dtowname=${dto.wname}"
-                            onclick="inputdata(), submitData()">
+                            onclick="inputdata()">
                         출고 요청
                     </button>
                 </td>

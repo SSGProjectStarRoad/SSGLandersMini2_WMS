@@ -15,7 +15,7 @@
     <select id="selectList">
         SELECT
         p.name, p.firstcategory, p.secondcategory, p.thirdcategory ,
-        sum(i.quantity) as quantity, wname, w.warehousetype, b.status
+        i.quantity as quantity, wname, w.warehousetype, b.status
         from incoming i left join product p on i.pid=p.pid left join warehouse w on w.wid = i.wid left join stock s on s.wid = i.wid left join inventory b on b.wid = w.wid
         <where>
             <if test="types != null and types.length > 0">
