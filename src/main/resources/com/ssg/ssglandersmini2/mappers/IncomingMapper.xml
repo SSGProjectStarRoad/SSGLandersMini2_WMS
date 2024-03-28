@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssg.ssglandersmini2.mappers.IncomingMapper">
-
     <select id="selectIncomingList" resultType="com.ssg.ssglandersmini2.domain.Incoming">
         select * from incoming i join product p on i.pid = p.pid
         <where>
@@ -21,7 +20,6 @@
         </where>
         order by iid limit #{skip}, #{size}
     </select>
-
     <select id="selectIncomingNotApprovalList" resultType="com.ssg.ssglandersmini2.domain.Incoming">
         select * from incoming i join product p on i.pid = p.pid
         <where>
@@ -38,60 +36,78 @@
                     </if>
                 </foreach>
             </if>
+            approval = '승인대기'
         </where>
-        where name = '승인대기'
         order by iid limit #{skip}, #{size}
     </select>
-
     <select id="getCount" resultType="int">
-        select count(*) from product
+        select count(*) from incoming
         <where>
-            <if test="keyword != null and keyword != ''">
-                name like concat('%', #{keyword}, '%')
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        iid like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'name'">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        iid like concat('%', #{keyword}, '%') or p.name like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
             </if>
         </where>
     </select>
-
-
+    <select id="getCount2" resultType="int">
+        select count(*) from incoming
+        <where>
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=") " separator=" OR ">
+                    <if test="type == 'id'">
+                        iid like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'name'">
+                        p.name like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test="type == 'all'">
+                        iid like concat('%', #{keyword}, '%') or p.name like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+            approval = '승인대기'
+        </where>
+    </select>
     <insert id="insertOne">
         insert into incoming(pid, wid, quantity, date, status, approval) values(#{pid}, #{wid}, #{quantity}, #{date}, '배송전', '승인대기')
     </insert>
-
     <delete id="deleteOne">
         delete from incoming where iid = #{iid}
     </delete>
-
     <update id="updateOne">
         update incoming set quantity = #{quantity}, date = #{date}, status = #{status}
         where iid = #{iid}
     </update>
-
     <select id="findListByWarehouseType" resultType="com.ssg.ssglandersmini2.domain.Warehouse">
         select wname,address from warehouse
         where warehousetype = #{warehousetype}
     </select>
-
     <select id="findWidByWarehouseName" resultType="long">
         select wid from warehouse
         where wname = #{wname}
     </select>
-
     <update id="updateApprovalByIid">
         update incoming
         set approval = "승인완료"
         where iid =#{iid}
     </update>
-
     <update id="updateStatus">
         update incoming
         set status = "배송후"
         where iid = #{iid}
     </update>
-
     <select id="getWarehouseQuantity" resultType="int">
         select (capacity - usingcapacity)
         from warehouse
         where wid = #{wid};
     </select>
-
 </mapper>

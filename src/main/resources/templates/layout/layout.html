@@ -91,7 +91,7 @@
             <span sec:authorize="hasRole('ADMIN')" class="nav-menu">회원</span>
             <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                 <i class="bi bi-person-check"></i>
-                <a class="nav-link" href="#">회원 관리</a>
+                <a class="nav-link" th:href="@{/ssglanders/list}">회원 관리</a>
             </li>
         </ul>
     </div>

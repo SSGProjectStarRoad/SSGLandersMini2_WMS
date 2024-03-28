@@ -24,7 +24,7 @@
             <h1>입고 승인</h1>
             <div class="main-main-stateboxes">
 
-                <form action="/ssglanders/inApproval" style="display: flex" method="get">
+                <form action="/ssglanders/inApproval" style="display: flex" method="get" class="please">
                     <div class="main-stateboxes">
 
                         <div class="search-toggle">
@@ -86,9 +86,9 @@
                         <td data-label="승인 여부"><span th:text="${dto.approval}"></span></td>
                         <td data-label="배송 상태"><span th:text="${dto.status}"></span></td>
                         <td data-label="승인 상태 변경">
-                            <button type="button" class="btn btn-primary incoming-approval-btton"
+                            <button type="button" class="btn btn-primary incoming-approval-button"
                                     th:attr="data-iid=${dto.iid}, data-status=${dto.status},
-                                    data-quantity=${dto.quantity}, data-wid=${dto.wid}">승인
+                                    data-quantity=${dto.quantity}, data-wid=${dto.wid}, data-approval=${dto.approval}">승인
                             </button>
                         </td>
 
