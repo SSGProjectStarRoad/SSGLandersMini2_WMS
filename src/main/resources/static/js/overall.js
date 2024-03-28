@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     $.ajax({
         url: '/ssglanders/api/overall',

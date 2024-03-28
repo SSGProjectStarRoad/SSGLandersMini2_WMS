@@ -107,6 +107,7 @@ public class IncomingServiceImpl implements IncomingService {
         incomingMapper.updateStatus(iid);
     }
 
+
     @Override
     public boolean compareCapacity(Long wid, int quantity) {
         if (quantity <= incomingMapper.getWarehouseQuantity(wid)) {

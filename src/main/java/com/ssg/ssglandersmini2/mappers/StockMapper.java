@@ -10,6 +10,7 @@ public interface StockMapper {
     List<StockDTO> selectAll();
     int getCount(PageRequestDTO pageRequestDTO);
     List<StockDTO> selectList(PageRequestDTO pageRequestDTO);
+    List<StockDTO> getWarehouseList(String wname);
 
 
 }
