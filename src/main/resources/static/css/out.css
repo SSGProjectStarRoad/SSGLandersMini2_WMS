@@ -164,7 +164,7 @@ body {
 .form-select{
   height: 40px;
   border-radius: 5px;
-  width: 60px;
+  width: 80px;
   margin-left: 40px;
   margin-right: -40vw;
   border: 0px;
@@ -586,6 +586,10 @@ tr:nth-child(even) {
 
 /*  !*padding-right: 4px;*!*/
 /*}*/
+
+.hover-effect:hover {
+  background-color: lightgray; /* 호버 시 배경색 변경 */
+}
 
 
 

@@ -83,21 +83,22 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.oid}">
-                    <td scope="row"><span th:text="${dto.oid}"></span></td>
-                    <td>
+                <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.oid}" class="hover-effect">
+                    <td scope="row" data-label="번호"><span th:text="${dto.oid}"></span></td>
+                    <td data-label="상품명">
                         <form th:action="@{/ssglanders/outList}" th:method="post">
                             <input type="hidden" name="oid" th:value="${dto.oid}">
+                            <input type="hidden" name="page" th:value="${param.page != null ? param.page : 1}">
                             <button type="submit">
-                                <span th:text="${dto.name}"></span>
+                                <span th:text="${dto.name}" th:style="'font-weight: bold;'"></span>
                             </button>
                         </form>
                     </td>
-                    <td><span th:text="${dto.quantity}"></span></td>
-                    <td><span th:text="${dto.warehousetype}"></span></td>
-                    <td><span th:text="${dto.date}"></span></td>
-                    <td><span th:text="${dto.approval}"></span></td>
-                    <td><span th:text="${dto.status}"></span></td>
+                    <td data-label="수량"><span th:text="${dto.quantity}"></span></td>
+                    <td data-label="창고"><span th:text="${dto.warehousetype}"></span></td>
+                    <td data-label="요청일"><span th:text="${dto.date}"></span></td>
+                    <td data-label="승인 여부"><span th:text="${dto.approval}"></span></td>
+                    <td data-label="배송상태"><span th:text="${dto.status}"></span></td>
                 </tr>
 
                 </tbody>
@@ -383,7 +384,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" th:onclick="|modifyShipping()|">확인</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 
                 </div>
             </form>
@@ -411,7 +412,7 @@
                    th:value="${detail != null ? (detail.oid != null ? detail.oid : '') : ''}">
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" th:onclick="|removeOid()|">확인</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 
             </div>
         </form>
