@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" th:href="@{/css/userLogin.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body class="body">
+<!--<form class="loginform" onsubmit="submitLoginForm(); return false;">-->
+<form class="loginform" th:action="@{/user/login}" method="post">
+    <table class="logintable">
+        <tr>
+            <td class="form-header">
+                <h2>로그인</h2>
+                <img src="/images/image.png" th:src="@{/images/image.png}" class="form-logo" alt="Logo">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" id="username" name="username" placeholder="ID"></td>
+        </tr>
+        <tr>
+            <td><input type="password" id="password" name="password" placeholder="Password"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="로그인하기" class="btn"></td>
+        </tr>
+        <tr>
+            <td class="join">
+                <a href="#" onclick="showModal('signupModal')">회원가입 |</a>
+                <a href="#" onclick="showModal('findIdModal')">아이디 찾기 |</a>
+                <a href="#" onclick="showModal('findPwModal')">비밀번호 찾기</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<!-- 아이디 찾기 모달 창 -->
+<div id="findIdModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('findIdModal')">&times;</span>
+        <form >
+            <h2>아이디 찾기</h2>
+            <div>
+                <label for="name">이름</label>
+                <input type="text" id="findname" name="name">
+            </div>
+            <div>
+                <label for="phone">핸드폰 번호(-제외)</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <button type="button" class="btn" onclick="findUserId()">ID 찾기</button>
+            <div class="join">
+                <a href="#" onclick="showModal('findPwModal')">비밀번호 찾기 |</a>
+                <a href="#" onclick="showModal('signupModal')">회원가입</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 비밀번호 찾기 모달 창 -->
+<div id="findPwModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('findPwModal')">&times;</span>
+        <form>
+            <h2>비밀번호 찾기</h2>
+            <div>
+                <label for="id">아이디</label>
+                <input type="text" id="id" name="id">
+            </div>
+            <div>
+                <label for="phonePw">핸드폰 번호(-제외)</label>
+                <input type="text" id="phonePw" name="phonePw">
+            </div>
+            <button type="button" class="btn" onclick="findUserPw()">비밀번호 찾기</button>
+            <div class="join">
+                <a href="#" onclick="showModal('findIdModal')">아이디 찾기 |</a>
+                <a href="#" onclick="showModal('signupModal')">회원가입</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 회원가입 모달 창 추가 -->
+<div id="signupModal" class="modal">
+    <div class="modal-content-member">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <form method="post" id="signupForm">
+            <table>
+                <tr>
+                    <td class="form-header-member">
+                        <h2>회원가입</h2>
+                        <img src="/images/image.png" class="form-logo-member" alt="Logo">
+                    </td>
+                </tr>
+                <tr>
+                    <td>권한 선택
+                        <select id="roleSelect">
+                            <option value="admin">총관리자</option>
+                            <option value="warehouse">창고관리자</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>아이디</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="registerUsername" class="textmember"></td>
+                    <div id="usernameError" class="error-bubble" style="color: palevioletred;"></div> <!-- 아이디 오류 메시지를 표시할 div 요소 -->
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                </tr>
+                <tr>
+                    <td><input type="password" id="registerPassword" class="textmember"></td>
+                    <div id="passwordError" class="error-bubble" style="color: palevioletred;"></div> <!-- 오류 메시지를 표시할 div 요소 -->
+                </tr>
+                <tr>
+                    <td>비밀번호 재입력</td>
+                </tr>
+                <tr>
+                    <td><input type="password" id="confirmPassword" class="textmember"></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="name" class="textmember"></td>
+                </tr>
+                <tr>
+                    <td>핸드폰 번호(-제외)</td>
+                </tr>
+                <tr>
+                    <td><input type="text"  id="telnum" class="textmember"></td>
+                </tr>
+                <tr>
+                    <td><label for="zipp_btn" class="form-label">주소</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control mb-2" id="zipp_code_id" name="zipp_code" maxlength="10" placeholder="우편번호" style="width: 50%; display: inline;">
+                        <input type="button" id="zipp_btn" class="btn btn-primary" onclick="execDaumPostcode()" value="우편번호 찾기">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control mb-2" name="user_add1" id="UserAdd1" maxlength="40" placeholder="기본 주소를 입력하세요" required>
+<!--                        <div class="invalid-feedback">주소를 입력해주시기 바랍니다!</div>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" name="user_add2" id="UserAdd2" maxlength="40" placeholder="상세 주소를 입력하세요">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="가입하기" class="btn"></td>
+                </tr>
+                <tr>
+                    <td class="login"><a href="userLogin.html">이미 회원이시라면 로그인</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script src="/js/userLogin.js" th:src="@{/js/userLogin.js}"></script>
+</body>
+</html>
