@@ -24,22 +24,22 @@
 
                 <form action="/ssglanders/inList" style="display: flex" method="get">
 
-                <div class="search-toggle">
-                    <select name="types" class="form-select" aria-label="Default select example">
-                        <option value="all">전체</option>
-                        <option value="id">번호</option>
-                        <option value="name">상품명</option>
-                    </select>
-                </div>
+                    <div class="search-toggle">
+                        <select name="types" class="form-select" aria-label="Default select example">
+                            <option value="all">전체</option>
+                            <option value="id">번호</option>
+                            <option value="name">상품명</option>
+                        </select>
+                    </div>
 
-                <div class="input-box">
-                    <input name="keyword" type="search" class="form-control" placeholder="" aria-label="Username"
-                           aria-describedby="basic-addon1">
-                </div>
+                    <div class="input-box">
+                        <input name="keyword" type="search" class="form-control" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1">
+                    </div>
 
-                <div class="input-btn">
-                    <button type="submit" class="btn btn-primary">검색</button>
-                </div>
+                    <div class="input-btn">
+                        <button type="submit" class="btn btn-primary">검색</button>
+                    </div>
 
                 </form>
             </div>
@@ -57,7 +57,7 @@
                             <th>수량</th>
                             <th>창고</th>
                             <th>계약일</th>
-                            <th>승인 여부</th>
+                            <th>승인 상태</th>
                             <th>배송 상태</th>
                             <th>수정</th>
                             <th>배송 상태 변경</th>
@@ -66,14 +66,14 @@
                         <tbody>
 
                         <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.iid}">
-                            <td><span th:text="${dto.iid}"></span></td>
-                            <td><span th:text="${dto.name}"></span></td>
-                            <td><span th:text="${dto.quantity}"></span></td>
-                            <td><span th:text="${dto.type}"></span></td>
-                            <td><span th:text="${dto.date}"></span></td>
-                            <td><span th:text="${dto.approval}"></span></td>
-                            <td><span th:text="${dto.status}"></span></td>
-                            <td>
+                            <td data-label="번호"><span th:text="${dto.iid}"></span></td>
+                            <td data-label="상품명"><span th:text="${dto.name}"></span></td>
+                            <td data-label="수량"><span th:text="${dto.quantity}"></span></td>
+                            <td data-label="창고"><span th:text="${dto.type}"></span></td>
+                            <td data-label="계약일"><span th:text="${dto.date}"></span></td>
+                            <td data-label="승인 상태"><span th:text="${dto.approval}"></span></td>
+                            <td data-label="배송 상태"><span th:text="${dto.status}"></span></td>
+                            <td data-label="수정">
                                 <button type="button" class="btn btn-primary open-modify-btn" data-toggle="modal"
                                         data-target="#myModal42"
                                         th:attr="data-iid=${dto.iid}, data-pid=${dto.pid}, data-wid=${dto.wid},
@@ -84,7 +84,7 @@
                                 >수정
                                 </button>
                             </td>
-                            <td>
+                            <td data-label="배송 상태 변경">
                                 <button type="button" class="btn btn-primary open-delivery-button" th:attr="data-iid=${dto.iid}">배송 상태 변경</button>
                             </td>
                         </tr>
@@ -92,7 +92,7 @@
                     </table>
 
                     <div class="float-end page-align">
-                        <ul class="pagination flex-wrap">
+                        <ul class="pagination flex-wrap ">
                             <th:block th:if="${responseDTO.prev}">
                                 <li class="page-item">
                                     <a class="page-link" th:href="@{/ssglanders/inList(page=${num})}" th:data-num="${responseDTO.start - 1}">Previous</a>
@@ -163,10 +163,11 @@
                     수량
                 </div>
                 <div class="modal-input data-label">
-                    <label class="quantity-label">1 PLT 당 : </label>
-                    <input id="palletperquantity" readonly>
-                    <label class="quantity-label"></label>
-                    <input type="text" class="form-control" placeholder="단위 : 1 파레트(PLT)" aria-label="Username"
+                    <label class="quantity-label label-text1">1 PLT 당:</label>
+                    <input id="palletperquantity" class="pallet-quantity" readonly>
+                    <label class="gae">개</label>
+                    <label class="quantity-label label-text2">입력:</label>
+                    <input type="text" class="form-control" placeholder="단위:(PLT)" aria-label="Username"
                            aria-describedby="basic-addon1" id="quantity">
                 </div>
                 <div class="modal-minititle">
@@ -181,11 +182,11 @@
                 </div>
 
 
-                    <div class="search-warehouse-toggle-1">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>---</option>
-                        </select>
-                    </div>
+                <div class="search-warehouse-toggle-1">
+                    <select class="toggle-style" aria-label="Default select example">
+                        <option selected>창고선택</option>
+                    </select>
+                </div>
 
 
 

@@ -1,8 +1,6 @@
 package com.ssg.ssglandersmini2.service.impl;
 
 import com.ssg.ssglandersmini2.domain.Incoming;
-import com.ssg.ssglandersmini2.domain.Product;
-import com.ssg.ssglandersmini2.domain.Warehouse;
 import com.ssg.ssglandersmini2.dto.*;
 import com.ssg.ssglandersmini2.mappers.IncomingMapper;
 import com.ssg.ssglandersmini2.mappers.ProductMapper;
@@ -13,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -110,4 +107,13 @@ public class IncomingServiceImpl implements IncomingService {
         incomingMapper.updateStatus(iid);
     }
 
+
+    @Override
+    public boolean compareCapacity(Long wid, int quantity) {
+        if (quantity <= incomingMapper.getWarehouseQuantity(wid)) {
+            return true;
+        }else return false;
+    }
+
 }
+

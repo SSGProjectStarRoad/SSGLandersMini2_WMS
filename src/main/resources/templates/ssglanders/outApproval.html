@@ -81,7 +81,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.oid}">
+                <tr th:each="dto : ${responseDTO.dtoList}" th:attr="data-tno=${dto.oid}" class="hover-effect">
                     <td scope="row" data-label="번호"><span th:text="${dto.oid}"></span></td>
                     <td data-label="상품명"><span th:text="${dto.name}"></span></td>
                     <td data-label="수량"><span th:text="${dto.quantity}"></span></td>
@@ -90,15 +90,7 @@
                     <td data-label="승인 여부">
                         <form th:action="@{/ssglanders/outApproval}" th:method="post">
                             <input type="hidden" name="oid" th:value="${dto.oid}">
-                            <input th:if="${param.page != null}" type="hidden" name="page" th:value="${param.page}">
-<!--                            <button type="submit" class="approval-button"-->
-<!--                                    th:style="'font-weight: bold;'">-->
-<!--                                승인하기-->
-<!--                            </button>-->
-<!--                            <button type="submit" class="approval-button" data-bs-toggle="modal"-->
-<!--                                    th:style="'font-weight: bold;'" data-bs-target="#exampleModal2">-->
-<!--                                승인하기-->
-<!--                            </button>-->
+                            <input type="hidden" name="page" th:value="${param.page != null ? param.page : 1}">
                             <button type="submit" class="approval-button" th:style="'font-weight: bold;'"
                                     th:onclick="approvalAlert()">승인하기</button>
                         </form>

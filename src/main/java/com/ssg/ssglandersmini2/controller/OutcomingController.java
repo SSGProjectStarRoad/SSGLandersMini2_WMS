@@ -57,11 +57,12 @@ public class OutcomingController {
     }
 
     @PostMapping("/outList")
-    public String details(@RequestParam(name = "oid", required = false) Long oid, RedirectAttributes redirectAttributes) {
+    public String details(@RequestParam(name = "oid", required = false) Long oid, @RequestParam(name = "page", required = false) Long page ,RedirectAttributes redirectAttributes) {
         // oid를 쿼리 매개변수로 전달하여 리다이렉트
         redirectAttributes.addAttribute("oid", oid);
         log.info(oid + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        return "redirect:/ssglanders/outList";
+
+        return "redirect:/ssglanders/outList?page="+page.toString();
     }
 
 
@@ -80,19 +81,11 @@ public class OutcomingController {
         model.addAttribute("oid",oid);
     }
 
-//    @PostMapping("/outApproval")
-//    public String approvalClick(@RequestParam(name = "oid", required = false) Long oid, RedirectAttributes redirectAttributes){
-//        redirectAttributes.addAttribute("oid", oid);
-//        log.info(oid + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        return "redirect:/ssglanders/outApproval";
-//    }
-
     @PostMapping("/outApproval")
     public String approvalClick(@RequestParam(name = "oid", required = false) Long oid,
                                 @RequestParam(name = "page", required = false) Long page ,RedirectAttributes redirectAttributes){
         redirectAttributes.addAttribute("oid", oid);
-        log.info(page + "페이지~~@###@@#@$");
-        log.info(oid + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 
         return "redirect:/ssglanders/outApproval?page="+page.toString();
     }
@@ -103,9 +96,6 @@ public class OutcomingController {
 
         String oid = request.get("oid");
         String status = request.get("status");
-
-        log.info(oid+"여기다");
-        log.info(status+"여기야");
 
         outcomingService.modifyStatus(Long.parseLong(status), Long.parseLong(oid));
 
@@ -133,7 +123,7 @@ public class OutcomingController {
 
     @PostMapping("/registerWay")
     @ResponseBody
-    public void registerWay1(@RequestBody Map<String, String> request) {
+    public void registerWay(@RequestBody Map<String, String> request) {
         String uponNum = request.get("uponNum");
         String userAdd1 = request.get("userAdd1");
         String userAdd2 = request.get("userAdd2");
@@ -156,6 +146,21 @@ public class OutcomingController {
 
 
     }
+
+    @PostMapping("/registerOutcoming")
+    @ResponseBody
+    public void registerOutcoming(@RequestBody Map<String, String> request) {
+        String name = request.get("name");
+        String wname = request.get("wname");
+        String quantity = request.get("quantity");
+
+        log.info(name +" "+wname+" "+quantity+"%%%%%%%%@!");
+
+        outcomingService.registerOutcomingByNameWnameQuantity(name,wname,Long.parseLong(quantity));
+
+    }
+
+
 
 
 
