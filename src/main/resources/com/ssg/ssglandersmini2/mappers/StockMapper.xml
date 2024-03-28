@@ -42,11 +42,9 @@
     </select>
     <select id = "getWarehouse">
         SELECT
-            s.quantity, w.warehousetype, w.wname, w.capacity, sum(w.usingcapacity) as usingcapacity
+            w.warehousetype, w.wname, w.capacity, sum(w.usingcapacity) as usingcapacity
         FROM
-            stock s
-                LEFT JOIN
-            warehouse w ON s.wid = w.wid
+            warehouse w
         group by w.wname
     </select>
     <select id="getWarehouseList" resultType="com.ssg.ssglandersmini2.dto.StockDTO">
