@@ -35,10 +35,10 @@ public class UserMapperTests {
     @Test
     public void testUpdate() {
         User user = User.builder()
-                .username("anotheruser")
-                .password("4567")
+                .username("user70")
+                .password("aaaa")
                 .usertype("user")
-                .name("Tester")
+                .name("헷갈리네")
                 .address("Test Address")
                 .telnum("010-9991111")
                 .build();
@@ -48,10 +48,20 @@ public class UserMapperTests {
 
     @Test
     public void testDelete() {
-        userMapper.delete("testUserInsert3");
+        userMapper.delete("user97");
     }
 
-
+    @Test
+    public void testselectList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                        .page(1)
+                                .size(10)
+                .types(new String[] {"username"})
+                .keyword("user15")
+                                        .build();
+        List<User> voList = userMapper.selectList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+    }
 
 }
 

@@ -32,6 +32,7 @@ public class PageResponseDTO<E> {
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
         // 현재 페이지 번호를 설정
+        this.page = pageRequestDTO.getPage();
 
         // 페이지 크기를 설정
         this.size = pageRequestDTO.getSize();

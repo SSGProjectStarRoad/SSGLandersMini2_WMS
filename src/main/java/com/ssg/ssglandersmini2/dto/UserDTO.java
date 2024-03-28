@@ -34,8 +34,5 @@ public class UserDTO {
     @Pattern(regexp = "^010\\d{8}$")
     private String telnum;
 
-    private String keyword;
-
-    private String type;
 
 }

@@ -43,10 +43,10 @@ public class UserServiceTests {
     @Test
     public void updateTest() {
         UserDTO userDTO = UserDTO.builder()
-                .username("testUser")
+                .username("user60")
                 .password("1234")
                 .usertype("user")
-                .name("Test User")
+                .name("dddiiiieieie")
                 .address("Test Address")
                 .telnum("01012345678")
                 .build();

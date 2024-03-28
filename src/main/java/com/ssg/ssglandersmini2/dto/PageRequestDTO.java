@@ -9,8 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.Arrays;
+
 
 // PageRequestDTO 클래스는 페이지 요청 정보를 전달하기 위한 데이터 전송 객체(DTO)입니다.
 
@@ -49,11 +49,6 @@ public class PageRequestDTO {
     // 검색 키워드를 나타내는 필드
     private String keyword;
 
-    // 시작일을 나타내는 필드
-    private LocalDate from;
-
-    // 종료일을 나타내는 필드
-    private LocalDate to;
 
     // 페이지당 건너뛸 항목 수를 계산하는 메서드
     public int getSkip(){
@@ -78,5 +73,15 @@ public class PageRequestDTO {
         }
         return Arrays.stream(types).anyMatch(type::equals);
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+

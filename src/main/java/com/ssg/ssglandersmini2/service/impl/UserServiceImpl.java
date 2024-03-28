@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -23,21 +24,22 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final ModelMapper modelMapper;
 
-    //사용자목록 조회
+    // 사용자 목록 조회 서비스 메서드
     @Override
     public PageResponseDTO<UserDTO> getUserList(PageRequestDTO pageRequestDTO) {
 
-        // 사용자 목록을 페이징하여 조회
+        // 페이지에 해당하는 사용자 목록을 조회
         List<User> userList = userMapper.selectList(pageRequestDTO);
 
         // User 엔티티를 UserDTO로 변환
         List<UserDTO> userDTOList = userList.stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))
-                .toList();
+                .collect(Collectors.toList());
 
         // 전체 사용자 수 조회
         int totalCount = userMapper.getCount(pageRequestDTO);
 
+        // 페이지 응답 DTO를 생성하여 반환
         PageResponseDTO<UserDTO> pageResponseDTO = PageResponseDTO.<UserDTO>withAll()
                 .dtoList(userDTOList)
                 .total(totalCount)
@@ -48,36 +50,40 @@ public class UserServiceImpl implements UserService {
         return pageResponseDTO;
     }
 
-    //특정 사용자 조회
+    // 특정 사용자 조회 서비스 메서드
     @Override
     public UserDTO getOne(String username) {
+        // 주어진 사용자 이름에 해당하는 사용자 정보를 조회하고 UserDTO로 변환하여 반환
         User user = userMapper.selectOne(username);
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 
         return userDTO;
     }
 
-    //사용자 정보 수정
+    // 사용자 정보 수정 서비스 메서드
     @Override
     public void update(UserDTO userDTO) {
+        log.info("user update: " + userDTO);
+        // UserDTO를 User 엔티티로 변환하여 업데이트 수행
         User user = modelMapper.map(userDTO, User.class);
         userMapper.update(user);
     }
 
-    //사용자 삭제
+    // 사용자 삭제 서비스 메서드
     @Override
     public void delete(String username) {
+        // 주어진 사용자 이름에 해당하는 사용자를 삭제
         userMapper.delete(username);
     }
 
+    // 사용자 검색 서비스 메서드
     @Override
     public List<UserDTO> getSearchList(UserDTO userDTO) {
-        return null;
+        // 주어진 사용자 DTO로 검색된 사용자 목록을 조회하고 UserDTO로 변환하여 반환
+        List<User> userList = userMapper.selectSearchList(userDTO);
+        return userList.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<UserDTO> getSearchList(UserDTO userDTO) {
-//        userMapper.SelectSearchList(userDTO);
-//
-//    }
 }
